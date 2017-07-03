@@ -1,0 +1,38 @@
+# Blender MTL File: 'witch.blend'
+# Material Count: 3
+
+newmtl material_0.010
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd t_summoner_hair_dm.tga
+map_Ks t_summoner_hair_s.tga
+map_Disp t_summoner_hair_n.tga
+
+newmtl mi_summoner_body
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd t_summoner_body_d.tga
+map_Disp t_summoner_body_n.tga
+map_Ke t_summoner_body_m.tga
+
+newmtl mi_summoner_head
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd t_summoner_head_d.tga
+map_Disp t_summoner_head_n.tga
+map_Ke t_summoner_head_m.tga

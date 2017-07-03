@@ -1,0 +1,27 @@
+#version 330 core
+  
+layout (location = 0 ) in vec3 inPosition;
+layout (location = 1 ) in vec2 inTextureCoord0;
+layout (location = 2 ) in vec3 inNormal;
+layout (location = 3 ) in vec3 inColor0;
+layout (location = 4 ) in vec3 inBitanges;
+layout (location = 5 ) in vec3 inTangent;
+layout (location = 6 ) in vec2 inTextureCoord1;
+
+
+out vec2 textureCoord;
+out vec3 fragPos;  
+out vec3 normal;
+
+uniform mat4 model;
+uniform mat4 view;
+uniform mat4 projection;
+
+void main()
+{
+    gl_Position =projection*view*model* vec4(inPosition.x, inPosition.y, inPosition.z, 1.0f);
+	textureCoord=inTextureCoord0 ;//SOIL texture is flipped upside-down, for most case textureCoord=inTextureCoord;
+	//normal=inNormal;
+	normal = mat3(transpose(inverse(model))) * inNormal;
+	fragPos = vec3(model * vec4(inPosition, 1.0f));
+}
