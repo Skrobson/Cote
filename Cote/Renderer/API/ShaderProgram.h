@@ -30,6 +30,7 @@ namespace cote
 			inline unsigned getProgramID()const { return mProgram; }
 
 			inline bool isLinked()const { return mbLinked; }
+
 		private:
 
 			unsigned mProgram;
