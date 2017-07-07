@@ -17,6 +17,11 @@ Shader::Shader(const std::string & filename, ShaderType type)
 	loadFromFile(filename, type);
 }
 
+cote::graphic::Shader::Shader(ShaderType type, const std::string & source)
+{
+	createFromSource(source, type);
+}
+
 
 Shader::~Shader()
 {
@@ -71,21 +76,26 @@ void Shader::loadFromFile(const std::string & filename, ShaderType type)
 	loadFromFile(filename.c_str(), type);
 }
 
-//GLuint Shader::createFromSource(const std::string & text, ShaderType type)
-//{
-//	GLint success;
-//	GLchar errBuffer[512];
-//
-//	const GLchar * shaderText = text.c_str();
-//	mShaderID = glCreateShader(type);
-//	glShaderSource(mShaderID, 1, &shaderText, NULL);
-//	glCompileShader(mShaderID);
-//	glGetShaderiv(mShaderID, GL_COMPILE_STATUS, &success);
-//
-//	if (!success)
-//	{
-//		glGetShaderInfoLog(mShaderID, sizeof(errBuffer), NULL, errBuffer);
-//		std::cerr << "Failed to compile shader from source: " << errBuffer;
-//	}
-//	return mShaderID;
-//}
+GLuint Shader::createFromSource(const std::string & text, ShaderType type)
+{
+	GLint success;
+	GLchar errBuffer[512];
+
+	const GLchar * shaderText = text.c_str();
+	mShaderID = glCreateShader(type);
+	glShaderSource(mShaderID, 1, &shaderText, NULL);
+	glCompileShader(mShaderID);
+	glGetShaderiv(mShaderID, GL_COMPILE_STATUS, &success);
+
+		if (!success)
+	{
+		glGetShaderInfoLog(mShaderID, sizeof(errBuffer), NULL, errBuffer);
+		std::string error("Failed to compile shader from file: ");
+		error += filename;
+		error += " ";
+		error += errBuffer;
+		throw(GLerror(error));
+		return;
+	}
+	return mShaderID;
+}

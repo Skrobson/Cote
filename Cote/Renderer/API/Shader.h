@@ -22,10 +22,15 @@ namespace cote
 		{
 		public:
 			Shader();
+			/**Loading from file*/
 			Shader(const std::string& filename, ShaderType);
+			/**Create from source*/
+			Shader(ShaderType ,const std::string& source);
 			~Shader();
 
+			GLuint Shader::createFromSource(const std::string & text, ShaderType type);
 			
+			//Wczytywanie z pliku mo¿nazrobiæ osobno
 			void loadFromFile(const char* filename, ShaderType type);
 			void loadFromFile(const std::string& filename, ShaderType type);
 
