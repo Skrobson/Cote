@@ -90,12 +90,10 @@ GLuint Shader::createFromSource(const std::string & text, ShaderType type)
 		if (!success)
 	{
 		glGetShaderInfoLog(mShaderID, sizeof(errBuffer), NULL, errBuffer);
-		std::string error("Failed to compile shader from file: ");
-		error += filename;
-		error += " ";
+		std::string error("Failed to compile shader from source: ");
 		error += errBuffer;
 		throw(GLerror(error));
-		return;
+		return 0;
 	}
 	return mShaderID;
 }
