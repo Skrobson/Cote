@@ -133,12 +133,12 @@
   <ItemGroup>
     <ClCompile Include="API\GLerror.cpp" />
     <ClCompile Include="API\ShaderProgram.cpp" />
-    <ClCompile Include="API\VertexAttribute.cpp" />
+    <ClCompile Include="API\VertexAttributeLayout.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="API\Shader.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="API\VertexAttribute.h" />
+    <ClInclude Include="API\VertexAttributeLayout.h" />
     <ClInclude Include="API\Shader.h" />
     <ClInclude Include="API\GLerror.h" />
     <ClInclude Include="API\ShaderProgram.h" />
