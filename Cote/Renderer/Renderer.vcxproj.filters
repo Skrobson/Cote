@@ -60,7 +60,7 @@
       <Filter>Header Files\API</Filter>
     </ClInclude>
     <ClInclude Include="API\ElementBuffer.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\API</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

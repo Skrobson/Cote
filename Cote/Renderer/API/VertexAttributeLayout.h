@@ -25,11 +25,11 @@ namespace cote {
 		{
 		public:
 			
-			uint16_t m_index; 
-			uint16_t m_type; 
-			uint16_t m_count; //gl need sizeOf( count of variables)
-			uint16_t m_offset;
-			uint16_t m_size;
+			unsigned m_index; 
+			unsigned m_type; 
+			unsigned m_count; //gl need sizeOf( count of variables)
+			unsigned m_offset;
+			unsigned m_size;
 			bool m_normalized;
 		};
 
@@ -41,15 +41,15 @@ namespace cote {
 			void pushVertexAttribute(T t, VertexAttributeIndex index,bool normalized);
 			const std::vector<VertexAttribute>& getAttributes()const { return m_attributes; }
 
-			uint16_t getStride() const
+			unsigned getStride() const
 			{
 				return m_stride;
 			}
 		protected:
 			std::vector<VertexAttribute> m_attributes;
-			uint16_t m_stride=0;
+			unsigned m_stride=0;
 
-			void push(VertexAttributeIndex index, uint16_t type, uint16_t count, uint16_t size, bool normalized);
+			void push(VertexAttributeIndex index, unsigned type, unsigned count, unsigned size, bool normalized);
 		};
 
 

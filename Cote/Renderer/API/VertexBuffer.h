@@ -12,12 +12,12 @@ namespace cote { namespace graphic
 		void bind();
 		void unbind();
 		void setVertexAttributeLayout(const VertexAttributeLayout& layout);
-		void setData(uint16_t size, float* data);
+		void setData(unsigned size, float* data);
 		~VertexBuffer();
 	protected:
 
 		unsigned m_handler=0;
-		std::shared_ptr<VertexAttributeLayout> m_layout;
+		
 	};
 }
 }

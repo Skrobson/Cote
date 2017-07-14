@@ -28,7 +28,7 @@ void cote::graphic::VertexBuffer::setVertexAttributeLayout(const VertexAttribute
 
 }
 
-void cote::graphic::VertexBuffer::setData(uint16_t size, float * data)
+void cote::graphic::VertexBuffer::setData(unsigned size, float * data)
 {
 	this->bind();
 	glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
