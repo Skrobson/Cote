@@ -134,6 +134,7 @@
     <ClCompile Include="API\GLerror.cpp" />
     <ClCompile Include="API\ShaderProgram.cpp" />
     <ClCompile Include="API\VertexAttributeLayout.cpp" />
+    <ClCompile Include="API\ElementBuffer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="API\Shader.cpp" />
     <ClCompile Include="API\VertexBuffer.cpp" />
@@ -144,6 +145,7 @@
     <ClInclude Include="API\GLerror.h" />
     <ClInclude Include="API\ShaderProgram.h" />
     <ClInclude Include="API\VertexBuffer.h" />
+    <ClInclude Include="API\ElementBuffer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
