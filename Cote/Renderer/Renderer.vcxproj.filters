@@ -36,6 +36,9 @@
     <ClCompile Include="API\VertexAttributeLayout.cpp">
       <Filter>Source Files\API</Filter>
     </ClCompile>
+    <ClCompile Include="API\VertexBuffer.cpp">
+      <Filter>Source Files\API</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="API\Shader.h">
@@ -48,6 +51,9 @@
       <Filter>Header Files\API</Filter>
     </ClInclude>
     <ClInclude Include="API\VertexAttributeLayout.h">
+      <Filter>Header Files\API</Filter>
+    </ClInclude>
+    <ClInclude Include="API\VertexBuffer.h">
       <Filter>Header Files\API</Filter>
     </ClInclude>
   </ItemGroup>
