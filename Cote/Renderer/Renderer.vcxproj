@@ -138,6 +138,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="API\Shader.cpp" />
     <ClCompile Include="API\VertexBuffer.cpp" />
+    <ClCompile Include="API\VertexArray.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="API\VertexAttributeLayout.h" />
@@ -146,6 +147,7 @@
     <ClInclude Include="API\ShaderProgram.h" />
     <ClInclude Include="API\VertexBuffer.h" />
     <ClInclude Include="API\ElementBuffer.h" />
+    <ClInclude Include="API\VertexArray.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

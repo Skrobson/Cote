@@ -42,6 +42,9 @@
     <ClCompile Include="API\ElementBuffer.cpp">
       <Filter>Source Files\API</Filter>
     </ClCompile>
+    <ClCompile Include="API\VertexArray.cpp">
+      <Filter>Source Files\API</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="API\Shader.h">
@@ -60,6 +63,9 @@
       <Filter>Header Files\API</Filter>
     </ClInclude>
     <ClInclude Include="API\ElementBuffer.h">
+      <Filter>Header Files\API</Filter>
+    </ClInclude>
+    <ClInclude Include="API\VertexArray.h">
       <Filter>Header Files\API</Filter>
     </ClInclude>
   </ItemGroup>
