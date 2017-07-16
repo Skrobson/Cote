@@ -9,15 +9,15 @@ namespace cote
 	public:
 		ElementBuffer();
 		ElementBuffer(ElementBuffer&) = delete;
-		ElementBuffer(ElementBuffer&& )=delete;
+		ElementBuffer(ElementBuffer&& other );
 		void bind();
 		void unbind();
 		unsigned getHandler()const { return m_handler; }
 
-		void setData(size_t count, const unsigned* data);
+		void copyData(size_t count, const unsigned* data);
 		
 		template<typename RandomIt>
-		void setData(RandomIt beg, RandomIt end);
+		void copyData(RandomIt beg, RandomIt end);
 		~ElementBuffer();
 	protected:
 		unsigned m_handler=0;
@@ -27,7 +27,7 @@ namespace cote
 	{
 		std::vector elem;
 		std::copy(beg, end, elem.begin());
-		setData(elem.size(), elem.data());
+		copyData(elem.size(), elem.data());
 	}
 }
 }

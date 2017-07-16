@@ -8,7 +8,7 @@ namespace cote { namespace graphic
 	{
 	public:
 		VertexBuffer();
-		VertexBuffer(VertexBuffer&& )=delete;
+		VertexBuffer(VertexBuffer&& other );
 		VertexBuffer(VertexBuffer&) = delete;
 		void bind();
 		void unbind();
@@ -16,7 +16,7 @@ namespace cote { namespace graphic
 
 
 		void setVertexAttributeLayout(const VertexAttributeLayout& layout);
-		void setData(size_t size,const uint8_t* data);
+		void copyData(size_t size,const uint8_t* data);
 
 		unsigned getHandler()const { return m_handler; }
 		~VertexBuffer();
