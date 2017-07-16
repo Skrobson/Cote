@@ -24,54 +24,54 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="API\GLerror.cpp">
+    <ClCompile Include="ElementBuffer.cpp">
       <Filter>Source Files\API</Filter>
     </ClCompile>
-    <ClCompile Include="API\Shader.cpp">
+    <ClCompile Include="GLerror.cpp">
       <Filter>Source Files\API</Filter>
     </ClCompile>
-    <ClCompile Include="API\ShaderProgram.cpp">
+    <ClCompile Include="Shader.cpp">
       <Filter>Source Files\API</Filter>
     </ClCompile>
-    <ClCompile Include="API\VertexAttributeLayout.cpp">
+    <ClCompile Include="ShaderProgram.cpp">
       <Filter>Source Files\API</Filter>
     </ClCompile>
-    <ClCompile Include="API\VertexBuffer.cpp">
+    <ClCompile Include="VertexArray.cpp">
       <Filter>Source Files\API</Filter>
     </ClCompile>
-    <ClCompile Include="API\ElementBuffer.cpp">
+    <ClCompile Include="VertexAttributeLayout.cpp">
       <Filter>Source Files\API</Filter>
     </ClCompile>
-    <ClCompile Include="API\VertexArray.cpp">
-      <Filter>Source Files\API</Filter>
-    </ClCompile>
-    <ClCompile Include="API\VertexAttributeValueHandler.cpp">
+    <ClCompile Include="VertexAttributeValueHandler.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VertexBuffer.cpp">
+      <Filter>Source Files\API</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="API\Shader.h">
+    <ClInclude Include="VertexBuffer.h">
       <Filter>Header Files\API</Filter>
     </ClInclude>
-    <ClInclude Include="API\GLerror.h">
+    <ClInclude Include="ElementBuffer.h">
       <Filter>Header Files\API</Filter>
     </ClInclude>
-    <ClInclude Include="API\ShaderProgram.h">
+    <ClInclude Include="GLerror.h">
       <Filter>Header Files\API</Filter>
     </ClInclude>
-    <ClInclude Include="API\VertexAttributeLayout.h">
+    <ClInclude Include="Shader.h">
       <Filter>Header Files\API</Filter>
     </ClInclude>
-    <ClInclude Include="API\VertexBuffer.h">
+    <ClInclude Include="ShaderProgram.h">
       <Filter>Header Files\API</Filter>
     </ClInclude>
-    <ClInclude Include="API\ElementBuffer.h">
+    <ClInclude Include="VertexArray.h">
       <Filter>Header Files\API</Filter>
     </ClInclude>
-    <ClInclude Include="API\VertexArray.h">
+    <ClInclude Include="VertexAttributeLayout.h">
       <Filter>Header Files\API</Filter>
     </ClInclude>
-    <ClInclude Include="API\VertexAttributeValueHandler.h">
+    <ClInclude Include="VertexAttributeValueHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
