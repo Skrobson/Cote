@@ -8,10 +8,14 @@ namespace cote
 	{
 	public:
 		ElementBuffer();
+		ElementBuffer(ElementBuffer&) = delete;
+		ElementBuffer(ElementBuffer&& )=delete;
 		void bind();
 		void unbind();
-		void setData(unsigned count, const unsigned* data);
+		unsigned getHandler()const { return m_handler; }
 
+		void setData(size_t count, const unsigned* data);
+		
 		template<typename RandomIt>
 		void setData(RandomIt beg, RandomIt end);
 		~ElementBuffer();

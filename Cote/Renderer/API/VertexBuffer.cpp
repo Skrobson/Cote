@@ -7,6 +7,7 @@ VertexBuffer::VertexBuffer()
 	glGenBuffers(1, &m_handler);
 }
 
+
 void cote::graphic::VertexBuffer::bind()
 {
 	glBindBuffer(GL_ARRAY_BUFFER, m_handler);
@@ -28,7 +29,8 @@ void cote::graphic::VertexBuffer::setVertexAttributeLayout(const VertexAttribute
 
 }
 
-void cote::graphic::VertexBuffer::setData(unsigned size, float * data)
+
+void cote::graphic::VertexBuffer::setData(size_t size , const uint8_t* data)
 {
 	this->bind();
 	glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
@@ -37,5 +39,6 @@ void cote::graphic::VertexBuffer::setData(unsigned size, float * data)
 
 VertexBuffer::~VertexBuffer()
 {
+	if(m_handler)
 	glDeleteBuffers(1, &m_handler);
 }
