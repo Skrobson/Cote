@@ -5,14 +5,9 @@ using namespace cote::graphic;
 cote::graphic::VertexArray::VertexArray( )
 {
 	glGenVertexArrays(1, &m_handler);
-	m_ebo = std::make_unique<ElementBuffer>(new ElementBuffer);
-	m_vbo = std::make_unique<VertexBuffer>(new VertexBuffer);
+	m_ebo = std::make_unique<ElementBuffer>();
+	m_vbo = std::make_unique<VertexBuffer>();
 }
-
-cote::graphic::VertexArray::VertexArray()
-{
-}
-
 
 void cote::graphic::VertexArray::bind()
 {
@@ -25,10 +20,10 @@ void cote::graphic::VertexArray::unbind()
 }
 
 
-void cote::graphic::VertexArray::setElements(size_t count, const unsigned * data)
+void cote::graphic::VertexArray::copyElements(size_t count, const unsigned * data)
 {
 	m_elemCount = count;
-	m_ebo->setData(count, data);
+	m_ebo->copyData(count, data);
 }
 
 void cote::graphic::VertexArray::setLayout(const VertexAttributeLayout & layout)
@@ -38,7 +33,14 @@ void cote::graphic::VertexArray::setLayout(const VertexAttributeLayout & layout)
 
 void cote::graphic::VertexArray::setAttributesValues(size_t count, const uint8_t * data)
 {
-	m_vbo->setData(count, data);
+	m_vbo->copyData(count, data);
+}
+
+void cote::graphic::VertexArray::drawElements()
+{
+	this->bind();
+	glDrawElements(GL_TRIANGLES, m_elemCount, GL_UNSIGNED_INT, NULL);
+	this->unbind();
 }
 
 VertexArray::~VertexArray()

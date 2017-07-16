@@ -45,6 +45,9 @@
     <ClCompile Include="API\VertexArray.cpp">
       <Filter>Source Files\API</Filter>
     </ClCompile>
+    <ClCompile Include="API\VertexAttributeValueHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="API\Shader.h">
@@ -67,6 +70,9 @@
     </ClInclude>
     <ClInclude Include="API\VertexArray.h">
       <Filter>Header Files\API</Filter>
+    </ClInclude>
+    <ClInclude Include="API\VertexAttributeValueHandler.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
