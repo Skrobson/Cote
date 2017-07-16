@@ -3,12 +3,13 @@
 #include <glm.hpp>
 #include <vector>
 #include <type_traits>
+#include <cassert>
 
 namespace cote {
 	namespace graphic {
 
-		enum  VertexAttributeIndex {
-			POSITION = 0,
+		enum  VertexAttributeIndex :unsigned{
+			POSITION =  0,
 			UV_0,
 			NORMAL,
 			COLOR_0,
@@ -37,10 +38,12 @@ namespace cote {
 		class VertexAttributeLayout
 		{
 		public:
+			/**Ustawia wlasciwosci atrybutu, takie jak offset, stride itp,
+				*narazie wspierane sa typy GL_FLOAT i GL_BYTE  */
 			template<typename T>
-			void pushVertexAttribute(T t, VertexAttributeIndex index,bool normalized);
+			void pushVertexAttribute(VertexAttributeIndex index, unsigned GlType, bool normalized);
 			const std::vector<VertexAttribute>& getAttributes()const { return m_attributes; }
-
+			
 			unsigned getStride() const
 			{
 				return m_stride;
@@ -56,11 +59,22 @@ namespace cote {
 
 
 		template<typename T>
-		inline void VertexAttributeLayout::pushVertexAttribute(T t, VertexAttributeIndex index, bool normalized)
+		inline void VertexAttributeLayout::pushVertexAttribute(VertexAttributeIndex index,unsigned GlType, bool normalized)
 		{
-			uint16_t size = sizeof(t);
-			uint16_t count = size / sizeof(float);
-			push(index, GL_FLOAT, count, size, normalized);
+			size_t size = sizeof(T);
+			size_t count;
+			switch(GlType):
+				case GL_FLOAT:
+					count = size / sizeof(float);
+					break;
+				case GL_BYTE:
+					count = size / sizeof(uint8_t);
+					break;
+				default:
+					static_assert(false, "Type is not supported");
+
+
+			push(index, GlType, count, size, normalized);
 		}
 	}
 
