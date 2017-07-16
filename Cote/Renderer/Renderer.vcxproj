@@ -133,6 +133,7 @@
   <ItemGroup>
     <ClCompile Include="GLerror.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
+    <ClCompile Include="Texture.cpp" />
     <ClCompile Include="VertexAttributeLayout.cpp" />
     <ClCompile Include="ElementBuffer.cpp" />
     <ClCompile Include="main.cpp" />
@@ -142,6 +143,7 @@
     <ClCompile Include="VertexAttributeValueHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Texture.h" />
     <ClInclude Include="VertexAttributeLayout.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="GLerror.h" />

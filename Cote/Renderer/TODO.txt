@@ -1,7 +1,9 @@
 TODO:
 
 IMPORTANT
--copy/move constructors and operators in Buffers
+-check GlErrors in Buffers
+-image loader
 FEATURES
 -log system
 -GL error checker
+-parametryzowanie tekstor
