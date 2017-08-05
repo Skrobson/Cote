@@ -8,17 +8,15 @@ namespace cote
 {
 	namespace graphic
 	{
-		class VertexArray
+		class VertexArray:public ABuffer
 		{
 		public:
 			VertexArray();
+
 			
-			VertexArray(VertexArray&&) = delete;
-			VertexArray(VertexArray&) = delete;
+			void bind()const noexcept override;
+			void unbind()const noexcept override ;
 			
-			void bind();
-			void unbind();
-			unsigned getHandler()const { return m_handler; }
 			size_t getElemCount()const { return m_elemCount; }
 
 			void copyElements(size_t count, const unsigned* data);
@@ -27,11 +25,10 @@ namespace cote
 			void setLayout(const VertexAttributeLayout& layout);
 			void setAttributesValues(size_t count, const uint8_t* data);
 			void drawElements();
-			~VertexArray();
+		
 		protected:
 			std::unique_ptr<VertexBuffer> m_vbo;
 			std::unique_ptr<ElementBuffer> m_ebo;
-			unsigned m_handler=0;
 			size_t m_elemCount;
 
 		};

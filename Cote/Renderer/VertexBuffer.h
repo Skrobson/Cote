@@ -1,28 +1,23 @@
 #pragma once
 #include <memory>
 #include "VertexAttributeLayout.h"
+#include "ABuffer.h"
 
 namespace cote { namespace graphic
 {
-	class VertexBuffer
+	class VertexBuffer:public ABuffer
 	{
 	public:
 		VertexBuffer();
-		VertexBuffer(VertexBuffer&& other );
-		VertexBuffer(VertexBuffer&) = delete;
-		void bind();
-		void unbind();
+
+		void bind()const noexcept override;
+		void unbind()const noexcept override;
 
 
 
 		void setVertexAttributeLayout(const VertexAttributeLayout& layout);
 		void copyData(size_t size,const uint8_t* data);
 
-		unsigned getHandler()const { return m_handler; }
-		~VertexBuffer();
-	protected:
-
-		unsigned m_handler=0;
 		
 	};
 

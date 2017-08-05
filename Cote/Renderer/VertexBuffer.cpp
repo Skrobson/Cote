@@ -4,22 +4,22 @@ using namespace cote::graphic;
 
 VertexBuffer::VertexBuffer()
 {
-	glGenBuffers(1, &m_handler);
+	unsigned* tmpHandler = new unsigned;
+	glGenBuffers(1, tmpHandler);
+	m_handler = std::shared_ptr<unsigned>(std::move(tmpHandler), [](unsigned* handler) {
+		glDeleteBuffers(1, handler);
+		delete handler;
+	});
 }
 
-cote::graphic::VertexBuffer::VertexBuffer(VertexBuffer && other)
+
+
+void cote::graphic::VertexBuffer::bind()const noexcept
 {
-	this->m_handler = other.m_handler;
-	other.m_handler = NULL;
+	glBindBuffer(GL_ARRAY_BUFFER, *m_handler);
 }
 
-
-void cote::graphic::VertexBuffer::bind()
-{
-	glBindBuffer(GL_ARRAY_BUFFER, m_handler);
-}
-
-void cote::graphic::VertexBuffer::unbind()
+void cote::graphic::VertexBuffer::unbind()const noexcept
 {
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
@@ -42,9 +42,3 @@ void cote::graphic::VertexBuffer::copyData(size_t size , const uint8_t* data)
 	glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
 }
 
-
-VertexBuffer::~VertexBuffer()
-{
-	if(m_handler)
-	glDeleteBuffers(1, &m_handler);
-}

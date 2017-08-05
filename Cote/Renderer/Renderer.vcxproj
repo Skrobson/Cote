@@ -131,8 +131,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ABuffer.cpp" />
     <ClCompile Include="GLerror.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
+    <ClCompile Include="Test.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="VertexAttributeLayout.cpp" />
     <ClCompile Include="ElementBuffer.cpp" />
@@ -143,6 +145,8 @@
     <ClCompile Include="VertexAttributeValueHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ABuffer.h" />
+    <ClInclude Include="Test.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="VertexAttributeLayout.h" />
     <ClInclude Include="Shader.h" />

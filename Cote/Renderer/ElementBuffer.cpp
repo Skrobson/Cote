@@ -4,35 +4,31 @@ using namespace cote::graphic;
 
 ElementBuffer::ElementBuffer()
 {
-	glGenBuffers(1, &m_handler);
+	unsigned* tmpHandler = new unsigned;
+	glGenBuffers(1, tmpHandler);
+
+	m_handler = std::shared_ptr<unsigned>(std::move(tmpHandler), [](unsigned* handler) {
+		glDeleteBuffers(1, handler);
+		delete handler;
+	});
 }
 
 
-cote::graphic::ElementBuffer::ElementBuffer(ElementBuffer && other)
+
+void cote::graphic::ElementBuffer::bind()const noexcept
 {
-	this->m_handler = other.m_handler;
-	other.m_handler = NULL;
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, *m_handler);
 }
 
-void cote::graphic::ElementBuffer::bind()
-{
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_handler);
-}
-
-void cote::graphic::ElementBuffer::unbind()
+void cote::graphic::ElementBuffer::unbind()const noexcept
 {
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
-void cote::graphic::ElementBuffer::copyData(size_t count, const unsigned * data)
+void cote::graphic::ElementBuffer::copyData(size_t count, const unsigned * data) noexcept
 {
 	this->bind();
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, count * sizeof(unsigned), (void*)data, GL_STATIC_DRAW);
 }
 
 
-ElementBuffer::~ElementBuffer()
-{
-	if(m_handler)
-	glDeleteBuffers(1, &m_handler);
-}
