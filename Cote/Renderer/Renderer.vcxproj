@@ -132,10 +132,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ABuffer.cpp" />
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="FreeCamera.cpp" />
     <ClCompile Include="GLerror.cpp" />
+    <ClCompile Include="Input.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
     <ClCompile Include="Test.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="Textureold.cpp" />
     <ClCompile Include="VertexAttributeLayout.cpp" />
     <ClCompile Include="ElementBuffer.cpp" />
     <ClCompile Include="main.cpp" />
@@ -143,11 +147,16 @@
     <ClCompile Include="VertexBuffer.cpp" />
     <ClCompile Include="VertexArray.cpp" />
     <ClCompile Include="VertexAttributeValueHandler.cpp" />
+    <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ABuffer.h" />
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="FreeCamera.h" />
+    <ClInclude Include="Input.h" />
     <ClInclude Include="Test.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="Textureold.h" />
     <ClInclude Include="VertexAttributeLayout.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="GLerror.h" />
@@ -156,6 +165,10 @@
     <ClInclude Include="ElementBuffer.h" />
     <ClInclude Include="VertexArray.h" />
     <ClInclude Include="VertexAttributeValueHandler.h" />
+    <ClInclude Include="Window.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="TODO.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
