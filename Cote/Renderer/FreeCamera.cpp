@@ -1,5 +1,5 @@
 #include "FreeCamera.h"
-#include "DebugLog.h"
+//#include "DebugLog.h"
 #include <cmath>
 
 
@@ -9,17 +9,17 @@ FreeCamera::FreeCamera(glm::vec3 cameraPos, glm::vec3 cameraDirection,Window* wi
 {	
 	mPitch = 0;// asin(cameraDirection.y);
 	mYaw = 0;//atan2(cameraDirection.x, cameraDirection.z);
-	Log debugLog;
-	debugLog() << cameraDirection.x << " " <<
-		cameraDirection.y << " " <<
-		cameraDirection.z << " " <<
-		" pitch"<<mPitch<<" yaw"<<mYaw<< std::endl;
+	//Log debugLog;
+	//debugLog() << cameraDirection.x << " " <<
+	//	cameraDirection.y << " " <<
+	//	cameraDirection.z << " " <<
+	//	" pitch"<<mPitch<<" yaw"<<mYaw<< std::endl;
 
 }
 
 void FreeCamera::update()
 {
-	Log debugLog;
+	//Log debugLog;
 	GLfloat currentFrame = (GLfloat)glfwGetTime();
 	deltaTime = currentFrame - lastFrame;
 	lastFrame = currentFrame;
@@ -76,10 +76,10 @@ void FreeCamera::update()
 
 		rotate(front);
 
-		debugLog() << front.x << " " <<
-			front.y << " " <<
-			front.z << " " <<
-			" pitch" << mPitch << " yaw" << mYaw << std::endl;
+		//debugLog() << front.x << " " <<
+		//	front.y << " " <<
+		//	front.z << " " <<
+		//	" pitch" << mPitch << " yaw" << mYaw << std::endl;
 	}
 	if (!(mInput->mouseButtonEvent(GLFW_MOUSE_BUTTON_LEFT)))
 		mFirstMouseUse = true;

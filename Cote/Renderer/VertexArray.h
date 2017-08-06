@@ -23,7 +23,7 @@ namespace cote
 			template<typename RandomIt>
 			void copyElements(RandomIt beg, RandomIt end);
 			void setLayout(const VertexAttributeLayout& layout);
-			void setAttributesValues(size_t count, const uint8_t* data);
+			void setAttributesValues(size_t count, const float* data);
 			void drawElements();
 		
 		protected:

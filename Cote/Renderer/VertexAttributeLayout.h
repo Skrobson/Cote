@@ -63,16 +63,16 @@ namespace cote {
 		{
 			size_t size = sizeof(T);
 			size_t count;
-			switch(GlType):
-				case GL_FLOAT:
-					count = size / sizeof(float);
-					break;
-				case GL_BYTE:
-					count = size / sizeof(uint8_t);
-					break;
-				default:
-					static_assert(false, "Type is not supported");
-
+			switch (GlType) {
+			case GL_FLOAT:
+				count = size / sizeof(float);
+				break;
+			case GL_BYTE:
+				count = size / sizeof(uint8_t);
+				break;
+			default:
+				static_assert(true, "Type is not supported");
+			}
 
 			push(index, GlType, count, size, normalized);
 		}

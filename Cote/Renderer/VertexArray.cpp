@@ -4,9 +4,9 @@ using namespace cote::graphic;
 
 cote::graphic::VertexArray::VertexArray( )
 {
-	unsigned* tmpHandler = new unsigned;
-	glGenVertexArrays(1, tmpHandler);
-	m_handler=std::shared_ptr<unsigned>(std::move(tmpHandler), [](unsigned* handler) {
+	unsigned tmpHandler;
+	glGenVertexArrays(1, &tmpHandler);
+	m_handler=std::shared_ptr<unsigned>(new unsigned(tmpHandler), [](unsigned* handler) {
 		glDeleteBuffers(1, handler);
 		delete handler;
 	});
@@ -36,7 +36,7 @@ void cote::graphic::VertexArray::setLayout(const VertexAttributeLayout & layout)
 	m_vbo->setVertexAttributeLayout(layout);
 }
 
-void cote::graphic::VertexArray::setAttributesValues(size_t count, const uint8_t * data)
+void cote::graphic::VertexArray::setAttributesValues(size_t count, const float* data)
 {
 	m_vbo->copyData(count, data);
 }

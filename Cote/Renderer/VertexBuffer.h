@@ -16,7 +16,7 @@ namespace cote { namespace graphic
 
 
 		void setVertexAttributeLayout(const VertexAttributeLayout& layout);
-		void copyData(size_t size,const uint8_t* data);
+		void copyData(size_t size,const float* data);
 
 		
 	};
