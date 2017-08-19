@@ -6,6 +6,7 @@
 #include <memory>
 #include <initializer_list>
 #include <map>
+#include <memory>
 
 #include "GLerror.h"
 #include "Shader.h"
@@ -21,23 +22,26 @@ namespace cote
 		public:
 			ShaderProgram();
 			ShaderProgram(std::initializer_list<const Shader> list);
-			~ShaderProgram();
+			
 
 			bool attachShader(const Shader& shader);
 			bool linkProgram();
 			void bind()const;
 			void unbind()const;
-			inline unsigned getProgramID()const { return mProgram; }
+			inline unsigned getProgramID()const { return *mProgram; }
 
 			inline bool isLinked()const { return mbLinked; }
 
-		private:
+		protected:
 
-			unsigned mProgram;
+			std::shared_ptr<unsigned> mProgram;
 
 			std::map<ShaderType, unsigned> mShaders;
 
 			bool mbLinked = false;
+
+		private:
+			void createProgram();
 		};
 	}
 }

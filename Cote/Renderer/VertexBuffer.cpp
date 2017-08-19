@@ -32,10 +32,6 @@ void cote::graphic::VertexBuffer::setVertexAttributeLayout(const VertexAttribute
 		glVertexAttribPointer(a.m_index, a.m_count, a.m_type, a.m_normalized, layout.getStride() , (GLvoid*)a.m_offset);
 		glEnableVertexAttribArray(a.m_index);
 
-		//testy
-		//std::cerr << sizeof(float) << "\n";
-		//std::cerr << sizeof(glm::vec2) << "\n";
-		std::cerr << "size" << a.m_size << " stride" << layout.getStride() << " offset"<<a.m_offset<<"\n";
 	}
 
 }
@@ -45,6 +41,5 @@ void cote::graphic::VertexBuffer::copyData(size_t size , const float* data)
 {
 	this->bind();
 	glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
-	std::cerr << "buffer size " << size << "\n";
 }
 

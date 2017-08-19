@@ -38,13 +38,14 @@ Test::Test()
 
 
 	vertexArray = std::make_unique<cote::graphic::VertexArray>();
-	vertexArray->bind();
+	//vertexArray->bind();
 
 	std::vector<float> vertexData{
-		0.5f, 0.5f, 0.0f ,1.0f, 1.0f ,
-		0.5f, -0.5f, 0.0f,1.0f, 0.0f,
-		-0.5f, -0.5f, 0.0f,0.0f, 0.0f,
-		-0.5f,  0.5f, 0.0f,0.0f, 1.0f
+		//pos					uv
+		0.5f, 0.5f, 0.0f ,		1.0f, 1.0f ,
+		0.5f, -0.5f, 0.0f,		1.0f, 0.0f,
+		-0.5f, -0.5f, 0.0f,		0.0f, 0.0f,
+		-0.5f,  0.5f, 0.0f,		0.0f, 1.0f
 	};
 	
 	vertexArray->setAttributesValues(vertexData.size()*sizeof(float), &vertexData[0]);
@@ -53,10 +54,10 @@ Test::Test()
 	vertexArray->copyElements(indicies.size(), &indicies[0]);
 
 	vertexArray->setLayout(vLayout);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	//glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-	glBindVertexArray(NULL);
-	tex = new Texture("../../textures/herb.png", TEX_DIFFUSE);
+	//glBindVertexArray(NULL);
+	tex = new Texture("../../Data/textures/wall.jpg", TEX_DIFFUSE);
 
 	vS.loadFromFile("../../Data/shaders/tex_vertex.glvs", cote::graphic::ShaderType::VERTEX_SHADER);
 	fS.loadFromFile("../../Data/shaders/tex_fragment.glfs", cote::graphic::ShaderType::FRAGMENT_SHADER);
@@ -97,10 +98,10 @@ void Test::start()
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 		program->bind();
-	//	tex->use(0);
-		glActiveTexture(GL_TEXTURE0);
-		glUniform1i(glGetUniformLocation(program->getProgramID(), "texture_diffuse1"), 0);
-		glBindTexture(GL_TEXTURE_2D, tex->getTextureID());
+		tex->use(0);
+		//glActiveTexture(GL_TEXTURE0);
+		//glUniform1i(glGetUniformLocation(program->getProgramID(), "texture_diffuse1"), 0);
+		//glBindTexture(GL_TEXTURE_2D, tex->getTextureID());
 		
 		
 		

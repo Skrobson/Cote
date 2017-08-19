@@ -3,6 +3,7 @@
 #include <string>
 #include <exception>
 #include "GLerror.h"
+#include <memory>
 
 namespace cote
 {
@@ -26,28 +27,38 @@ namespace cote
 			Shader(const std::string& filename, ShaderType);
 			/**Create from source*/
 			Shader(ShaderType ,const std::string& source);
-			~Shader();
+	
+			/**Create shader from source*/
+			static std::shared_ptr<Shader> createVertexShader(const std::string& source);
 
-			GLuint Shader::createFromSource(const std::string & text, ShaderType type);
+			/**Create shader from source*/
+			static std::shared_ptr<Shader> createFragmentShader(const std::string& source);
+
+			void Shader::createFromSource(const std::string & text, ShaderType type);
 			
 			//Wczytywanie z pliku mo¿nazrobiæ osobno
 			void loadFromFile(const char* filename, ShaderType type);
 			void loadFromFile(const std::string& filename, ShaderType type);
 
+
+
 			inline unsigned getShaderID()const {
-				return mShaderID;
+				return *mShaderID;
 			}
 
 			inline ShaderType getType()const { return mType; }
 			inline bool isCompiled()const { return mbCompiled; }
 
 
-		private:
+		protected:
 
 			bool mbCompiled = false;
 
 			ShaderType mType;
-			unsigned mShaderID;
+			std::shared_ptr<unsigned> mShaderID;
+
+		private:
+			void makeHandler();
 		};
 	}
 }

@@ -6,12 +6,12 @@ using namespace cote::graphic;
 
 ShaderProgram::ShaderProgram()
 {
-	mProgram = glCreateProgram();
+	createProgram();
 }
 
 ShaderProgram::ShaderProgram(std::initializer_list<const Shader> list)
 {
-	mProgram = glCreateProgram();
+	createProgram();
 	for (auto& shader : list)
 	{
 		attachShader(shader);
@@ -19,14 +19,6 @@ ShaderProgram::ShaderProgram(std::initializer_list<const Shader> list)
 	linkProgram();
 }
 
-ShaderProgram::~ShaderProgram()
-{
-	for (auto& shader : mShaders)
-	{
-		glDetachShader(mProgram, shader.second);
-	}
-	glDeleteProgram(mProgram);
-}
 
 bool ShaderProgram::attachShader(const Shader& shader)
 {
@@ -35,21 +27,21 @@ bool ShaderProgram::attachShader(const Shader& shader)
 		throw("Shader not compiled");
 		return false;
 	}
-	glAttachShader(mProgram, shader.getShaderID());
+	glAttachShader(*mProgram, shader.getShaderID());
 	mShaders.insert(std::make_pair(shader.getType(), shader.getShaderID()));
 	return true;
 }
 
 bool ShaderProgram::linkProgram()
 {
-	glLinkProgram(mProgram);
+	glLinkProgram(*mProgram);
 
 	GLint success;
 	char errBuffer[512];
-	glGetProgramiv(mProgram, GL_LINK_STATUS, &success);
+	glGetProgramiv(*mProgram, GL_LINK_STATUS, &success);
 	if (!success)
 	{
-		glGetProgramInfoLog(mProgram, sizeof(errBuffer), NULL, errBuffer);
+		glGetProgramInfoLog(*mProgram, sizeof(errBuffer), NULL, errBuffer);
 		std::string error("Failed to link shader program ");
 		error += errBuffer;
 		throw(GLerror(error));
@@ -64,10 +56,23 @@ bool ShaderProgram::linkProgram()
 void ShaderProgram::bind()const
 {
 
-	glUseProgram(mProgram);
+	glUseProgram(*mProgram);
 }
 
 void ShaderProgram::unbind()const
 {
 	glUseProgram(NULL);
+}
+
+void cote::graphic::ShaderProgram::createProgram()
+{
+	mProgram = std::shared_ptr<unsigned>(new unsigned(glCreateProgram()), [this](unsigned* program){
+		for (auto& shader : this->mShaders)
+		{
+			glDetachShader(*program, shader.second);
+		}
+		glDeleteProgram(*program);
+		delete program;
+	});
+	
 }

@@ -27,17 +27,20 @@ void cote::graphic::VertexArray::unbind()const noexcept
 
 void cote::graphic::VertexArray::copyElements(size_t count, const unsigned * data)
 {
+	bind();
 	m_elemCount = count;
 	m_ebo->copyData(count, data);
 }
 
 void cote::graphic::VertexArray::setLayout(const VertexAttributeLayout & layout)
 {
+	bind();
 	m_vbo->setVertexAttributeLayout(layout);
 }
 
 void cote::graphic::VertexArray::setAttributesValues(size_t count, const float* data)
 {
+	bind();
 	m_vbo->copyData(count, data);
 }
 
