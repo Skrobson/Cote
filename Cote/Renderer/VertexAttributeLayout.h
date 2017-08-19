@@ -39,9 +39,13 @@ namespace cote {
 		{
 		public:
 			/**Ustawia wlasciwosci atrybutu, takie jak offset, stride itp,
-				*narazie wspierane sa typy GL_FLOAT i GL_BYTE  */
+			*only for floats
+				  */
 			template<typename T>
-			void pushVertexAttribute(VertexAttributeIndex index, unsigned GlType, bool normalized);
+			void pushVertexAttribute(VertexAttributeIndex index, bool normalized);
+
+			void pushVertexAttribute(VertexAttributeIndex index, unsigned type, unsigned count, unsigned size, bool normalized);
+
 			const std::vector<VertexAttribute>& getAttributes()const { return m_attributes; }
 			
 			unsigned getStride() const
@@ -52,29 +56,19 @@ namespace cote {
 			std::vector<VertexAttribute> m_attributes;
 			unsigned m_stride=0;
 
-			void push(VertexAttributeIndex index, unsigned type, unsigned count, unsigned size, bool normalized);
+			void pushVertexAttribute(VertexAttributeIndex index, unsigned type, unsigned count, unsigned size, bool normalized);
 		};
 
 
 
 
 		template<typename T>
-		inline void VertexAttributeLayout::pushVertexAttribute(VertexAttributeIndex index,unsigned GlType, bool normalized)
+		inline void VertexAttributeLayout::pushVertexAttribute(VertexAttributeIndex index, bool normalized)
 		{
 			size_t size = sizeof(T);
-			size_t count;
-			switch (GlType) {
-			case GL_FLOAT:
-				count = size / sizeof(float);
-				break;
-			case GL_BYTE:
-				count = size / sizeof(uint8_t);
-				break;
-			default:
-				static_assert(true, "Type is not supported");
-			}
-
-			push(index, GlType, count, size, normalized);
+			size_t count = size / sizeof(float);
+		
+			pushVertexAttribute(index, GlType, count, size, normalized);
 		}
 	}
 
