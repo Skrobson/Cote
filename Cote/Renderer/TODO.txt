@@ -3,6 +3,15 @@ TODO:
 IMPORTANT
 -check GlErrors in Buffers
 -image loader
+-spraedzic layouty
+-textury
+-mesh
+-uniformy
+-program state
+-render state
+-material system
+-model( zbior powyzszych)
+
 FEATURES
 -log system
 -GL error checker

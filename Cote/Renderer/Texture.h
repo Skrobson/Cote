@@ -1,6 +1,7 @@
 #pragma once
 #include <GL/glew.h>
 #include <string>
+#include <memory>
 
 namespace cote {
 	namespace graphic {
@@ -15,9 +16,9 @@ namespace cote {
 		{
 		public:
 			Texture(size_t width , size_t height);
-			Texture(Texture&&) = delete;
-			Texture(const Texture&) = delete;
-			GLuint getTextureID();
+			Texture(Texture&&) = default;
+			Texture(const Texture&) = default;
+			unsigned getTextureID();
 
 			void bind(unsigned slot);
 			void unbind(unsigned slot);
@@ -27,7 +28,7 @@ namespace cote {
 			unsigned m_width, m_height;
 			
 			
-			GLuint m_handler;
+			std::shared_ptr<unsigned> m_handler;
 			
 			virtual void bindImpl() = 0;
 			virtual void unbindImpl() = 0;

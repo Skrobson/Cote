@@ -6,12 +6,17 @@ using namespace cote::graphic;
 
 Texture::Texture(size_t width, size_t height)
 {
-	glGenTextures(1, &m_handler);
+	unsigned tmpHandler;
+	glGenTextures(1, &tmpHandler);
+	m_handler = std::shared_ptr<unsigned>(new unsigned(tmpHandler), [](unsigned* handler) {
+		glDeleteTextures(1, handler);
+	});
+	
 }
 
-GLuint Texture::getTextureID()
+unsigned Texture::getTextureID()
 {
-	return m_handler;
+	return *m_handler;
 }
 
 void Texture::bind(unsigned slot)
@@ -28,12 +33,12 @@ void cote::graphic::Texture::unbind(unsigned slot)
 
 Texture::~Texture()
 {
-	glDeleteTextures(1, &m_handler);
+	
 }
 
 cote::graphic::Texture2d::Texture2d(size_t width, size_t height, const uint8_t * data):Texture(width,height)
 {
-	glBindTexture(GL_TEXTURE_2D, m_handler);
+	glBindTexture(GL_TEXTURE_2D, *m_handler);
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	// Set texture wrapping to GL_REPEAT
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -65,7 +70,7 @@ cote::graphic::Texture2d::Texture2d(size_t width, size_t height, const uint8_t *
 
 void cote::graphic::Texture2d::bindImpl()
 {
-	glBindTexture(GL_TEXTURE_2D, m_handler);
+	glBindTexture(GL_TEXTURE_2D, *m_handler);
 }
 
 void cote::graphic::Texture2d::unbindImpl()
