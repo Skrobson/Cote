@@ -1,7 +1,8 @@
 #pragma once
-#include "VertexArray.h"
+
 #include <GL\glew.h>
 #include <GLFW\glfw3.h>
+#include "VertexArray.h"
 #include <memory>
 #include "Window.h"
 #include "Textureold.h"

@@ -2,7 +2,7 @@
 
 using namespace cote::graphic;
 
-cote::graphic::VertexArray::VertexArray( )
+cote::graphic::VertexArray::VertexArray(const std::vector<unsigned>& indecies, const VertexAttributeLayout & layout)
 {
 	unsigned tmpHandler;
 	glGenVertexArrays(1, &tmpHandler);
@@ -11,7 +11,8 @@ cote::graphic::VertexArray::VertexArray( )
 		delete handler;
 	});
 	m_ebo = std::make_unique<ElementBuffer>();
-	m_vbo = std::make_unique<VertexBuffer>();
+	m_ebo->copyData(indecies.size(), indecies.data());
+	m_vbo = std::make_unique<VertexBuffer>(layout);
 }
 
 void cote::graphic::VertexArray::bind()const noexcept 
@@ -30,18 +31,6 @@ void cote::graphic::VertexArray::copyElements(size_t count, const unsigned * dat
 	bind();
 	m_elemCount = count;
 	m_ebo->copyData(count, data);
-}
-
-void cote::graphic::VertexArray::setLayout(const VertexAttributeLayout & layout)
-{
-	bind();
-	m_vbo->setVertexAttributeLayout(layout);
-}
-
-void cote::graphic::VertexArray::setAttributesValues(size_t count, const float* data)
-{
-	bind();
-	m_vbo->copyData(count, data);
 }
 
 void cote::graphic::VertexArray::drawElements()

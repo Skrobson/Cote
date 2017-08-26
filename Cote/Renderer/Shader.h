@@ -38,7 +38,7 @@ namespace cote
 			
 			//Wczytywanie z pliku mo¿nazrobiæ osobno
 			void loadFromFile(const char* filename, ShaderType type);
-			void loadFromFile(const std::string& filename, ShaderType type);
+			void loadFromFile(const std::string & filename, ShaderType type);
 
 
 

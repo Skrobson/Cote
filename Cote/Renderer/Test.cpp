@@ -32,8 +32,8 @@ Test::Test()
 	glViewport(0, 0, frameX, frameY);
 	//testy nowych klas
 	cote::graphic::VertexAttributeLayout vLayout;
-	vLayout.pushVertexAttribute<glm::vec3>(cote::graphic::VertexAttributeIndex::POSITION, GL_FLOAT, false);
-	vLayout.pushVertexAttribute<glm::vec2>(cote::graphic::VertexAttributeIndex::UV_0, GL_FLOAT, false);
+//	vLayout.pushVertexAttribute<glm::vec3>(cote::graphic::VertexAttributeIndex::POSITION);
+//	vLayout.pushVertexAttribute<glm::vec2>(cote::graphic::VertexAttributeIndex::UV_0);
 
 
 
