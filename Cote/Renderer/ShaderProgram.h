@@ -35,7 +35,8 @@ namespace cote
 		protected:
 
 			std::shared_ptr<unsigned> mProgram;
-
+			/**Na ta chwile mapa shaderow bedzie sie znajdowala w shader program, pozniej zostanie przeniesiona
+			do fabryki programow*/
 			std::map<ShaderType, unsigned> mShaders;
 
 			bool mbLinked = false;

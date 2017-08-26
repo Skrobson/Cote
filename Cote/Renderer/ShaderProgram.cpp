@@ -28,7 +28,7 @@ bool ShaderProgram::attachShader(const Shader& shader)
 		return false;
 	}
 	glAttachShader(*mProgram, shader.getShaderID());
-	mShaders.insert(std::make_pair(shader.getType(), shader.getShaderID()));
+	//mShaders.insert(std::make_pair(shader.getType(), shader.getShaderID()));
 	return true;
 }
 
@@ -47,7 +47,11 @@ bool ShaderProgram::linkProgram()
 		throw(GLerror(error));
 		return false;
 	}
-
+	for (auto& shader : this->mShaders)
+	{
+		glDetachShader(*mProgram, shader.second);
+	}
+	mShaders.clear();
 	mbLinked = true;
 
 	return true;
@@ -66,11 +70,8 @@ void ShaderProgram::unbind()const
 
 void cote::graphic::ShaderProgram::createProgram()
 {
-	mProgram = std::shared_ptr<unsigned>(new unsigned(glCreateProgram()), [this](unsigned* program){
-		for (auto& shader : this->mShaders)
-		{
-			glDetachShader(*program, shader.second);
-		}
+	mProgram = std::shared_ptr<unsigned>(new unsigned(glCreateProgram()), [](unsigned* program){
+		
 		glDeleteProgram(*program);
 		delete program;
 	});
