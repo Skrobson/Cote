@@ -28,14 +28,14 @@ void cote::graphic::VertexBuffer::setVertexAttributeLayout(const VertexAttribute
 	size_t offset = 0;
 	auto attributes = layout.getAttributes();
 	this->bind();
-	glBufferData(GL_ARRAY_BUFFER, layout.getStride(), NULL, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, layout.getSizeOf(), NULL, GL_STATIC_DRAW);
 	for (auto &a : attributes)
 	{
 		auto attribute = a.first;
 		glEnableVertexAttribArray(attribute->getIndex());
 		
 		//dla wartosci podawanych pokolei przy pomocy subData
-		glVertexAttribPointer(attribute->getIndex(), attribute->getCount(), GL_FLOAT, GL_FALSE, 0, (char*)offset);
+		glVertexAttribPointer(attribute->getIndex(), attribute->getCount(), GL_FLOAT, GL_FALSE, 0, (GLvoid*)offset);
 		glBufferSubData(GL_ARRAY_BUFFER, offset, attribute->getSize(), attribute->getRawData());
 		//dla wymieszanych wartosci
 		//glVertexAttribPointer(a.m_index, a.m_count, GL_FLOAT, GL_FALSE, layout.getStride() , (GLvoid*)a.m_offset);

@@ -1,10 +1,10 @@
 #pragma once
 
-#include <memory>
-#include <vector>
+//#include <memory>
+//#include <vector>
 #include "VertexBuffer.h"
 #include "ElementBuffer.h"
-//#include "VertexAttributeLayout.h"
+#include "VertexAttributeLayout.h"
 
 namespace cote
 {
@@ -32,3 +32,4 @@ namespace cote
 
 		};
 	}
+}

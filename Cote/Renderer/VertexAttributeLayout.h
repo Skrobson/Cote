@@ -1,11 +1,9 @@
 #pragma once
-#include <GL\glew.h>
 #include <glm.hpp>
 #include <vector>
 #include <memory>
 #include <utility>
-#include <type_traits>
-#include <cassert>
+
 
 namespace cote {
 	namespace graphic {
@@ -80,13 +78,13 @@ namespace cote {
 
 			const std::vector<std::pair <std::shared_ptr<VertexAttribute>, unsigned>>& getAttributes()const { return m_attributes; }
 			
-			unsigned getStride() const
+			size_t getSizeOf() const
 			{
-				return m_stride;
+				return m_size;
 			}
 		protected:
 			std::vector<std::pair <std::shared_ptr<VertexAttribute> , size_t>> m_attributes;
-			size_t m_stride=0;
+			size_t m_size=0;
 
 			
 		};

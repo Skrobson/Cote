@@ -1,13 +1,11 @@
 #pragma once
 
-#include <GL\glew.h>
-#include <GLFW\glfw3.h>
-#include "VertexArray.h"
 #include <memory>
+
 #include "Window.h"
 #include "Textureold.h"
 #include "ShaderProgram.h"
-#include <glm.hpp> 
+ #include "VertexArray.h"
 class Test
 {
 public:

@@ -11,7 +11,8 @@ cote::graphic::VertexArray::VertexArray(const std::vector<unsigned>& indecies, c
 		delete handler;
 	});
 	m_ebo = std::make_unique<ElementBuffer>();
-	m_ebo->copyData(indecies.size(), indecies.data());
+	m_elemCount = indecies.size();
+	m_ebo->copyData(m_elemCount, indecies.data());
 	m_vbo = std::make_unique<VertexBuffer>(layout);
 }
 
@@ -36,7 +37,8 @@ void cote::graphic::VertexArray::copyElements(size_t count, const unsigned * dat
 void cote::graphic::VertexArray::drawElements()
 {
 	this->bind();
-	glDrawElements(GL_TRIANGLES, m_elemCount, GL_UNSIGNED_INT, NULL);
+	//glDrawElements(GL_TRIANGLES, m_elemCount, GL_UNSIGNED_INT, NULL);
+	glDrawArrays(GL_TRIANGLES ,0, m_elemCount);
 	this->unbind();
 }
 

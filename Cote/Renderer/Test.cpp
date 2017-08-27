@@ -1,6 +1,8 @@
 #include "Test.h"
+#include <GL\glew.h>
+#include <GLFW\glfw3.h>
 #include <vector>
-
+#include "VertexAttributeLayout.h"
 
 Test::Test()
 {
@@ -30,33 +32,38 @@ Test::Test()
 
 	//ustawianie miejsca do ryowania
 	glViewport(0, 0, frameX, frameY);
-	//testy nowych klas
-	cote::graphic::VertexAttributeLayout vLayout;
-//	vLayout.pushVertexAttribute<glm::vec3>(cote::graphic::VertexAttributeIndex::POSITION);
-//	vLayout.pushVertexAttribute<glm::vec2>(cote::graphic::VertexAttributeIndex::UV_0);
-
-
-
-	vertexArray = std::make_unique<cote::graphic::VertexArray>();
-	//vertexArray->bind();
-
-	std::vector<float> vertexData{
-		//pos					uv
-		0.5f, 0.5f, 0.0f ,		1.0f, 1.0f ,
-		0.5f, -0.5f, 0.0f,		1.0f, 0.0f,
-		-0.5f, -0.5f, 0.0f,		0.0f, 0.0f,
-		-0.5f,  0.5f, 0.0f,		0.0f, 1.0f
-	};
 	
-	vertexArray->setAttributesValues(vertexData.size()*sizeof(float), &vertexData[0]);
+
 
 	std::vector<unsigned> indicies = { 0,1,3 ,1,2,3 };
-	vertexArray->copyElements(indicies.size(), &indicies[0]);
 
-	vertexArray->setLayout(vLayout);
-	//glBindBuffer(GL_ARRAY_BUFFER, 0);
+	
+	//vertexArray->bind();
 
-	//glBindVertexArray(NULL);
+	std::vector<glm::vec3> vertexPos{
+		//pos					
+		{0.5f, 0.5f, 0.0f 	},	
+		{0.5f, -0.5f, 0.0f	}	,
+		{-0.5f, -0.5f, 0.0f}	,
+		{-0.5f,  0.5f, 0.0f}	
+	};
+	std::shared_ptr<cote::graphic::VertexAttribute> pos = std::make_shared<cote::graphic::VertexAttribute3f>(cote::graphic::VertexAttributeIndex::POSITION, vertexPos);
+	
+	std::vector<glm::vec2> vertexUv{
+		{ 1.0f, 1.0f },
+		{ 1.0f, 0.0f },
+		{ 0.0f, 0.0f },
+		{ 0.0f, 1.0f }
+	};
+
+	std::shared_ptr<cote::graphic::VertexAttribute> uv = std::make_shared<cote::graphic::VertexAttribute2f>(cote::graphic::VertexAttributeIndex::UV_0, vertexUv);
+
+	cote::graphic::VertexAttributeLayout vLayout;
+	vLayout.pushVertexAttribute(pos);
+	vLayout.pushVertexAttribute(uv);
+
+	vertexArray = std::make_unique<cote::graphic::VertexArray>(indicies,vLayout);
+	
 	tex = new Texture("../../Data/textures/wall.jpg", TEX_DIFFUSE);
 
 	vS.loadFromFile("../../Data/shaders/tex_vertex.glvs", cote::graphic::ShaderType::VERTEX_SHADER);

@@ -1,12 +1,12 @@
 #pragma once
 
 #include <GL\glew.h>
-#include <detail/type_vec4.hpp>
+//#include <detail/type_vec4.hpp>
 
 #include <memory>
 #include <initializer_list>
 #include <map>
-#include <memory>
+
 
 #include "GLerror.h"
 #include "Shader.h"

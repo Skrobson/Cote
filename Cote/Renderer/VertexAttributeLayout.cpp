@@ -1,5 +1,6 @@
 #include "VertexAttributeLayout.h"
-
+#include <GL\glew.h>
+#include <glm.hpp>
 using namespace cote::graphic;
 
 //void cote::graphic::VertexAttributeLayout::pushVertexAttribute(VertexAttributeIndex index,  unsigned count, unsigned size)
@@ -80,6 +81,7 @@ void cote::graphic::VertexAttribute3f::convertData()
 void cote::graphic::VertexAttributeLayout::pushVertexAttribute(std::shared_ptr<VertexAttribute> attribute)
 {
 	
-	auto tmpAttribute = std::make_pair(attribute, m_stride);
+	auto tmpAttribute = std::make_pair(attribute, m_size);
 	m_attributes.push_back(tmpAttribute);
+	m_size += attribute->getSize();
 }
