@@ -76,6 +76,7 @@ void cote::graphic::VertexAttribute3f::convertData()
 		m_data.push_back(vec.y);
 		m_data.push_back(vec.z);
 	}
+	m_SpecData.clear();
 }
 
 void cote::graphic::VertexAttributeLayout::pushVertexAttribute(std::shared_ptr<VertexAttribute> attribute)

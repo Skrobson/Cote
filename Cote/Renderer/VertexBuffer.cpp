@@ -29,14 +29,37 @@ void cote::graphic::VertexBuffer::setVertexAttributeLayout(const VertexAttribute
 	auto attributes = layout.getAttributes();
 	this->bind();
 	glBufferData(GL_ARRAY_BUFFER, layout.getSizeOf(), NULL, GL_STATIC_DRAW);
+	//GLenum error = glGetError();
+	//if (error != GL_NO_ERROR)
+	//{
+	//	std::cerr << "after creating buffer " << glewGetErrorString(error);
+	//}
 	for (auto &a : attributes)
 	{
 		auto attribute = a.first;
 		glEnableVertexAttribArray(attribute->getIndex());
-		
+		//GLenum error = glGetError();
+		//if (error != GL_NO_ERROR)
+		//{
+		//	std::cerr << "after enable vertexAttribArray " << glewGetErrorString(error);
+		//}
 		//dla wartosci podawanych pokolei przy pomocy subData
-		glVertexAttribPointer(attribute->getIndex(), attribute->getCount(), GL_FLOAT, GL_FALSE, 0, (GLvoid*)offset);
+	
 		glBufferSubData(GL_ARRAY_BUFFER, offset, attribute->getSize(), attribute->getRawData());
+		// error = glGetError();
+		//if (error != GL_NO_ERROR)
+		//{
+		//	std::cerr << "after sub data " << glewGetErrorString(error);
+		//}
+		
+		glVertexAttribPointer(attribute->getIndex(), attribute->getCount(), GL_FLOAT, GL_FALSE, 0, (GLvoid*)a.second);
+
+		//error = glGetError();
+		//if (error != GL_NO_ERROR)
+		//{
+		//	std::cerr << "after Vertex Attrib Pointer " << glewGetErrorString(error);
+		//}
+		
 		//dla wymieszanych wartosci
 		//glVertexAttribPointer(a.m_index, a.m_count, GL_FLOAT, GL_FALSE, layout.getStride() , (GLvoid*)a.m_offset);
 		offset += attribute->getSize();

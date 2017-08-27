@@ -3,7 +3,7 @@ TODO:
 IMPORTANT
 -check GlErrors in Buffers
 -image loader
--spraedzic layouty
+-poprawidz layouty, dodac opcje kwerendy wyszukiwania lokalizacji atrybutu
 -textury
 -mesh
 -uniformy

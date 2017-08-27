@@ -33,6 +33,12 @@ Texture::~Texture()
 //TODO: wczytywanie gdzies indziej
 bool Texture::load(const char* filename)
 {
+	GLenum error = glGetError();
+	if (error != GL_NO_ERROR)
+	{
+		std::cerr << "Error before creating texture " << filename << " " << glewGetErrorString(error) << std::endl;
+		//return false;
+	}
 	FreeImage_Initialise();
 
 	FIBITMAP * data = FreeImage_Load(FreeImage_GetFIFFromFilename(filename), filename);
@@ -63,7 +69,8 @@ bool Texture::load(const char* filename)
 	
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, mWidth, mHeight, 0, GL_BGRA, GL_UNSIGNED_BYTE, (GLvoid*)FreeImage_GetBits(bitmap));
 	glGenerateMipmap(GL_TEXTURE_2D);
-	GLenum error = glGetError();
+//	GLenum 
+	error = glGetError();
 	if (error != GL_NO_ERROR)
 	{
 		std::cerr << "Error creating texture " << filename <<" "<< glewGetErrorString(error)<< std::endl;

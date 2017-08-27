@@ -32,7 +32,11 @@ Test::Test()
 
 	//ustawianie miejsca do ryowania
 	glViewport(0, 0, frameX, frameY);
-	
+	error = glGetError();
+	if (error != GL_NO_ERROR)
+	{
+		std::cerr <<"after viewport & framebuffer" << glewGetErrorString(error);
+	}
 
 
 	std::vector<unsigned> indicies = { 0,1,3 ,1,2,3 };
@@ -63,8 +67,13 @@ Test::Test()
 	vLayout.pushVertexAttribute(uv);
 
 	vertexArray = std::make_unique<cote::graphic::VertexArray>(indicies,vLayout);
-	
-	tex = new Texture("../../Data/textures/wall.jpg", TEX_DIFFUSE);
+	error = glGetError();
+	if (error != GL_NO_ERROR)
+	{
+		std::cerr<<"after vertexArray"  << glewGetErrorString(error);
+	}
+
+	tex = new Texture("../../Data/textures/herb.png", TEX_DIFFUSE);
 
 	vS.loadFromFile("../../Data/shaders/tex_vertex.glvs", cote::graphic::ShaderType::VERTEX_SHADER);
 	fS.loadFromFile("../../Data/shaders/tex_fragment.glfs", cote::graphic::ShaderType::FRAGMENT_SHADER);
