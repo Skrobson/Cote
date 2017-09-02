@@ -73,7 +73,7 @@ Test::Test()
 		std::cerr<<"after vertexArray"  << glewGetErrorString(error);
 	}
 
-	tex = new Texture("../../Data/textures/herb.png", TEX_DIFFUSE);
+	tex = new Texture("../../Data/textures/wall.jpg", TEX_DIFFUSE);
 
 	vS.loadFromFile("../../Data/shaders/tex_vertex.glvs", cote::graphic::ShaderType::VERTEX_SHADER);
 	fS.loadFromFile("../../Data/shaders/tex_fragment.glfs", cote::graphic::ShaderType::FRAGMENT_SHADER);

@@ -30,38 +30,46 @@ namespace cote {
 			size_t getSize()const{ return m_size; }
 
 			const float* getRawData()const { return m_data.data(); }
+			virtual ~VertexAttribute(){}
 		protected:
 
-			 unsigned m_index; 
-			 size_t m_count; //gl need sizeOf( count of variables)
-			 size_t m_size;
-			 std::vector<float> m_data;
+			VertexAttribute(){}
+			unsigned m_index; 
+			size_t m_count; //gl need sizeOf( count of variables)
+			size_t m_size;
+			std::vector<float> m_data;
 			
 			
-			virtual void convertData() = 0;
+			
+			
 		};
 	
+		template<typename T>
+		class VertexAttributeT :public VertexAttribute
+		{
+		protected:
+			std::vector<T> m_originalData;
+			virtual void convertData(const std::vector<T>& data) = 0;
+		};
 
-	
-
-		class VertexAttribute2f :public VertexAttribute
+		class VertexAttribute2f :public VertexAttributeT<glm::vec2>
 		{
 		public:
 			VertexAttribute2f(VertexAttributeIndex index,const std::vector<glm::vec2>& data);
 			VertexAttribute2f(unsigned index, const std::vector<glm::vec2>& data);
 		protected:
-			std::vector<glm::vec2> m_SpecData;
-			virtual void convertData() override;
+			//std::vector<glm::vec2> m_originalData;
+			virtual void convertData(const std::vector<glm::vec2>& data) override;
 		};
 
-		class VertexAttribute3f :public VertexAttribute
+		class VertexAttribute3f :public VertexAttributeT<glm::vec3>
 		{
 		public:
 			VertexAttribute3f(VertexAttributeIndex index , const std::vector<glm::vec3>& data);
 			VertexAttribute3f(unsigned index , const std::vector<glm::vec3>& data);
 		protected:
-			std::vector<glm::vec3> m_SpecData;
-			virtual void convertData()override;
+			//std::vector<glm::vec3> m_originalData;
+			virtual void convertData(const std::vector<glm::vec3>& data)override;
 		};
 
 
