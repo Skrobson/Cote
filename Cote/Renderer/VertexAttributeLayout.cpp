@@ -42,7 +42,7 @@ cote::graphic::VertexAttribute2f::VertexAttribute2f(unsigned index,const  std::v
 
 void cote::graphic::VertexAttribute2f::convertData(const std::vector<glm::vec2>& data)
 {
-	for (auto& vec : m_originalData)
+	for (auto& vec : data)
 	{
 		m_data.push_back(vec.x);
 		m_data.push_back(vec.y);

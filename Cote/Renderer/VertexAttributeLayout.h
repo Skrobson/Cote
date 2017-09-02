@@ -48,7 +48,7 @@ namespace cote {
 		class VertexAttributeT :public VertexAttribute
 		{
 		protected:
-			std::vector<T> m_originalData;
+			//std::vector<T> m_originalData;
 			virtual void convertData(const std::vector<T>& data) = 0;
 		};
 
