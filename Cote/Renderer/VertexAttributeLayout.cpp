@@ -47,7 +47,7 @@ void cote::graphic::VertexAttribute2f::convertData(const std::vector<glm::vec2>&
 		m_data.push_back(vec.x);
 		m_data.push_back(vec.y);
 	}
-	m_originalData.clear();
+	//m_originalData.clear();
 }
 
 cote::graphic::VertexAttribute3f::VertexAttribute3f(VertexAttributeIndex index,  const std::vector<glm::vec3>& data)
@@ -56,7 +56,7 @@ cote::graphic::VertexAttribute3f::VertexAttribute3f(VertexAttributeIndex index, 
 	m_count = 3;
 	m_size = sizeof(float) * m_count * data.size();
 
-	m_originalData = data;
+	//m_originalData = data;
 	convertData(data);
 }
 
@@ -66,7 +66,7 @@ cote::graphic::VertexAttribute3f::VertexAttribute3f(unsigned index, const std::v
 	m_count = 3;
 	m_size = sizeof(float) * m_count * data.size();
 
-	m_originalData = data;
+	//m_originalData = data;
 	//convertData();
 	convertData(data);
 }
