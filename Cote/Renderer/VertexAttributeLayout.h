@@ -2,11 +2,13 @@
 #include <glm.hpp>
 #include <vector>
 #include <memory>
-#include <utility>
+//#include <utility>
 
 
 namespace cote {
 	namespace graphic {
+
+
 
 		enum  VertexAttributeIndex :unsigned{
 			POSITION =  0,
@@ -21,6 +23,8 @@ namespace cote {
 
 			MAX_VERTEX_LAYOUT = 16
 		};
+
+
 
 		class VertexAttribute
 		{
@@ -52,23 +56,32 @@ namespace cote {
 			virtual void convertData(const std::vector<T>& data) = 0;
 		};
 
+
+
 		class VertexAttribute2f :public VertexAttributeT<glm::vec2>
 		{
 		public:
 			VertexAttribute2f(VertexAttributeIndex index,const std::vector<glm::vec2>& data);
+
 			VertexAttribute2f(unsigned index, const std::vector<glm::vec2>& data);
+
 		protected:
-			//std::vector<glm::vec2> m_originalData;
+			
 			virtual void convertData(const std::vector<glm::vec2>& data) override;
 		};
+
+
 
 		class VertexAttribute3f :public VertexAttributeT<glm::vec3>
 		{
 		public:
+
 			VertexAttribute3f(VertexAttributeIndex index , const std::vector<glm::vec3>& data);
+
 			VertexAttribute3f(unsigned index , const std::vector<glm::vec3>& data);
+
 		protected:
-			//std::vector<glm::vec3> m_originalData;
+			
 			virtual void convertData(const std::vector<glm::vec3>& data)override;
 		};
 
@@ -79,18 +92,22 @@ namespace cote {
 		{
 		public:
 			/**Ustawia wlasciwosci atrybutu, takie jak offset, stride itp,
-			*only for floats
-				  */
-			
+			*only for floats*/
 			void pushVertexAttribute(std::shared_ptr<VertexAttribute > attribute);
 
-			const std::vector<std::pair <std::shared_ptr<VertexAttribute>, unsigned>>& getAttributes()const { return m_attributes; }
+			/**return pair attribute and offset*/
+			const std::vector<std::pair <std::shared_ptr<VertexAttribute>, unsigned>>& getAttributes()const 
+			{ 
+				return m_attributes;
+			}
 			
 			size_t getSizeOf() const
 			{
 				return m_size;
 			}
+
 		protected:
+
 			std::vector<std::pair <std::shared_ptr<VertexAttribute> , size_t>> m_attributes;
 			size_t m_size=0;
 

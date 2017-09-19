@@ -16,7 +16,7 @@ namespace cote
 	namespace graphic
 	{
 
-//TODO: shadery moze nie musza byc przechowywane i wylaczane z programu w destruktorze
+
 		class ShaderProgram
 		{
 		public:

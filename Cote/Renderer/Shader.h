@@ -25,19 +25,22 @@ namespace cote
 			Shader();
 			/**Loading from file*/
 			Shader(const std::string& filename, ShaderType);
-			/**Create from source*/
-			Shader(ShaderType ,const std::string& source);
-	
+
 			/**Create shader from source*/
 			static std::shared_ptr<Shader> createVertexShader(const std::string& source);
 
 			/**Create shader from source*/
 			static std::shared_ptr<Shader> createFragmentShader(const std::string& source);
 
+			/**Create from source*/
+			Shader(ShaderType ,const std::string& source);
+	
 			void Shader::createFromSource(const std::string & text, ShaderType type);
 			
+
 			//Wczytywanie z pliku mo¿nazrobiæ osobno
 			void loadFromFile(const char* filename, ShaderType type);
+
 			void loadFromFile(const std::string & filename, ShaderType type);
 
 
@@ -47,6 +50,7 @@ namespace cote
 			}
 
 			inline ShaderType getType()const { return mType; }
+
 			inline bool isCompiled()const { return mbCompiled; }
 
 
@@ -55,6 +59,7 @@ namespace cote
 			bool mbCompiled = false;
 
 			ShaderType mType;
+
 			std::shared_ptr<unsigned> mShaderID;
 
 		private:

@@ -40,12 +40,12 @@ void cote::graphic::VertexArray::unbind()const noexcept
 }
 
 
-void cote::graphic::VertexArray::copyElements(size_t count, const unsigned * data)
-{
-	bind();
-	m_elemCount = count;
-	m_ebo->copyData(count, data);
-}
+//void cote::graphic::VertexArray::copyElements(size_t count, const unsigned * data)
+//{
+//	bind();
+//	m_elemCount = count;
+//	m_ebo->copyData(count, data);
+//}
 
 void cote::graphic::VertexArray::drawElements()
 {

@@ -14,6 +14,7 @@ namespace cote
 		{
 		public:
 			VertexArray() = delete;
+
 			VertexArray(const std::vector<unsigned>& indecies, const VertexAttributeLayout & layout);
 
 			void bind()const noexcept override;
@@ -21,7 +22,7 @@ namespace cote
 
 			size_t getElemCount()const { return m_elemCount; }
 
-			void copyElements(size_t count, const unsigned* data);
+			//void copyElements(size_t count, const unsigned* data);
 
 			void drawElements();
 

@@ -10,7 +10,9 @@ namespace cote {
 			ABuffer();
 		
 			virtual void bind() const noexcept=0;
+
 			virtual void unbind()const noexcept=0;
+
 			unsigned getHandler()const noexcept { return *m_handler; }
 
 		protected:
