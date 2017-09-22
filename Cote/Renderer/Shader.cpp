@@ -92,7 +92,7 @@ void Shader::createFromSource(const std::string & text, ShaderType type)
 		glGetShaderInfoLog(*mShaderID, sizeof(errBuffer), NULL, errBuffer);
 		std::string error("Failed to compile shader from source: ");
 		error += errBuffer;
-		throw(GLerror(error));
+		//throw(GLerror(error));
 		return ;
 	}
 	mbCompiled = true;
