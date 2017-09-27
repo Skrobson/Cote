@@ -1,15 +1,24 @@
 #pragma once
 #include <exception>
 #include <string>
+#include <sstream>
+#include <vector>
+#include <GL\glew.h>
 
-class GLerror:public std::runtime_error
+
+
+
+class GlError
 {
 public:
-	GLerror(const std::string& error);
-	GLerror(const char* error);
 	
-	~GLerror();
+	std::vector<std::string> getErrors();
+	
+	bool checkForError();
+
 private:
-	
+	std::vector<std::string> errors;
+
+	void saveErrorString(GLenum errCode);
 };
 

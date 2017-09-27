@@ -139,6 +139,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="FreeCamera.cpp" />
     <ClCompile Include="GLerror.cpp" />
+    <ClCompile Include="GlException.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="ABuffer.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="FreeCamera.h" />
+    <ClInclude Include="GlException.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="Test.h" />

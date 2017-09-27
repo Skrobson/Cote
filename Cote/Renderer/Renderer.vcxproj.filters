@@ -81,6 +81,9 @@
     <ClCompile Include="Log.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GlException.cpp">
+      <Filter>Source Files\API</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VertexBuffer.h">
@@ -133,6 +136,9 @@
     </ClInclude>
     <ClInclude Include="Log.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GlException.h">
+      <Filter>Header Files\API</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
