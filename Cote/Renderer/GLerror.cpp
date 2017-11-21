@@ -1,14 +1,31 @@
 #include "GLerror.h"
 
 
-GLerror::GLerror(const std::string & error):std::runtime_error(error.c_str())
+
+
+
+
+std::vector<std::string> GlError::getErrors()
 {
+	return errors;
 }
 
-GLerror::GLerror(const char * error):std::runtime_error(error)
+bool GlError::checkForError()
 {
+	GLenum errorCode = glGetError();
+	if (errorCode != GL_NO_ERROR)
+	{
+		saveErrorString(errorCode);
+		return true;
+	}
+	else
+		return false;
 }
 
-GLerror::~GLerror()
+void GlError::saveErrorString(GLenum errCode)
 {
+	std::stringstream tmpErr;
+	tmpErr << glewGetErrorString(errCode);
+
+	errors.push_back(tmpErr.str());
 }

@@ -44,7 +44,7 @@ bool ShaderProgram::linkProgram()
 		glGetProgramInfoLog(*mProgram, sizeof(errBuffer), NULL, errBuffer);
 		std::string error("Failed to link shader program ");
 		error += errBuffer;
-		throw(GLerror(error));
+		//throw(GLerror(error));
 		return false;
 	}
 	for (auto& shader : this->mShaders)

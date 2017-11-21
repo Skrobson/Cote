@@ -39,7 +39,8 @@ bool Texture::load(const char* filename)
 		std::cerr << "Error before creating texture " << filename << " " << glewGetErrorString(error) << std::endl;
 		//return false;
 	}
-	FreeImage_Initialise();
+	//FreeImage_Initialise();
+	
 
 	FIBITMAP * data = FreeImage_Load(FreeImage_GetFIFFromFilename(filename), filename);
 	FIBITMAP * bitmap = FreeImage_ConvertTo32Bits(data);
@@ -83,8 +84,11 @@ bool Texture::load(const char* filename)
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 
-	FreeImage_DeInitialise();
 
 	return true;
 
+
+	//uzywane tylko wtedy gdy linkujemy freeimage statycznie, na innych systemach prawdopodobnie zawsze trzeba uzyc
+	//FreeImage_Initialise();
+	//FreeImage_DeInitialise();
 }
