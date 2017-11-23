@@ -51,9 +51,6 @@
     <ClCompile Include="VertexBuffer.cpp">
       <Filter>Source Files\API</Filter>
     </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>Source Files\Graphic</Filter>
-    </ClCompile>
     <ClCompile Include="ABuffer.cpp">
       <Filter>Source Files\API</Filter>
     </ClCompile>
@@ -84,6 +81,9 @@
     <ClCompile Include="GlException.cpp">
       <Filter>Source Files\API</Filter>
     </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Source Files\API</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VertexBuffer.h">
@@ -106,9 +106,6 @@
     </ClInclude>
     <ClInclude Include="VertexAttributeLayout.h">
       <Filter>Header Files\API</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>Header Files\Graphic</Filter>
     </ClInclude>
     <ClInclude Include="ABuffer.h">
       <Filter>Header Files\API</Filter>
@@ -138,6 +135,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GlException.h">
+      <Filter>Header Files\API</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
       <Filter>Header Files\API</Filter>
     </ClInclude>
   </ItemGroup>

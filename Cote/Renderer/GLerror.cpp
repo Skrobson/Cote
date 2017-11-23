@@ -5,21 +5,45 @@
 
 
 
+GlError::GlError()
+{
+	clearBuffer();
+}
+
 std::vector<std::string> GlError::getErrors()
 {
 	return errors;
 }
 
-bool GlError::checkForError()
+void GlError::clear()
+{
+	clearBuffer();
+	errors.clear();
+}
+
+
+bool GlError::check()
 {
 	GLenum errorCode = glGetError();
-	if (errorCode != GL_NO_ERROR)
+	if (errorCode == GL_NO_ERROR)
+	{
+		return false;
+	}
+	else 
 	{
 		saveErrorString(errorCode);
+		while ((errorCode = glGetError()) != GL_NO_ERROR)
+		{
+			saveErrorString(errorCode);
+		}
+		
 		return true;
 	}
-	else
-		return false;
+}
+
+void GlError::clearBuffer()
+{
+	while (glGetError != GL_NO_ERROR);
 }
 
 void GlError::saveErrorString(GLenum errCode)
