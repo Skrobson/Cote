@@ -43,7 +43,7 @@ void Shader::loadFromFile(const char * filename, ShaderType shaderType)
 	{
 		std::string error("Failed to open shader file");
 		error += filename;
-		throw(std::runtime_error(error.c_str()));
+		throw(std::exception(error.c_str()));
 		return;
 	}
 
