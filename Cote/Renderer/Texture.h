@@ -2,6 +2,7 @@
 #include <GL/glew.h>
 #include <string>
 #include <memory>
+#include "Image.h"
 
 namespace cote {
 	namespace graphic {
@@ -37,9 +38,13 @@ namespace cote {
 		class Texture2d :public Texture
 		{
 		public:
-			Texture2d(size_t width, size_t height, const uint8_t* data);
+			Texture2d(size_t width, size_t height, const unsigned char* data);
+
+			Texture2d(Bitmap& image);
+
 		protected:
 			void bindImpl()override;
+
 			void unbindImpl() override;
 		};
 

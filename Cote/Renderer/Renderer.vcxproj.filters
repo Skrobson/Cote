@@ -84,8 +84,8 @@
     <ClCompile Include="Texture.cpp">
       <Filter>Source Files\API</Filter>
     </ClCompile>
-    <ClCompile Include="Image.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Bitmap.cpp">
+      <Filter>Source Files\Graphic</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -143,8 +143,8 @@
     <ClInclude Include="Texture.h">
       <Filter>Header Files\API</Filter>
     </ClInclude>
-    <ClInclude Include="Image.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Bitmap.h">
+      <Filter>Header Files\Graphic</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

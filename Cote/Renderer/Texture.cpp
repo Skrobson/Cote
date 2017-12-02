@@ -36,7 +36,7 @@ Texture::~Texture()
 	
 }
 
-cote::graphic::Texture2d::Texture2d(size_t width, size_t height, const uint8_t * data):Texture(width,height)
+cote::graphic::Texture2d::Texture2d(size_t width, size_t height, const unsigned char * data):Texture(width,height)
 {
 	glBindTexture(GL_TEXTURE_2D, *m_handler);
 
@@ -60,12 +60,13 @@ cote::graphic::Texture2d::Texture2d(size_t width, size_t height, const uint8_t *
 
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, m_width, m_height, 0, GL_BGRA, GL_UNSIGNED_BYTE, (GLvoid*)data);
 	glGenerateMipmap(GL_TEXTURE_2D);
-	GLenum error = glGetError();
-	if (error != GL_NO_ERROR)
-	{
-		std::cerr << "Error creating texture " << " " << glewGetErrorString(error) << std::endl;
-	}
+
+
 	glBindTexture(GL_TEXTURE_2D, 0);
+}
+
+cote::graphic::Texture2d::Texture2d(Bitmap & image):Texture2d(image.getWidth(),image.getHeight(), image.getRawData())
+{
 }
 
 void cote::graphic::Texture2d::bindImpl()
