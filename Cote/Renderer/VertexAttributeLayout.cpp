@@ -1,21 +1,42 @@
 #include "VertexAttributeLayout.h"
+#include "GlException.h"
 #include <GL\glew.h>
 #include <glm.hpp>
 using namespace cote::graphic;
 
-cote::graphic::VertexAttribute2f::VertexAttribute2f(VertexAttributeIndex index,const std::vector<glm::vec2>& data)
+void cote::graphic::VertexAttribute::findIndex(const unsigned programHandler)
 {
-	m_index = static_cast<unsigned>(index);
-	m_count = 2;
-	m_size = sizeof(float) * m_count * data.size();
-	convertData(data);
+	int index = glGetAttribLocation(programHandler, attributeName.c_str());
+
+	if (index == -1) 
+	{
+		throw GlException("Could not find attribute " + attributeName);
+	}
+	else
+	{
+		this->index = static_cast<unsigned>(index);
+	}
 }
 
-cote::graphic::VertexAttribute2f::VertexAttribute2f(unsigned index,const  std::vector<glm::vec2>& data)
+cote::graphic::VertexAttribute2f::VertexAttribute2f(VertexAttributeIndex index,const std::vector<glm::vec2>& data):VertexAttribute2f(data)
 {
-	m_index = static_cast<unsigned>(index);
-	m_count = 2;
-	m_size = sizeof(float) * m_count * data.size();
+	this->index = static_cast<unsigned>(index);
+}
+
+cote::graphic::VertexAttribute2f::VertexAttribute2f(unsigned index,const  std::vector<glm::vec2>& data):VertexAttribute2f(data)
+{
+	index = static_cast<unsigned>(index);
+}
+
+cote::graphic::VertexAttribute2f::VertexAttribute2f(const std::string& attribName, const std::vector<glm::vec2>& data): VertexAttribute2f(data)
+{
+	attributeName = attribName;
+}
+
+cote::graphic::VertexAttribute2f::VertexAttribute2f(const std::vector<glm::vec2>& data)
+{
+	count = 2;
+	size = sizeof(float) * count * data.size();
 
 	convertData(data);
 }
@@ -24,26 +45,32 @@ void cote::graphic::VertexAttribute2f::convertData(const std::vector<glm::vec2>&
 {
 	for (auto& vec : data)
 	{
-		m_data.push_back(vec.x);
-		m_data.push_back(vec.y);
+		this->data.push_back(vec.x);
+		this->data.push_back(vec.y);
 	}
 	
 }
 
-cote::graphic::VertexAttribute3f::VertexAttribute3f(VertexAttributeIndex index,  const std::vector<glm::vec3>& data)
+cote::graphic::VertexAttribute3f::VertexAttribute3f(VertexAttributeIndex index,  const std::vector<glm::vec3>& data):VertexAttribute3f(data)
 {
-	m_index = static_cast<unsigned>(index);
-	m_count = 3;
-	m_size = sizeof(float) * m_count * data.size();
-
-	convertData(data);
+	this->index = static_cast<unsigned>(index);
 }
 
-cote::graphic::VertexAttribute3f::VertexAttribute3f(unsigned index, const std::vector<glm::vec3>& data)
+cote::graphic::VertexAttribute3f::VertexAttribute3f(unsigned index, const std::vector<glm::vec3>& data): VertexAttribute3f(data)
 {
-	m_index = index;
-	m_count = 3;
-	m_size = sizeof(float) * m_count * data.size();
+	this->index = index;
+
+}
+
+cote::graphic::VertexAttribute3f::VertexAttribute3f(const std::string & attribName, const std::vector<glm::vec3>& data):VertexAttribute3f(data)
+{
+	attributeName = attribName;
+}
+
+cote::graphic::VertexAttribute3f::VertexAttribute3f(const std::vector<glm::vec3>& data)
+{
+	count = 3;
+	size = sizeof(float) * count * data.size();
 
 	convertData(data);
 }
@@ -52,9 +79,9 @@ void cote::graphic::VertexAttribute3f::convertData(const std::vector<glm::vec3>&
 {
 	for (auto& vec : data)
 	{
-		m_data.push_back(vec.x);
-		m_data.push_back(vec.y);
-		m_data.push_back(vec.z);
+		this->data.push_back(vec.x);
+		this->data.push_back(vec.y);
+		this->data.push_back(vec.z);
 	}
 	
 }
@@ -62,7 +89,16 @@ void cote::graphic::VertexAttribute3f::convertData(const std::vector<glm::vec3>&
 void cote::graphic::VertexAttributeLayout::pushVertexAttribute(std::shared_ptr<VertexAttribute> attribute)
 {
 	
-	auto tmpAttribute = std::make_pair(attribute, m_size);
-	m_attributes.push_back(tmpAttribute);
-	m_size += attribute->getSize();
+	auto tmpAttribute = std::make_pair(attribute, size);
+	attributes.push_back(tmpAttribute);
+	size += attribute->getSize();
 }
+
+void cote::graphic::VertexAttributeLayout::findVertexAttributeIndecies(const unsigned shaderProgramHandler)
+{
+	for (auto attrib : attributes) {
+		attrib.first->findIndex(shaderProgramHandler);
+	}
+}
+
+

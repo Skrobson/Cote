@@ -2,7 +2,7 @@
 #include <glm.hpp>
 #include <vector>
 #include <memory>
-//#include <utility>
+#include <string>
 
 
 namespace cote {
@@ -29,23 +29,25 @@ namespace cote {
 		class VertexAttribute
 		{
 		public:
-			unsigned getIndex()const { return m_index; }
-			size_t getCount() const { return m_count; }
-			size_t getSize()const{ return m_size; }
+			unsigned getIndex()const { return index; }
+			size_t getCount() const { return count; }
+			size_t getSize()const{ return size; }
 
-			const float* getRawData()const { return m_data.data(); }
+			void findIndex(const unsigned programHandler) throw (GlException);
+			const float* getRawData()const { return data.data(); }
 			virtual ~VertexAttribute(){}
+
 		protected:
 
 			VertexAttribute(){}
-			unsigned m_index; 
-			size_t m_count; //gl need sizeOf( count of variables)
-			size_t m_size;
-			std::vector<float> m_data;
+
 			
-			
-			
-			
+
+			unsigned index;
+			size_t count; 
+			size_t size;
+			std::vector<float> data;
+			std::string attributeName;
 		};
 	
 		template<typename T>
@@ -65,8 +67,11 @@ namespace cote {
 
 			VertexAttribute2f(unsigned index, const std::vector<glm::vec2>& data);
 
+			VertexAttribute2f(const std::string& attribName, const std::vector<glm::vec2>& data);
+
 		protected:
-			
+			VertexAttribute2f(const std::vector<glm::vec2>& data);
+
 			virtual void convertData(const std::vector<glm::vec2>& data) override;
 		};
 
@@ -80,7 +85,10 @@ namespace cote {
 
 			VertexAttribute3f(unsigned index , const std::vector<glm::vec3>& data);
 
+			VertexAttribute3f(const std::string& attribName, const std::vector<glm::vec3>& data);
+
 		protected:
+			VertexAttribute3f(const std::vector<glm::vec3>& data);
 			
 			virtual void convertData(const std::vector<glm::vec3>& data)override;
 		};
@@ -95,23 +103,26 @@ namespace cote {
 			*only for floats*/
 			void pushVertexAttribute(std::shared_ptr<VertexAttribute > attribute);
 
+			/**Wyszukuje indexy atrybutow w podanym shader programie
+			* Rzuca wyj¹tek GlException
+			*/
+			void findVertexAttributeIndecies(const unsigned shaderProgramHandler)throw (GlException);
+
 			/**return pair attribute and offset*/
 			const std::vector<std::pair <std::shared_ptr<VertexAttribute>, unsigned>>& getAttributes()const 
 			{ 
-				return m_attributes;
+				return attributes;
 			}
 			
 			size_t getSizeOf() const
 			{
-				return m_size;
+				return size;
 			}
 
 		protected:
 
-			std::vector<std::pair <std::shared_ptr<VertexAttribute> , size_t>> m_attributes;
-			size_t m_size=0;
-
-			
+			std::vector<std::pair <std::shared_ptr<VertexAttribute> , size_t>> attributes;
+			size_t size=0;
 		};
 
 
