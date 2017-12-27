@@ -9,7 +9,8 @@ Bitmap::Bitmap(std::string filePath)
 	};
 
 	FIBITMAP * data = FreeImage_Load(FreeImage_GetFIFFromFilename(filePath.c_str()), filePath.c_str());
-	bitmap = std::make_unique<FIBITMAP>(FreeImage_ConvertTo32Bits(data),unloadBitmap);
+	bitmap = std::unique_ptr<FIBITMAP, std::function<void(FIBITMAP*)>>(FreeImage_ConvertTo32Bits(data), unloadBitmap);
+	
 	width = FreeImage_GetWidth(bitmap.get());
 	height = FreeImage_GetHeight(bitmap.get());
 	unloadBitmap(data);

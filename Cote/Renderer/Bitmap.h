@@ -2,6 +2,7 @@
 #include <vector>
 #include <FreeImage.h>
 #include <memory>
+#include <functional>
 
 namespace cote
 {
@@ -27,8 +28,7 @@ namespace cote
 		private:
 			size_t height, width;
 
-			std::unique_ptr<FIBITMAP> bitmap;
-
+			std::unique_ptr<FIBITMAP, std::function<void(FIBITMAP*)>> bitmap;
 		};
 	}
 }

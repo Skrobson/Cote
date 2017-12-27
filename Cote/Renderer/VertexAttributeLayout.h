@@ -33,7 +33,7 @@ namespace cote {
 			size_t getCount() const { return count; }
 			size_t getSize()const{ return size; }
 
-			void findIndex(const unsigned programHandler) throw (GlException);
+			void findIndex(const unsigned programHandler);// throw (GlException);
 			const float* getRawData()const { return data.data(); }
 			virtual ~VertexAttribute(){}
 
@@ -106,7 +106,7 @@ namespace cote {
 			/**Wyszukuje indexy atrybutow w podanym shader programie
 			* Rzuca wyj¹tek GlException
 			*/
-			void findVertexAttributeIndecies(const unsigned shaderProgramHandler)throw (GlException);
+			void findVertexAttributeIndecies(const unsigned shaderProgramHandler);// throw (GlException);
 
 			/**return pair attribute and offset*/
 			const std::vector<std::pair <std::shared_ptr<VertexAttribute>, unsigned>>& getAttributes()const 
