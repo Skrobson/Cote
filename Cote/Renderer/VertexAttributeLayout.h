@@ -30,23 +30,30 @@ namespace cote {
 		{
 		public:
 			unsigned getIndex()const { return index; }
+
 			size_t getCount() const { return count; }
+
 			size_t getSize()const{ return size; }
 
-			void findIndex(const unsigned programHandler);// throw (GlException);
+			/**throw (GlException)*/
+			void findIndex(const unsigned programHandler);
+
 			const float* getRawData()const { return data.data(); }
+
 			virtual ~VertexAttribute(){}
 
 		protected:
 
 			VertexAttribute(){}
 
-			
-
 			unsigned index;
+
 			size_t count; 
+
 			size_t size;
+
 			std::vector<float> data;
+
 			std::string attributeName;
 		};
 	

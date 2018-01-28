@@ -10,15 +10,15 @@ GlError::GlError()
 	clearBuffer();
 }
 
-std::vector<std::string> GlError::getErrors()
+std::string GlError::getError()
 {
-	return errors;
+	return error;
 }
 
 void GlError::clear()
 {
 	clearBuffer();
-	errors.clear();
+	error.clear();
 }
 
 
@@ -32,18 +32,14 @@ bool GlError::check()
 	else 
 	{
 		saveErrorString(errorCode);
-		while ((errorCode = glGetError()) != GL_NO_ERROR)
-		{
-			saveErrorString(errorCode);
-		}
-		
+
 		return true;
 	}
 }
 
 void GlError::clearBuffer()
 {
-	while (glGetError != GL_NO_ERROR);
+	while (glGetError() != GL_NO_ERROR);
 }
 
 void GlError::saveErrorString(GLenum errCode)
@@ -51,5 +47,5 @@ void GlError::saveErrorString(GLenum errCode)
 	std::stringstream tmpErr;
 	tmpErr << glewGetErrorString(errCode);
 
-	errors.push_back(tmpErr.str());
+	error = tmpErr.str();
 }

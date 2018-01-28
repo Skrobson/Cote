@@ -1,6 +1,7 @@
 #pragma once
 #include <memory>
 #include <GL\glew.h>
+
 namespace cote {
 	namespace graphic
 	{
@@ -13,10 +14,10 @@ namespace cote {
 
 			virtual void unbind()const noexcept=0;
 
-			unsigned getHandler()const noexcept { return *m_handler; }
+			unsigned getHandler()const noexcept { return *handler; }
 
 		protected:
-			std::shared_ptr<unsigned> m_handler;
+			std::shared_ptr<unsigned> handler;
 		};
 	}
 }

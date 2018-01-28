@@ -15,7 +15,7 @@ class GlError
 public:
 	GlError();
 
-	std::vector<std::string> getErrors();
+	std::string getError();
 	
 	/**Clear the buffer with errors
 	Use it if you do not regularly test for errors */
@@ -28,7 +28,7 @@ public:
 	bool check();
 
 private:
-	std::vector<std::string> errors;
+	std::string error;
 
 	void clearBuffer();
 
