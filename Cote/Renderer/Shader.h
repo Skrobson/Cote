@@ -35,7 +35,7 @@ namespace cote
 			/**Create from source*/
 			Shader(ShaderType ,const std::string& source);
 	
-			void Shader::createFromSource(const std::string & text, ShaderType type);
+			void createFromSource(const std::string & text, ShaderType type);
 			
 
 			//Wczytywanie z pliku mo¿nazrobiæ osobno

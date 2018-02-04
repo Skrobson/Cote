@@ -1,11 +1,25 @@
-#include "Test.h"
-#include <GL\glew.h>
-#include <GLFW\glfw3.h>
-#include <vector>
-#include "VertexAttributeLayout.h"
 
-Test::Test()
+#include <vector>
+#include <iostream>
+#include <memory>
+
+#include "Window.h"
+#include "Textureold.h"
+#include "ShaderProgram.h"
+#include "VertexArray.h"
+#include <GL/glew.h>
+#include <GLFW\glfw3.h>
+
+int main()
 {
+	cote::graphic::Shader vS;
+	cote::graphic::Shader fS;
+	std::unique_ptr<cote::graphic::ShaderProgram> program;
+	Window* window;
+	Texture* tex;
+	std::unique_ptr< cote::graphic::VertexArray> vertexArray;
+
+
 	glfwInit();
 	window = new Window(800, 600, "renderer");//w klasie window znajduje sie glfwWindowhint ktory musi zostac wywo³any przed glewInit
 
@@ -14,7 +28,7 @@ Test::Test()
 		std::cerr << "\nFAILED TO INITIALIZE GLEW";//debugLog
 		glfwTerminate();
 
-		return;
+		return 1;
 	}
 	GLenum error = glGetError();
 	if (error != GL_NO_ERROR)
@@ -35,29 +49,29 @@ Test::Test()
 	error = glGetError();
 	if (error != GL_NO_ERROR)
 	{
-		std::cerr <<"after viewport & framebuffer" << glewGetErrorString(error);
+		std::cerr << "after viewport & framebuffer" << glewGetErrorString(error);
 	}
 
 
 	std::vector<unsigned> indicies = { 0,1,3 ,1,2,3 };
 
-	
+
 	//vertexArray->bind();
 
 	std::vector<glm::vec3> vertexPos{
 		//pos					
-		{0.5f, 0.5f, 0.0f 	},	
-		{0.5f, -0.5f, 0.0f	}	,
-		{-0.5f, -0.5f, 0.0f}	,
-		{-0.5f,  0.5f, 0.0f}	
+		{ 0.5f, 0.5f, 0.0f },
+	{ 0.5f, -0.5f, 0.0f }	,
+	{ -0.5f, -0.5f, 0.0f }	,
+	{ -0.5f,  0.5f, 0.0f }
 	};
 	std::shared_ptr<cote::graphic::VertexAttribute> pos = std::make_shared<cote::graphic::VertexAttribute3f>(cote::graphic::VertexAttributeIndex::POSITION, vertexPos);
-	
+
 	std::vector<glm::vec2> vertexUv{
 		{ 1.0f, 1.0f },
-		{ 1.0f, 0.0f },
-		{ 0.0f, 0.0f },
-		{ 0.0f, 1.0f }
+	{ 1.0f, 0.0f },
+	{ 0.0f, 0.0f },
+	{ 0.0f, 1.0f }
 	};
 
 	std::shared_ptr<cote::graphic::VertexAttribute> uv = std::make_shared<cote::graphic::VertexAttribute2f>(cote::graphic::VertexAttributeIndex::UV_0, vertexUv);
@@ -66,11 +80,11 @@ Test::Test()
 	vLayout.pushVertexAttribute(pos);
 	vLayout.pushVertexAttribute(uv);
 
-	vertexArray = std::make_unique<cote::graphic::VertexArray>(indicies,vLayout);
+	vertexArray = std::make_unique<cote::graphic::VertexArray>(indicies, vLayout);
 	error = glGetError();
 	if (error != GL_NO_ERROR)
 	{
-		std::cerr<<"after vertexArray"  << glewGetErrorString(error);
+		std::cerr << "after vertexArray" << glewGetErrorString(error);
 	}
 
 	tex = new Texture("../../Data/textures/wall.jpg", TEX_DIFFUSE);
@@ -100,14 +114,7 @@ Test::Test()
 
 
 
-	
 
-
-	
-}
-
-void Test::start()
-{
 	while (glfwWindowShouldClose(*window) == false) {
 		glfwPollEvents();
 
@@ -118,18 +125,17 @@ void Test::start()
 		//glActiveTexture(GL_TEXTURE0);
 		//glUniform1i(glGetUniformLocation(program->getProgramID(), "texture_diffuse1"), 0);
 		//glBindTexture(GL_TEXTURE_2D, tex->getTextureID());
-		
-		
-		
+
+
+
 		vertexArray->drawElements();
 
 
 		glfwSwapBuffers(*window);
 	}
-}
 
 
-Test::~Test()
-{
 	delete window;
+
+	return 0;
 }

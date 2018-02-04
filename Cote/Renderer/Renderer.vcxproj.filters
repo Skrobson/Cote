@@ -87,12 +87,6 @@
     <ClCompile Include="Window.cpp">
       <Filter>Source Files\Old</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Test.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VertexBuffer.h">
@@ -138,9 +132,6 @@
       <Filter>Header Files\Old</Filter>
     </ClInclude>
     <ClInclude Include="Log.h">
-      <Filter>Header Files\Old</Filter>
-    </ClInclude>
-    <ClInclude Include="Test.h">
       <Filter>Header Files\Old</Filter>
     </ClInclude>
     <ClInclude Include="TextureFactory.h">
