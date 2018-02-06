@@ -1,4 +1,6 @@
 #include "ShaderProgram.h"
+#include "GlException.h"
+#include "GLerror.h"
 
 using namespace cote::graphic;
 
@@ -20,47 +22,46 @@ ShaderProgram::ShaderProgram(std::initializer_list<const Shader> list)
 }
 
 
-bool ShaderProgram::attachShader(const Shader& shader)
+void ShaderProgram::attachShader(const Shader& shader)
 {
 	if (!shader.isCompiled()) 
 	{
-		throw("Shader not compiled");
-		return false;
+		throw GlException("Shader not compiled");
 	}
-	glAttachShader(*mProgram, shader.getShaderID());
-	//mShaders.insert(std::make_pair(shader.getType(), shader.getShaderID()));
-	return true;
+	glAttachShader(*programID, shader.getShaderID());
+	attachedShaders.push_back(shader.getShaderID());
+
+	
 }
 
-bool ShaderProgram::linkProgram()
+void ShaderProgram::linkProgram()
 {
-	glLinkProgram(*mProgram);
+	glLinkProgram(*programID);
 
 	GLint success;
 	char errBuffer[512];
-	glGetProgramiv(*mProgram, GL_LINK_STATUS, &success);
+	glGetProgramiv(*programID, GL_LINK_STATUS, &success);
 	if (!success)
 	{
-		glGetProgramInfoLog(*mProgram, sizeof(errBuffer), NULL, errBuffer);
+		glGetProgramInfoLog(*programID, sizeof(errBuffer), NULL, errBuffer);
 		std::string error("Failed to link shader program ");
 		error += errBuffer;
-		//throw(GLerror(error));
-		return false;
+		throw GlException(error);
+		
 	}
-	for (auto& shader : this->mShaders)
+	for (auto& shader : this->attachedShaders)
 	{
-		glDetachShader(*mProgram, shader.second);
+		glDetachShader(*programID, shader);
 	}
-	mShaders.clear();
-	mbLinked = true;
-
-	return true;
+	attachedShaders.clear();
+	linked = true;
+	attachedShaders.shrink_to_fit();
 }
 
 void ShaderProgram::bind()const
 {
 
-	glUseProgram(*mProgram);
+	glUseProgram(*programID);
 }
 
 void ShaderProgram::unbind()const
@@ -70,7 +71,7 @@ void ShaderProgram::unbind()const
 
 void cote::graphic::ShaderProgram::createProgram()
 {
-	mProgram = std::shared_ptr<unsigned>(new unsigned(glCreateProgram()), [](unsigned* program){
+	programID = std::shared_ptr<unsigned>(new unsigned(glCreateProgram()), [](unsigned* program){
 		
 		glDeleteProgram(*program);
 		delete program;
