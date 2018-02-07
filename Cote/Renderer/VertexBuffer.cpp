@@ -55,7 +55,7 @@ void cote::graphic::VertexBuffer::setVertexAttributeLayout(const VertexAttribute
 			throw GlException(error.getError());
 		}
 		
-		glVertexAttribPointer(attribute->getIndex(), attribute->getCount(), GL_FLOAT, GL_FALSE, 0, (GLvoid*)a.second);
+		glVertexAttribPointer(attribute->getIndex(), attribute->getCount(), attribute->getType(), GL_FALSE, 0, (GLvoid*)a.second);
 
 		error.clear();
 		if (error.check())

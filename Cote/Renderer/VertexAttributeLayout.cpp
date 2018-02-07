@@ -4,19 +4,11 @@
 #include <glm.hpp>
 using namespace cote::graphic;
 
-void cote::graphic::VertexAttribute::findIndex(const unsigned programHandler)
-{
-	int index = glGetAttribLocation(programHandler, attributeName.c_str());
 
-	if (index == -1) 
-	{
-		throw GlException("Could not find attribute " + attributeName);
-	}
-	else
-	{
-		this->index = static_cast<unsigned>(index);
-	}
+cote::graphic::VertexAttribute::VertexAttribute(const GLenum dataType):dataType(dataType)
+{
 }
+
 
 cote::graphic::VertexAttribute2f::VertexAttribute2f(VertexAttributeIndex index,const std::vector<glm::vec2>& data):VertexAttribute2f(data)
 {
@@ -28,10 +20,6 @@ cote::graphic::VertexAttribute2f::VertexAttribute2f(unsigned index,const  std::v
 	index = static_cast<unsigned>(index);
 }
 
-cote::graphic::VertexAttribute2f::VertexAttribute2f(const std::string& attribName, const std::vector<glm::vec2>& data): VertexAttribute2f(data)
-{
-	attributeName = attribName;
-}
 
 cote::graphic::VertexAttribute2f::VertexAttribute2f(const std::vector<glm::vec2>& data)
 {
@@ -62,10 +50,6 @@ cote::graphic::VertexAttribute3f::VertexAttribute3f(unsigned index, const std::v
 
 }
 
-cote::graphic::VertexAttribute3f::VertexAttribute3f(const std::string & attribName, const std::vector<glm::vec3>& data):VertexAttribute3f(data)
-{
-	attributeName = attribName;
-}
 
 cote::graphic::VertexAttribute3f::VertexAttribute3f(const std::vector<glm::vec3>& data)
 {
@@ -92,13 +76,6 @@ void cote::graphic::VertexAttributeLayout::pushVertexAttribute(std::shared_ptr<V
 	auto tmpAttribute = std::make_pair(attribute, size);
 	attributes.push_back(tmpAttribute);
 	size += attribute->getSize();
-}
-
-void cote::graphic::VertexAttributeLayout::findVertexAttributeIndecies(const unsigned shaderProgramHandler)
-{
-	for (auto attrib : attributes) {
-		attrib.first->findIndex(shaderProgramHandler);
-	}
 }
 
 
