@@ -3,6 +3,7 @@
 #include <vector>
 #include <memory>
 #include <string>
+#include <GL\glew.h>
 
 
 namespace cote {
@@ -29,22 +30,28 @@ namespace cote {
 		class VertexAttribute
 		{
 		public:
+
+			void setName(const std::string& attribName) { attributeName = attribName; }
+
+			std::string getName()const { return attributeName; }
+
+			void setIndex(int index) { this->index = index; }
+
 			unsigned getIndex()const { return index; }
 
 			size_t getCount() const { return count; }
 
 			size_t getSize()const{ return size; }
 
-			/**throw (GlException)*/
-			void findIndex(const unsigned programHandler);
+			GLenum getType()const { return dataType; }
 
-			const float* getRawData()const { return data.data(); }
+			virtual const void* getRawData()const = 0 ;
 
 			virtual ~VertexAttribute(){}
 
 		protected:
 
-			VertexAttribute(){}
+			VertexAttribute(const GLenum dataType);
 
 			unsigned index;
 
@@ -52,22 +59,37 @@ namespace cote {
 
 			size_t size;
 
-			std::vector<float> data;
+			const GLenum dataType;
 
 			std::string attributeName;
 		};
 	
-		template<typename T>
+		template<typename T, typename S>
 		class VertexAttributeT :public VertexAttribute
 		{
+		public:
+			
+
+			virtual const void* getRawData()const override { return data.data() ; }
+
 		protected:
-			//std::vector<T> m_originalData;
+			VertexAttributeT(GLenum dataType) :VertexAttribute(dataType) {}
+			
+			virtual void convertData(const std::vector<T>& data) = 0;
+
+			std::vector<S> data;
+		};
+
+		template<typename T>
+		class VertexAttributeF : public VertexAttributeT<T, float>
+		{
+		protected:
+			VertexAttributeF():VertexAttributeT(GL_FLOAT){}
+
 			virtual void convertData(const std::vector<T>& data) = 0;
 		};
 
-
-
-		class VertexAttribute2f :public VertexAttributeT<glm::vec2>
+		class VertexAttribute2f :public VertexAttributeF<glm::vec2>
 		{
 		public:
 			VertexAttribute2f(VertexAttributeIndex index,const std::vector<glm::vec2>& data);
@@ -84,7 +106,7 @@ namespace cote {
 
 
 
-		class VertexAttribute3f :public VertexAttributeT<glm::vec3>
+		class VertexAttribute3f :public VertexAttributeF<glm::vec3>
 		{
 		public:
 
@@ -107,13 +129,8 @@ namespace cote {
 		{
 		public:
 			/**Ustawia wlasciwosci atrybutu, takie jak offset, stride itp,
-			*only for floats*/
-			void pushVertexAttribute(std::shared_ptr<VertexAttribute > attribute);
-
-			/**Wyszukuje indexy atrybutow w podanym shader programie
-			* Rzuca wyj¹tek GlException
 			*/
-			void findVertexAttributeIndecies(const unsigned shaderProgramHandler);// throw (GlException);
+			void pushVertexAttribute(std::shared_ptr<VertexAttribute > attribute);
 
 			/**return pair attribute and offset*/
 			const std::vector<std::pair <std::shared_ptr<VertexAttribute>, unsigned>>& getAttributes()const 
@@ -137,6 +154,10 @@ namespace cote {
 
 
 
-	}
+
+
+	
+
+}
 
 }

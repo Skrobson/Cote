@@ -4,19 +4,11 @@
 #include <glm.hpp>
 using namespace cote::graphic;
 
-void cote::graphic::VertexAttribute::findIndex(const unsigned programHandler)
-{
-	int index = glGetAttribLocation(programHandler, attributeName.c_str());
 
-	if (index == -1) 
-	{
-		throw GlException("Could not find attribute " + attributeName);
-	}
-	else
-	{
-		this->index = static_cast<unsigned>(index);
-	}
+cote::graphic::VertexAttribute::VertexAttribute(const GLenum dataType):dataType(dataType)
+{
 }
+
 
 cote::graphic::VertexAttribute2f::VertexAttribute2f(VertexAttributeIndex index,const std::vector<glm::vec2>& data):VertexAttribute2f(data)
 {
@@ -92,13 +84,6 @@ void cote::graphic::VertexAttributeLayout::pushVertexAttribute(std::shared_ptr<V
 	auto tmpAttribute = std::make_pair(attribute, size);
 	attributes.push_back(tmpAttribute);
 	size += attribute->getSize();
-}
-
-void cote::graphic::VertexAttributeLayout::findVertexAttributeIndecies(const unsigned shaderProgramHandler)
-{
-	for (auto attrib : attributes) {
-		attrib.first->findIndex(shaderProgramHandler);
-	}
 }
 
 
