@@ -4,11 +4,11 @@
 using namespace cote::graphic;
 
 
-Texture::Texture(size_t width, size_t height)
+Texture::Texture(size_t width, size_t height):width(width),height(height)
 {
 	unsigned tmpHandler;
 	glGenTextures(1, &tmpHandler);
-	m_handler = std::shared_ptr<unsigned>(new unsigned(tmpHandler), [](unsigned* handler) {
+	handler = std::shared_ptr<unsigned>(new unsigned(tmpHandler), [](unsigned* handler) {
 		glDeleteTextures(1, handler);
 	});
 	
@@ -16,7 +16,7 @@ Texture::Texture(size_t width, size_t height)
 
 unsigned Texture::getTextureID()
 {
-	return *m_handler;
+	return *handler;
 }
 
 void Texture::bind(unsigned slot)
@@ -50,7 +50,7 @@ Texture::~Texture()
 
 cote::graphic::Texture2d::Texture2d(size_t width, size_t height, const unsigned char * data):Texture(width,height)
 {
-	glBindTexture(GL_TEXTURE_2D, *m_handler);
+	glBindTexture(GL_TEXTURE_2D, *handler);
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	// Set texture wrapping to GL_REPEAT
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -58,7 +58,7 @@ cote::graphic::Texture2d::Texture2d(size_t width, size_t height, const unsigned 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, m_width, m_height, 0, GL_BGRA, GL_UNSIGNED_BYTE, (GLvoid*)data);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_BGRA, GL_UNSIGNED_BYTE, (GLvoid*)data);
 	glGenerateMipmap(GL_TEXTURE_2D);
 
 	glBindTexture(GL_TEXTURE_2D, 0);
@@ -70,7 +70,7 @@ cote::graphic::Texture2d::Texture2d(Bitmap & image):Texture2d(image.getWidth(),i
 
 void cote::graphic::Texture2d::bindImpl()
 {
-	glBindTexture(GL_TEXTURE_2D, *m_handler);
+	glBindTexture(GL_TEXTURE_2D, *handler);
 }
 
 void cote::graphic::Texture2d::unbindImpl()

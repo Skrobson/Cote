@@ -27,10 +27,10 @@ namespace cote {
 			virtual ~Texture();
 
 		protected:
-			unsigned m_width, m_height;
+			unsigned width, height;
 			
 			
-			std::shared_ptr<unsigned> m_handler;
+			std::shared_ptr<unsigned> handler;
 			
 			virtual void bindImpl() = 0;
 			virtual void unbindImpl() = 0;

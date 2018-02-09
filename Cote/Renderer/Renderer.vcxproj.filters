@@ -13,12 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\API">
-      <UniqueIdentifier>{804c3315-d245-4583-a43c-1931e37ad374}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\API">
-      <UniqueIdentifier>{22193bc1-a1b2-4ad0-879f-3ea815198144}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Graphic">
       <UniqueIdentifier>{d746310c-7fda-4a9c-a8c3-5743d202a93d}</UniqueIdentifier>
     </Filter>
@@ -31,37 +25,43 @@
     <Filter Include="Source Files\Old">
       <UniqueIdentifier>{dcd2ad50-9368-42ce-91cc-2d4c6252b70b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Graphic\API">
+      <UniqueIdentifier>{804c3315-d245-4583-a43c-1931e37ad374}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Graphic\API">
+      <UniqueIdentifier>{22193bc1-a1b2-4ad0-879f-3ea815198144}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ElementBuffer.cpp">
-      <Filter>Source Files\API</Filter>
+      <Filter>Source Files\Graphic\API</Filter>
     </ClCompile>
     <ClCompile Include="GLerror.cpp">
-      <Filter>Source Files\API</Filter>
+      <Filter>Source Files\Graphic\API</Filter>
     </ClCompile>
     <ClCompile Include="Shader.cpp">
-      <Filter>Source Files\API</Filter>
+      <Filter>Source Files\Graphic\API</Filter>
     </ClCompile>
     <ClCompile Include="ShaderProgram.cpp">
-      <Filter>Source Files\API</Filter>
+      <Filter>Source Files\Graphic\API</Filter>
     </ClCompile>
     <ClCompile Include="VertexArray.cpp">
-      <Filter>Source Files\API</Filter>
+      <Filter>Source Files\Graphic\API</Filter>
     </ClCompile>
     <ClCompile Include="VertexAttributeLayout.cpp">
-      <Filter>Source Files\API</Filter>
+      <Filter>Source Files\Graphic\API</Filter>
     </ClCompile>
     <ClCompile Include="VertexBuffer.cpp">
-      <Filter>Source Files\API</Filter>
+      <Filter>Source Files\Graphic\API</Filter>
     </ClCompile>
     <ClCompile Include="ABuffer.cpp">
-      <Filter>Source Files\API</Filter>
+      <Filter>Source Files\Graphic\API</Filter>
     </ClCompile>
     <ClCompile Include="GlException.cpp">
-      <Filter>Source Files\API</Filter>
+      <Filter>Source Files\Graphic\API</Filter>
     </ClCompile>
     <ClCompile Include="Texture.cpp">
-      <Filter>Source Files\API</Filter>
+      <Filter>Source Files\Graphic\API</Filter>
     </ClCompile>
     <ClCompile Include="Bitmap.cpp">
       <Filter>Source Files\Graphic</Filter>
@@ -78,9 +78,6 @@
     <ClCompile Include="Log.cpp">
       <Filter>Source Files\Old</Filter>
     </ClCompile>
-    <ClCompile Include="TextureFactory.cpp">
-      <Filter>Source Files\Old</Filter>
-    </ClCompile>
     <ClCompile Include="Textureold.cpp">
       <Filter>Source Files\Old</Filter>
     </ClCompile>
@@ -88,39 +85,42 @@
       <Filter>Source Files\Old</Filter>
     </ClCompile>
     <ClCompile Include="VertexAttribute.cpp">
-      <Filter>Source Files\API</Filter>
+      <Filter>Source Files\Graphic\API</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureFactory.cpp">
+      <Filter>Source Files\Graphic</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VertexBuffer.h">
-      <Filter>Header Files\API</Filter>
+      <Filter>Header Files\Graphic\API</Filter>
     </ClInclude>
     <ClInclude Include="ElementBuffer.h">
-      <Filter>Header Files\API</Filter>
+      <Filter>Header Files\Graphic\API</Filter>
     </ClInclude>
     <ClInclude Include="GLerror.h">
-      <Filter>Header Files\API</Filter>
+      <Filter>Header Files\Graphic\API</Filter>
     </ClInclude>
     <ClInclude Include="Shader.h">
-      <Filter>Header Files\API</Filter>
+      <Filter>Header Files\Graphic\API</Filter>
     </ClInclude>
     <ClInclude Include="ShaderProgram.h">
-      <Filter>Header Files\API</Filter>
+      <Filter>Header Files\Graphic\API</Filter>
     </ClInclude>
     <ClInclude Include="VertexArray.h">
-      <Filter>Header Files\API</Filter>
+      <Filter>Header Files\Graphic\API</Filter>
     </ClInclude>
     <ClInclude Include="VertexAttributeLayout.h">
-      <Filter>Header Files\API</Filter>
+      <Filter>Header Files\Graphic\API</Filter>
     </ClInclude>
     <ClInclude Include="ABuffer.h">
-      <Filter>Header Files\API</Filter>
+      <Filter>Header Files\Graphic\API</Filter>
     </ClInclude>
     <ClInclude Include="GlException.h">
-      <Filter>Header Files\API</Filter>
+      <Filter>Header Files\Graphic\API</Filter>
     </ClInclude>
     <ClInclude Include="Texture.h">
-      <Filter>Header Files\API</Filter>
+      <Filter>Header Files\Graphic\API</Filter>
     </ClInclude>
     <ClInclude Include="Bitmap.h">
       <Filter>Header Files\Graphic</Filter>
@@ -137,9 +137,6 @@
     <ClInclude Include="Log.h">
       <Filter>Header Files\Old</Filter>
     </ClInclude>
-    <ClInclude Include="TextureFactory.h">
-      <Filter>Header Files\Old</Filter>
-    </ClInclude>
     <ClInclude Include="Textureold.h">
       <Filter>Header Files\Old</Filter>
     </ClInclude>
@@ -147,7 +144,10 @@
       <Filter>Header Files\Old</Filter>
     </ClInclude>
     <ClInclude Include="VertexAttribute.h">
-      <Filter>Header Files\API</Filter>
+      <Filter>Header Files\Graphic\API</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureFactory.h">
+      <Filter>Header Files\Graphic</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
