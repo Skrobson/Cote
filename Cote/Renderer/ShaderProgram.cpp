@@ -69,6 +69,8 @@ void ShaderProgram::unbind()const
 	glUseProgram(NULL);
 }
 
+
+
 void cote::graphic::ShaderProgram::createProgram()
 {
 	programID = std::shared_ptr<unsigned>(new unsigned(glCreateProgram()), [](unsigned* program){
