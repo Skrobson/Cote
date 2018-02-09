@@ -32,7 +32,6 @@ namespace cote
 
 			inline bool isLinked()const { return linked; }
 
-			bool operator = (const ShaderProgram& second);
 		protected:
 
 			std::shared_ptr<unsigned> programID;
