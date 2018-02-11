@@ -147,6 +147,7 @@
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureFactory.cpp" />
     <ClCompile Include="Textureold.cpp" />
+    <ClCompile Include="Uniform.cpp" />
     <ClCompile Include="VertexAttribute.cpp" />
     <ClCompile Include="VertexAttributeLayout.cpp" />
     <ClCompile Include="ElementBuffer.cpp" />
@@ -166,6 +167,7 @@
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureFactory.h" />
     <ClInclude Include="Textureold.h" />
+    <ClInclude Include="Uniform.h" />
     <ClInclude Include="VertexAttribute.h" />
     <ClInclude Include="VertexAttributeLayout.h" />
     <ClInclude Include="Shader.h" />
