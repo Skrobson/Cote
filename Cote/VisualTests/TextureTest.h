@@ -12,6 +12,8 @@
 #include "Texture.h"
 #include "Bitmap.h"
 #include <Textureold.h>
+#include <Uniform.h>
+
 
 class TextureTest
 {
@@ -24,8 +26,11 @@ private:
 
 	cote::graphic::Shader vS;
 	cote::graphic::Shader fS;
-	std::unique_ptr<cote::graphic::ShaderProgram> program;
+	std::shared_ptr<cote::graphic::ShaderProgram> program;
 	std::unique_ptr< cote::graphic::VertexArray> vertexArray;
+
+	//cote::graphic::UniformT<unsigned> texUniform;
+	cote::graphic::UniformT<unsigned> texUniform;
 
 	std::unique_ptr<cote::graphic::Texture2d> tex;
 	std::unique_ptr<Texture> oldTex;

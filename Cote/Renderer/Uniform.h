@@ -3,13 +3,31 @@
 #include <memory>
 #include <functional>
 #include "ShaderProgram.h"
-namespace cote 
+namespace cote
 {
-	namespace graphic 
+	namespace graphic
 	{
 
-		template<typename T>
+		class Comparator
+		{
+		public:
+			bool operator()(std::shared_ptr<const ShaderProgram> a, std::shared_ptr<const ShaderProgram> b) const; 
+			
+		};
+
 		class Uniform
+		{
+		public:
+			virtual void updateValueForProgram(const std::shared_ptr<ShaderProgram>  program)=0;
+			
+			virtual void searchForUniformLocation(std::shared_ptr<const ShaderProgram> program, const std::string& uniformName);
+		protected:
+			std::map <std::shared_ptr<const ShaderProgram>, int, Comparator > uniformLocations;
+
+		};
+
+		template<typename T>
+		class UniformT : public Uniform
 		{
 		public:
 		
@@ -18,27 +36,24 @@ namespace cote
 			T getValue()const { return value; }
 
 			/**Specify the value of a uniform variable for the current program object*/
-			void updateValueForProgram(const ShaderProgram& program)const =0;
+			virtual void updateValueForProgram(const std::shared_ptr<ShaderProgram>  program)override;
 
-			void searchForUniformLocation(std::shared_ptr<const ShaderProgram> program, const std::string& uniformName);
 		protected:
 			T value;
-
-			static const auto comparator = []( std::shared_ptr<const ShaderProgram> a,const std::shared_ptr<ShaderProgram> b) {
-				return a->getProgramID() > b->getProgramID();
-			};
-
-			std::map <std::shared_ptr<const ShaderProgram>, int, decltype( comparator)> uniformLocations ;
 
 			std::string name;
 			
 		};
 		template<typename T>
-		inline void Uniform<T>::searchForUniformLocation(std::shared_ptr<const ShaderProgram> program, const std::string & uniformName)
+		void UniformT<T>::updateValueForProgram(const std::shared_ptr<ShaderProgram>  program)
 		{
-			auto location = glGetUniformLocation(program->getProgramID(), uniformName.c_str());
-			uniformLocations.insert_or_assign(program, location);
+			auto loc = uniformLocations.find(program);
+			if(loc != uniformLocations.end())
+				program->setUniform(loc->second, value);
 		}
+
+
+	
 	}
 }
 

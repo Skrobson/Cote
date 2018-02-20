@@ -37,7 +37,7 @@ TextureTest::TextureTest()
 
 	vS.loadFromFile("../../Data/shaders/tex_vertex.glvs", cote::graphic::ShaderType::VERTEX_SHADER);
 	fS.loadFromFile("../../Data/shaders/tex_fragment.glfs", cote::graphic::ShaderType::FRAGMENT_SHADER);
-	program = std::make_unique<cote::graphic::ShaderProgram>();
+	program = std::make_shared<cote::graphic::ShaderProgram>();
 	program->attachShader(vS);
 	program->attachShader(fS);
 	program->linkProgram();
@@ -53,7 +53,8 @@ TextureTest::TextureTest()
 	GlError error;
 	if (error.check())
 		std::cout << error.getError() << std::endl;
-
+	texUniform.searchForUniformLocation(program, "texture_diffuse1");
+	//texUniform.setValue(0);
 }
 
 
@@ -66,9 +67,8 @@ void TextureTest::bind()
 {
 	program->bind();
 	tex->bind(0);
-	//oldTex->use(0);
-	glUniform1i(glGetUniformLocation(program->getProgramID(), "texture_diffuse1"), 0);
 	
+	texUniform.updateValueForProgram(program);
 
 	vertexArray->drawElements();
 }
