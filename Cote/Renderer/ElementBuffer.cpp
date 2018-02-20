@@ -1,5 +1,7 @@
 #include "ElementBuffer.h"
-
+#include "GLerror.h"
+#include "GlException.h"
+#include <string>
 using namespace cote::graphic;
 
 ElementBuffer::ElementBuffer()
@@ -7,7 +9,7 @@ ElementBuffer::ElementBuffer()
 	unsigned* tmpHandler = new unsigned;
 	glGenBuffers(1, tmpHandler);
 
-	m_handler = std::shared_ptr<unsigned>(std::move(tmpHandler), [](unsigned* handler) {
+	handler = std::shared_ptr<unsigned>(std::move(tmpHandler), [](unsigned* handler) {
 		glDeleteBuffers(1, handler);
 		delete handler;
 	});
@@ -17,7 +19,7 @@ ElementBuffer::ElementBuffer()
 
 void cote::graphic::ElementBuffer::bind()const noexcept
 {
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, *m_handler);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, *handler);
 }
 
 void cote::graphic::ElementBuffer::unbind()const noexcept
@@ -25,10 +27,16 @@ void cote::graphic::ElementBuffer::unbind()const noexcept
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
-void cote::graphic::ElementBuffer::copyData(size_t count, const unsigned * data) noexcept
+void cote::graphic::ElementBuffer::setData(size_t count, const unsigned * data) 
 {
 	this->bind();
+	GlError error;
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, count * sizeof(unsigned), (void*)data, GL_STATIC_DRAW);
+	if (error.check())
+	{
+	
+		throw GlException(error.getError());
+	}
 }
 
 

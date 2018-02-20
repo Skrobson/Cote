@@ -43,7 +43,7 @@ void Shader::loadFromFile(const char * filename, ShaderType shaderType)
 	{
 		std::string error("Failed to open shader file");
 		error += filename;
-		throw(std::runtime_error(error.c_str()));
+		throw(std::exception(error.c_str()));
 		return;
 	}
 
@@ -64,7 +64,7 @@ void Shader::loadFromFile(const std::string & filename, ShaderType type)
 
 void cote::graphic::Shader::makeHandler()
 {
-	mShaderID = std::shared_ptr<unsigned>(new unsigned(), [](unsigned * handler) {
+	shaderID = std::shared_ptr<unsigned>(new unsigned(), [](unsigned * handler) {
 		glDeleteShader(*handler);
 		delete handler;
 	});
@@ -81,19 +81,19 @@ void Shader::createFromSource(const std::string & text, ShaderType type)
 	GLchar errBuffer[512];
 
 	const GLchar * shaderText = text.c_str();
-	*mShaderID= glCreateShader(type);
+	*shaderID= glCreateShader(type);
 	
-	glShaderSource(*mShaderID, 1, &shaderText, NULL);
-	glCompileShader(*mShaderID);
-	glGetShaderiv(*mShaderID, GL_COMPILE_STATUS, &success);
+	glShaderSource(*shaderID, 1, &shaderText, NULL);
+	glCompileShader(*shaderID);
+	glGetShaderiv(*shaderID, GL_COMPILE_STATUS, &success);
 
 		if (!success)
 	{
-		glGetShaderInfoLog(*mShaderID, sizeof(errBuffer), NULL, errBuffer);
+		glGetShaderInfoLog(*shaderID, sizeof(errBuffer), NULL, errBuffer);
 		std::string error("Failed to compile shader from source: ");
 		error += errBuffer;
 		//throw(GLerror(error));
 		return ;
 	}
-	mbCompiled = true;
+	compiled = true;
 }

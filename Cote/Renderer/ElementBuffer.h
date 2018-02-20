@@ -14,20 +14,20 @@ namespace cote
 		void bind()const noexcept override;
 		void unbind()const noexcept override;
 		
-		void copyData(size_t count, const unsigned* data)noexcept;
+		void setData(size_t count, const unsigned* data);
 		
 		template<typename RandomIt>
-		void setData(RandomIt beg, RandomIt end)noexcept;
+		void setData(RandomIt beg, RandomIt end);
 	};
 
 
 
 	template<typename RandomIt>
-	inline void ElementBuffer::setData(RandomIt beg, RandomIt end)noexcept
+	inline void ElementBuffer::setData(RandomIt beg, RandomIt end)
 	{
 		std::vector elem;
 		std::copy(beg, end, elem.begin());
-		copyData(elem.size(), elem.data());
+		setData(elem.size(), elem.data());
 	}
 }
 }

@@ -3,19 +3,20 @@
 #include "VertexAttributeLayout.h"
 #include "ABuffer.h"
 
-namespace cote { namespace graphic
-{
-	class VertexBuffer:public ABuffer
+namespace cote 
+{ namespace graphic
 	{
-	public:
-		VertexBuffer(const VertexAttributeLayout& layout);
-		VertexBuffer() = delete;
-		void bind()const noexcept override;
-		void unbind()const noexcept override;
+		class VertexBuffer:public ABuffer
+		{
+		public:
+			VertexBuffer(const VertexAttributeLayout& layout);
+			VertexBuffer() = delete;
+			void bind()const noexcept override;
+			void unbind()const noexcept override;
 
 
-	private:
-		void setVertexAttributeLayout(const VertexAttributeLayout& layout);
-	};
-}
+		private:
+			void setVertexAttributeLayout(const VertexAttributeLayout& layout);
+		};
+	}
 }

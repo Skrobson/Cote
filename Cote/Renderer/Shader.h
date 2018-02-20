@@ -35,7 +35,7 @@ namespace cote
 			/**Create from source*/
 			Shader(ShaderType ,const std::string& source);
 	
-			void Shader::createFromSource(const std::string & text, ShaderType type);
+			void createFromSource(const std::string & text, ShaderType type);
 			
 
 			//Wczytywanie z pliku mo¿nazrobiæ osobno
@@ -46,21 +46,21 @@ namespace cote
 
 
 			inline unsigned getShaderID()const {
-				return *mShaderID;
+				return *shaderID;
 			}
 
-			inline ShaderType getType()const { return mType; }
+			inline ShaderType getType()const { return shaderType; }
 
-			inline bool isCompiled()const { return mbCompiled; }
+			inline bool isCompiled()const { return compiled; }
 
 
 		protected:
 
-			bool mbCompiled = false;
+			bool compiled = false;
 
-			ShaderType mType;
+			ShaderType shaderType;
 
-			std::shared_ptr<unsigned> mShaderID;
+			std::shared_ptr<unsigned> shaderID;
 
 		private:
 			void makeHandler();

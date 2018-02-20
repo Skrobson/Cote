@@ -2,6 +2,7 @@
 #include <GL/glew.h>
 #include <string>
 #include <memory>
+#include "Bitmap.h"
 
 namespace cote {
 	namespace graphic {
@@ -18,6 +19,7 @@ namespace cote {
 			Texture(size_t width , size_t height);
 			Texture(Texture&&) = default;
 			Texture(const Texture&) = default;
+
 			unsigned getTextureID();
 
 			void bind(unsigned slot);
@@ -25,10 +27,10 @@ namespace cote {
 			virtual ~Texture();
 
 		protected:
-			unsigned m_width, m_height;
+			unsigned width, height;
 			
 			
-			std::shared_ptr<unsigned> m_handler;
+			std::shared_ptr<unsigned> handler;
 			
 			virtual void bindImpl() = 0;
 			virtual void unbindImpl() = 0;
@@ -37,9 +39,13 @@ namespace cote {
 		class Texture2d :public Texture
 		{
 		public:
-			Texture2d(size_t width, size_t height, const uint8_t* data);
+			Texture2d(size_t width, size_t height, const unsigned char* data);
+
+			Texture2d(Bitmap& image);
+
 		protected:
 			void bindImpl()override;
+
 			void unbindImpl() override;
 		};
 

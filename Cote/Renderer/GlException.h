@@ -6,7 +6,7 @@ namespace cote
 	namespace graphic
 	{
 
-		class GlException : public std::runtime_error
+		class GlException : public std::exception
 		{
 		public:
 			GlException(const std::string& error);
