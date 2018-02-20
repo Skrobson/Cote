@@ -1,6 +1,7 @@
 #include "ShaderProgram.h"
 #include "GlException.h"
 #include "GLerror.h"
+#include <gtc/type_ptr.hpp>
 
 using namespace cote::graphic;
 
@@ -67,6 +68,46 @@ void ShaderProgram::bind()const
 void ShaderProgram::unbind()const
 {
 	glUseProgram(NULL);
+}
+
+void cote::graphic::ShaderProgram::setUniform(int location, int value)
+{
+	glUniform1i(location, value);
+}
+
+void cote::graphic::ShaderProgram::setUniform(int location, unsigned value)
+{
+	glUniform1ui(location, value);
+}
+
+void cote::graphic::ShaderProgram::setUniform(int location, float value)
+{
+	glUniform1f(location, value);
+}
+
+void cote::graphic::ShaderProgram::setUniform(int location, glm::vec2 value)
+{
+	glUniform2fv(location, 1, glm::value_ptr(value));
+}
+
+void cote::graphic::ShaderProgram::setUniform(int location, glm::vec3 value)
+{
+	glUniform2fv(location, 1, glm::value_ptr(value));
+}
+
+void cote::graphic::ShaderProgram::setUniform(int location, glm::vec4 value)
+{
+	glUniform4fv(location, 1, glm::value_ptr(value));
+}
+
+void cote::graphic::ShaderProgram::setUniform(int location, glm::mat3 value)
+{
+	glUniformMatrix3fv(location, 1, false, glm::value_ptr(value));
+}
+
+void cote::graphic::ShaderProgram::setUniform(int location, glm::mat4 value)
+{
+	glUniformMatrix4fv(location, 1, false, glm::value_ptr(value));
 }
 
 void cote::graphic::ShaderProgram::createProgram()
