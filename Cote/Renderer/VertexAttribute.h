@@ -50,7 +50,7 @@ namespace cote {
 
 		protected:
 
-			VertexAttribute(const GLenum dataType);
+			VertexAttribute(const GLenum dataType , size_t count);
 
 			unsigned index;
 
@@ -63,19 +63,23 @@ namespace cote {
 			std::string attributeName;
 		};
 
+
+
+
 		template<typename T, typename S>
 		class VertexAttributeT :public VertexAttribute
 		{
 		public:
-
-
 			virtual const void* getRawData()const override { return data.data(); }
 
 		protected:
-			VertexAttributeT(GLenum dataType) :VertexAttribute(dataType) {}
+			VertexAttributeT(const std::vector<T>& data, GLenum dataType, size_t count) :VertexAttribute(dataType, count)
+			{	
+				convertData(data.size());
+			}
 
-			virtual void convertData(const std::vector<T>& data) = 0;
-
+			virtual void convertDataImpl(const std::vector<T>& data) = 0;
+			void convertData(size_t dataVectorSize);
 			std::vector<S> data;
 		};
 
@@ -83,10 +87,13 @@ namespace cote {
 		class VertexAttributeF : public VertexAttributeT<T, float>
 		{
 		protected:
-			VertexAttributeF() :VertexAttributeT(GL_FLOAT) {}
+			VertexAttributeF(const std::vector<T>& data, size_t countF) :VertexAttributeT(data, GL_FLOAT, countF) {  }
 
-			virtual void convertData(const std::vector<T>& data) = 0;
+			virtual void convertDataImpl(const std::vector<T>& data) = 0;
 		};
+
+
+
 
 		class VertexAttribute2f :public VertexAttributeF<glm::vec2>
 		{
@@ -98,8 +105,11 @@ namespace cote {
 		protected:
 			VertexAttribute2f(const std::vector<glm::vec2>& data);
 
-			virtual void convertData(const std::vector<glm::vec2>& data) override;
+			virtual void convertDataImpl(const std::vector<glm::vec2>& data) override;
 		};
+
+
+
 
 
 
@@ -114,7 +124,16 @@ namespace cote {
 		protected:
 			VertexAttribute3f(const std::vector<glm::vec3>& data);
 
-			virtual void convertData(const std::vector<glm::vec3>& data)override;
+			virtual void convertDataImpl(const std::vector<glm::vec3>& data)override;
 		};
-	}
+
+
+
+
+		template<typename T, typename S>
+		inline void VertexAttributeT<T, S>::convertData(size_t dataVectorSize)
+		{
+			size = sizeof(S) * count * dataVectorSize;
+		}
+}
 }
