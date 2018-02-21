@@ -31,7 +31,7 @@ TextureTest::TextureTest()
 	vLayout.pushVertexAttribute(pos);
 	vLayout.pushVertexAttribute(uv);
 
-	vertexArray = std::make_unique<cote::graphic::VertexArray>(indicies, vLayout);
+	vertexArray = std::make_shared<cote::graphic::VertexArray>(indicies, vLayout);
 
 
 
@@ -46,14 +46,16 @@ TextureTest::TextureTest()
 	cote::graphic::Bitmap bitmap = cote::graphic::Bitmap("../../Data/textures/herb.png");
 
 
-	tex = std::make_unique<cote::graphic::Texture2d>(bitmap);
-
-	std::cout << tex->getTextureID() << std::endl;
-	std::cout << bitmap.getHeight()<<" "<<bitmap.getWidth() << std::endl;
+	tex = std::make_shared<cote::graphic::Texture2d>(bitmap);
+	tex->setSamplerName("texture_diffuse1");
 	GlError error;
 	if (error.check())
 		std::cout << error.getError() << std::endl;
-	texUniform.searchForUniformLocation(program, "texture_diffuse1");
+
+
+	material = std::make_shared<Material>(program);
+	material->addTexture(tex);
+	material->setVAO(vertexArray);
 	//texUniform.setValue(0);
 }
 
@@ -63,12 +65,14 @@ TextureTest::~TextureTest()
 
 }
 
-void TextureTest::bind()
+void TextureTest::render()
 {
-	program->bind();
-	tex->bind(0);
-	
-	texUniform.updateValueForProgram(program);
+	//program->bind();
+	//tex->bind(0);
+	//
+	//texUniform.updateValueForProgram(program);
 
-	vertexArray->drawElements();
+	//vertexArray->drawElements();
+
+	material->render();
 }

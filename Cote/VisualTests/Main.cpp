@@ -5,7 +5,7 @@
 
 #include "Window.h"
 #include "TextureTest.h"
-#include <GL/glew.h>
+#include <GL\glew.h>
 #include <GLFW\glfw3.h>
 
 int main()
@@ -75,7 +75,7 @@ int main()
 		//glBindTexture(GL_TEXTURE_2D, tex->getTextureID());
 
 
-		test.bind();
+		test.render();
 
 
 		glfwSwapBuffers(*window);

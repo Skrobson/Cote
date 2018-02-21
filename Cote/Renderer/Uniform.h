@@ -15,14 +15,21 @@ namespace cote
 			
 		};
 
+
 		class Uniform
 		{
 		public:
+			Uniform(std::string name);
+			Uniform() {}
+
+			void setUniformName(const std::string& name) { uniformName = name; }
 			virtual void updateValueForProgram(const std::shared_ptr<ShaderProgram>  program)=0;
 			
-			virtual void searchForUniformLocation(std::shared_ptr<const ShaderProgram> program, const std::string& uniformName);
+			virtual void searchForUniformLocation(std::shared_ptr<const ShaderProgram> program);
 		protected:
 			std::map <std::shared_ptr<const ShaderProgram>, int, Comparator > uniformLocations;
+
+			std::string uniformName;
 
 		};
 
@@ -30,7 +37,8 @@ namespace cote
 		class UniformT : public Uniform
 		{
 		public:
-		
+			UniformT(std::string name);
+			UniformT(){}
 			void setValue(T newValue) { value = newValue; }
 			
 			T getValue()const { return value; }
@@ -44,6 +52,10 @@ namespace cote
 			std::string name;
 			
 		};
+		template<typename T>
+		inline UniformT<T>::UniformT(std::string name): Uniform(name)
+		{
+		}
 		template<typename T>
 		void UniformT<T>::updateValueForProgram(const std::shared_ptr<ShaderProgram>  program)
 		{

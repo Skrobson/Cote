@@ -1,5 +1,5 @@
 #pragma once
-#include <GL/glew.h>
+#include <GL\glew.h>
 #include <string>
 #include <memory>
 #include "Bitmap.h"
@@ -9,9 +9,9 @@ namespace cote {
 
 
 		//TODO: initialize gdzies indziej, np do textureManagera
-//#define TEX_DIFFUSE "texture_diffuse"
-//#define TEX_SPECULAR "texture_specular"
-//#define TEX_NORMALS   "texture_normals"
+#define TEX_DIFFUSE "texture_diffuse"
+#define TEX_SPECULAR "texture_specular"
+#define TEX_NORMALS   "texture_normals"
 
 		class Texture
 		{
@@ -22,6 +22,8 @@ namespace cote {
 
 			unsigned getTextureID();
 
+			void setSamplerName(const std::string& type);
+			std::string getSamplerName()const;
 			void bind(unsigned slot);
 			void unbind(unsigned slot);
 			virtual ~Texture();
@@ -29,6 +31,7 @@ namespace cote {
 		protected:
 			unsigned width, height;
 			
+			std::string samplerName;
 			
 			std::shared_ptr<unsigned> handler;
 			

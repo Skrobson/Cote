@@ -93,6 +93,12 @@
     <ClCompile Include="Uniform.cpp">
       <Filter>Source Files\Graphic\API</Filter>
     </ClCompile>
+    <ClCompile Include="RenderState.cpp">
+      <Filter>Source Files\Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="Material.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VertexBuffer.h">
@@ -154,6 +160,12 @@
     </ClInclude>
     <ClInclude Include="Uniform.h">
       <Filter>Header Files\Graphic\API</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderState.h">
+      <Filter>Header Files\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,5 +1,5 @@
 #pragma once
-#include <GL/glew.h>
+#include <GL\glew.h>
 #include <string>
 //TODO: initialize gdzies indziej, np do textureManagera
 #define TEX_DIFFUSE "texture_diffuse"
