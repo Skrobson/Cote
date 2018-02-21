@@ -11,7 +11,7 @@
 #include <GLFW\glfw3.h>
 #include "Texture.h"
 #include "Bitmap.h"
-#include <Textureold.h>
+
 #include <Uniform.h>
 #include <Material.h>
 

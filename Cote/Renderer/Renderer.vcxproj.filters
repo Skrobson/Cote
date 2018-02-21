@@ -78,9 +78,6 @@
     <ClCompile Include="Log.cpp">
       <Filter>Source Files\Old</Filter>
     </ClCompile>
-    <ClCompile Include="Textureold.cpp">
-      <Filter>Source Files\Old</Filter>
-    </ClCompile>
     <ClCompile Include="Window.cpp">
       <Filter>Source Files\Old</Filter>
     </ClCompile>
@@ -97,7 +94,7 @@
       <Filter>Source Files\Graphic</Filter>
     </ClCompile>
     <ClCompile Include="Material.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Graphic</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -146,9 +143,6 @@
     <ClInclude Include="Log.h">
       <Filter>Header Files\Old</Filter>
     </ClInclude>
-    <ClInclude Include="Textureold.h">
-      <Filter>Header Files\Old</Filter>
-    </ClInclude>
     <ClInclude Include="Window.h">
       <Filter>Header Files\Old</Filter>
     </ClInclude>
@@ -165,7 +159,7 @@
       <Filter>Header Files\Graphic</Filter>
     </ClInclude>
     <ClInclude Include="Material.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Graphic</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
