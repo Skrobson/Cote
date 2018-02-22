@@ -12,7 +12,8 @@ namespace cote
 		{
 		public:
 			Renderer();
-
+			void setView(glm::mat4 view);
+			
 			//prototype
 			void addCommandToQueue(std::shared_ptr<RenderCommand> command);
 			virtual void render();
@@ -23,6 +24,9 @@ namespace cote
 			std::queue<std::shared_ptr<RenderCommand>> renderQueue;
 
 			std::shared_ptr<ShaderProgram> actualProgram = nullptr;
+
+			UniformT<glm::mat4> view;
+			UniformT<glm::mat4> projection;
 		};
 
 

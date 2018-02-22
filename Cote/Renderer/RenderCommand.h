@@ -15,24 +15,21 @@ namespace cote
 		class RenderCommand
 		{
 		public:
-			RenderCommand();
+			RenderCommand(std::shared_ptr<Material> material , std::shared_ptr<VertexArray> vao, std::shared_ptr<UniformT<glm::mat4>> modelTransform);
 			
-
-			void setMaterial(std::shared_ptr<Material> material);
-			void setVAO(std::shared_ptr<VertexArray> vao);
-
+			
 			std::shared_ptr<ShaderProgram> getProgram();
 
 			void render();
 
-			
 		protected:
+			std::shared_ptr<ShaderProgram>  program ;
 
 			std::shared_ptr<Material> material;
 
 			std::shared_ptr<VertexArray> vao;
 
-			std::shared_ptr<ShaderProgram>  program;
+			std::shared_ptr<UniformT<glm::mat4>> modelTransform;
 
 		};
 

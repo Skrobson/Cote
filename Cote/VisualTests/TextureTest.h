@@ -28,11 +28,13 @@ public:
 
 	void render();
 private:
+	std::shared_ptr< cote::graphic::VertexArray> createBox();
 
 	cote::graphic::Shader vS;
 	cote::graphic::Shader fS;
 	std::shared_ptr<cote::graphic::ShaderProgram> program;
 	std::shared_ptr< cote::graphic::VertexArray> vertexArray;
+	std::shared_ptr< cote::graphic::VertexArray> box;
 
 	cote::graphic::UniformT<unsigned> texUniform;
 
@@ -42,7 +44,8 @@ private:
 
 	Renderer renderer;
 
-	glm::mat4 model;
+	std::shared_ptr<UniformT<glm::mat4>> model;
+	
 	glm::mat4 view;
 	glm::mat4 projection;
 };

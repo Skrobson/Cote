@@ -62,6 +62,10 @@ namespace cote
 			auto loc = uniformLocations.find(program);
 			if(loc != uniformLocations.end())
 				program->setUniform(loc->second, value);
+			else
+			{
+				searchForUniformLocation(program);
+			}
 		}
 
 

@@ -31,9 +31,9 @@ int main()
 	}
 
 
-	//glEnable(GL_DEPTH_TEST);
+	glEnable(GL_DEPTH_TEST);
 	//glEnable(GL_CULL_FACE);
-	//glCullFace(GL_BACK);
+	//glCullFace(GL_FRONT_AND_BACK);
 
 	//pobieranie rozmiaru okna
 	int frameX, frameY;
@@ -63,12 +63,12 @@ int main()
 	//GLuint indecies1[] = { 0,1,3 ,1,2,3 };
 
 	TextureTest test;
-	glEnable(GL_ALPHA);
+	//glEnable(GL_ALPHA);
 	while (glfwWindowShouldClose(*window) == false) {
 		glfwPollEvents();
 
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
 		//glActiveTexture(GL_TEXTURE0);
 		//glUniform1i(glGetUniformLocation(program->getProgramID(), "texture_diffuse1"), 0);

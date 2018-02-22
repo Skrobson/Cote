@@ -20,7 +20,7 @@ TextureTest::TextureTest()
 	std::shared_ptr<cote::graphic::VertexAttribute> pos = std::make_shared<cote::graphic::VertexAttribute3f>(cote::graphic::VertexAttributeIndex::POSITION, vertexPos);
 
 	std::vector<glm::vec2> vertexUv{
-		{ 1.0f, 1.0f },
+	{ 1.0f, 1.0f },
 	{ 1.0f, 0.0f },
 	{ 0.0f, 0.0f },
 	{ 0.0f, 1.0f }
@@ -35,9 +35,10 @@ TextureTest::TextureTest()
 	vertexArray = std::make_shared<cote::graphic::VertexArray>(indicies, vLayout);
 
 
-	vS.loadFromFile("../../Data/shaders/tex_vertex.glvs", cote::graphic::ShaderType::VERTEX_SHADER);
-	//vS.loadFromFile("../../Data/shaders/simple_model_vertex.glvs", cote::graphic::ShaderType::VERTEX_SHADER);
-	fS.loadFromFile("../../Data/shaders/tex_fragment.glfs", cote::graphic::ShaderType::FRAGMENT_SHADER);
+	//vS.loadFromFile("../../Data/shaders/tex_vertex.glvs", cote::graphic::ShaderType::VERTEX_SHADER);
+	vS.loadFromFile("../../Data/shaders/simple_model_vertex.glvs", cote::graphic::ShaderType::VERTEX_SHADER);
+	fS.loadFromFile("../../Data/shaders/simple_model_fragment.glfs", cote::graphic::ShaderType::FRAGMENT_SHADER);
+	//fS.loadFromFile("../../Data/shaders/tex_fragment.glfs", cote::graphic::ShaderType::FRAGMENT_SHADER);
 	program = std::make_shared<cote::graphic::ShaderProgram>();
 	program->attachShader(vS);
 	program->attachShader(fS);
@@ -58,30 +59,13 @@ TextureTest::TextureTest()
 	material->addTexture(tex);
 
 
-
 	//intro to 3d
-	UniformT<glm::mat4> preUniform;
-	preUniform.setUniformName("model");
-	model = glm::rotate(model, glm::radians(-55.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-	preUniform.setValue(model);
-	auto uptr = std::make_shared<UniformT<glm::mat4>>(preUniform);
+	model = std::make_shared<UniformT<glm::mat4>>();
+	model->setUniformName("model");
+	glm::mat4 matPos  = glm::translate(glm::mat4(1.0f), glm::vec3(0.0, 0.0, -4.0));
+	model->setValue( glm::rotate(matPos, glm::radians(-10.0f), glm::vec3(1.0f, 0.0f, 0.0f)));
 
-	material->addUniform(uptr);
-
-	view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
-	projection = glm::perspective(glm::radians(45.0f), float(800 / 600), 0.1f, 100.0f);
-
-	auto uptrView = std::make_shared<UniformT<glm::mat4>>();
-	auto uptrProjection = std::make_shared<UniformT<glm::mat4>>();
-	uptrView->setValue(view);
-	uptrView->setUniformName("view");
-	
-	uptrProjection->setValue(projection);
-	uptrProjection->setUniformName("projection");
-
-	material->addUniform(uptrProjection);
-	material->addUniform(uptrView);
-	
+	box = createBox();
 }
 
 
@@ -92,11 +76,74 @@ TextureTest::~TextureTest()
 
 void TextureTest::render()
 {
+	glm::mat4 matPos = glm::translate(glm::mat4(1.0f), glm::vec3(0.0, 0.0, -4.0));
+	model->setValue(glm::rotate(matPos, (float)glfwGetTime() * glm::radians(-35.0f), glm::vec3(1.0f, 0.0f, -1.0f)));
+	RenderCommand command(material, box, model);
 	
-	RenderCommand command;
-	command.setMaterial(material);
-	command.setVAO(vertexArray);
 
 	renderer.addCommandToQueue(std::make_shared<RenderCommand>(command));
+
+
 	renderer.render();
+}
+
+std::shared_ptr<cote::graphic::VertexArray> TextureTest::createBox()
+{
+	std::vector<glm::vec3> vertexPos{
+		// front
+		{-1.0, -1.0,  1.0},
+		{1.0, -1.0,  1.0},
+		{1.0,  1.0,  1.0},
+		{-1.0,  1.0,  1.0},
+		// back			},
+		{-1.0, -1.0, -1.0},
+		{1.0, -1.0, -1.0},
+		{1.0,  1.0, -1.0},
+		{-1.0,  1.0, -1.0}
+
+	};
+
+
+	std::vector<glm::vec2> vertexUv{
+		{ 1.0f, 1.0f },
+		{ 1.0f, 0.0f },
+		{ 0.0f, 0.0f },
+		{ 0.0f, 1.0f },
+		{ 1.0f, 1.0f },
+		{ 1.0f, 0.0f },
+		{ 0.0f, 0.0f },
+		{ 0.0f, 1.0f }
+	};
+
+	std::vector<unsigned> indicies = {		
+		// front
+		0, 1, 2,
+		2, 3, 0,
+		// top
+		1, 5, 6,
+		6, 2, 1,
+		// back
+		7, 6, 5,
+		5, 4, 7,
+		// bottom
+		4, 0, 3,
+		3, 7, 4,
+		// left
+		4, 5, 1,
+		1, 0, 4,
+		// right
+		3, 2, 6,
+		6, 7, 3, };
+
+	std::shared_ptr<cote::graphic::VertexAttribute> pos = std::make_shared<cote::graphic::VertexAttribute3f>(cote::graphic::VertexAttributeIndex::POSITION, vertexPos);
+
+	std::shared_ptr<cote::graphic::VertexAttribute> uv = std::make_shared<cote::graphic::VertexAttribute2f>(cote::graphic::VertexAttributeIndex::UV_0, vertexUv);
+
+	cote::graphic::VertexAttributeLayout vLayout;
+	vLayout.pushVertexAttribute(pos);
+	vLayout.pushVertexAttribute(uv);
+
+	auto box = std::make_shared<cote::graphic::VertexArray>(indicies, vLayout);
+
+	return box;
 }
