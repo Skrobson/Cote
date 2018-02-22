@@ -1,6 +1,6 @@
 #pragma once
 #include <queue>
-#include "Material.h"
+#include "RenderCommand.h"
 
 namespace cote
 {
@@ -14,13 +14,15 @@ namespace cote
 			Renderer();
 
 			//prototype
-			void addCommandToQueue(std::shared_ptr<Material> material);
+			void addCommandToQueue(std::shared_ptr<RenderCommand> command);
 			virtual void render();
 
 			virtual ~Renderer();
 
 		protected:
-			std::queue<std::shared_ptr<Material>> renderQueue;
+			std::queue<std::shared_ptr<RenderCommand>> renderQueue;
+
+			std::shared_ptr<ShaderProgram> actualProgram = nullptr;
 		};
 
 

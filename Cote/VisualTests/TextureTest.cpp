@@ -1,6 +1,7 @@
 #include "TextureTest.h"
 #include <iostream>
 #include <GLerror.h>
+#include <common.hpp>
 
 TextureTest::TextureTest()
 {
@@ -34,8 +35,8 @@ TextureTest::TextureTest()
 	vertexArray = std::make_shared<cote::graphic::VertexArray>(indicies, vLayout);
 
 
-
 	vS.loadFromFile("../../Data/shaders/tex_vertex.glvs", cote::graphic::ShaderType::VERTEX_SHADER);
+	//vS.loadFromFile("../../Data/shaders/simple_model_vertex.glvs", cote::graphic::ShaderType::VERTEX_SHADER);
 	fS.loadFromFile("../../Data/shaders/tex_fragment.glfs", cote::graphic::ShaderType::FRAGMENT_SHADER);
 	program = std::make_shared<cote::graphic::ShaderProgram>();
 	program->attachShader(vS);
@@ -55,8 +56,32 @@ TextureTest::TextureTest()
 
 	material = std::make_shared<Material>(program);
 	material->addTexture(tex);
-	material->setVAO(vertexArray);
-	//texUniform.setValue(0);
+
+
+
+	//intro to 3d
+	UniformT<glm::mat4> preUniform;
+	preUniform.setUniformName("model");
+	model = glm::rotate(model, glm::radians(-55.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+	preUniform.setValue(model);
+	auto uptr = std::make_shared<UniformT<glm::mat4>>(preUniform);
+
+	material->addUniform(uptr);
+
+	view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+	projection = glm::perspective(glm::radians(45.0f), float(800 / 600), 0.1f, 100.0f);
+
+	auto uptrView = std::make_shared<UniformT<glm::mat4>>();
+	auto uptrProjection = std::make_shared<UniformT<glm::mat4>>();
+	uptrView->setValue(view);
+	uptrView->setUniformName("view");
+	
+	uptrProjection->setValue(projection);
+	uptrProjection->setUniformName("projection");
+
+	material->addUniform(uptrProjection);
+	material->addUniform(uptrView);
+	
 }
 
 
@@ -67,12 +92,11 @@ TextureTest::~TextureTest()
 
 void TextureTest::render()
 {
-	//program->bind();
-	//tex->bind(0);
-	//
-	//texUniform.updateValueForProgram(program);
+	
+	RenderCommand command;
+	command.setMaterial(material);
+	command.setVAO(vertexArray);
 
-	//vertexArray->drawElements();
-
-	material->render();
+	renderer.addCommandToQueue(std::make_shared<RenderCommand>(command));
+	renderer.render();
 }

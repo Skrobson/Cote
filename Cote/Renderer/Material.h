@@ -24,9 +24,12 @@ namespace cote
 
 			void addTexture(std::shared_ptr<Texture> texture);
 
-			//Only for tests
-			void render();
-			void setVAO(std::shared_ptr<VertexArray> vao) { this->vao = vao; }
+			void updateUniforms();
+
+			void bindTextures();
+			void unbindTextures();
+
+			std::shared_ptr<ShaderProgram> getProgram();
 
 			virtual ~Material();
 
@@ -39,7 +42,6 @@ namespace cote
 
 			std::vector<std::shared_ptr<Uniform>> uniforms;
 
-			std::shared_ptr<VertexArray> vao;
 
 			//not use
 			void setTexturesUniforms();
