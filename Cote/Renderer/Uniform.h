@@ -25,6 +25,7 @@ namespace cote
 			void setUniformName(const std::string& name) { uniformName = name; }
 			virtual void updateValueForProgram(const std::shared_ptr<ShaderProgram>  program)=0;
 			
+
 			virtual void searchForUniformLocation(std::shared_ptr<const ShaderProgram> program);
 		protected:
 			std::map <std::shared_ptr<const ShaderProgram>, int, Comparator > uniformLocations;
@@ -37,11 +38,19 @@ namespace cote
 		class UniformT : public Uniform
 		{
 		public:
-			UniformT(std::string name);
+			UniformT(const std::string& name);
+
 			UniformT(){}
+
+			UniformT(T value,const std::string& name);
+
 			void setValue(T newValue) { value = newValue; }
 			
 			T getValue()const { return value; }
+
+			UniformT<T>& operator=(const T& t);
+			
+			operator T();
 
 			/**Specify the value of a uniform variable for the current program object*/
 			virtual void updateValueForProgram(const std::shared_ptr<ShaderProgram>  program)override;
@@ -53,9 +62,29 @@ namespace cote
 			
 		};
 		template<typename T>
-		inline UniformT<T>::UniformT(std::string name): Uniform(name)
+		inline UniformT<T>::UniformT(const std::string& name): Uniform(name)
 		{
 		}
+
+		template<typename T>
+		inline UniformT<T>::UniformT(T value ,const std::string& name)
+		{
+			this->value = value;
+		}
+
+		template<typename T>
+		inline UniformT<T> & UniformT<T>::operator=(const T & t)
+		{
+			this->value = t;
+			return *(this);
+		}
+
+		template<typename T>
+		inline UniformT<T>::operator T()
+		{
+			return value;
+		}
+
 		template<typename T>
 		void UniformT<T>::updateValueForProgram(const std::shared_ptr<ShaderProgram>  program)
 		{

@@ -77,7 +77,7 @@ TextureTest::~TextureTest()
 void TextureTest::render()
 {
 	glm::mat4 matPos = glm::translate(glm::mat4(1.0f), glm::vec3(0.0, 0.0, -4.0));
-	model->setValue(glm::rotate(matPos, (float)glfwGetTime() * glm::radians(-35.0f), glm::vec3(1.0f, 0.0f, -1.0f)));
+	*model = (glm::rotate(matPos, (float)glfwGetTime() * glm::radians(-35.0f), glm::vec3(1.0f, 0.0f, -1.0f)));
 	RenderCommand command(material, box, model);
 	
 
