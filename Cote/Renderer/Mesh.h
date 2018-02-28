@@ -15,7 +15,8 @@ namespace cote
 		public:
 
 			Mesh(std::shared_ptr<Material> material, std::shared_ptr<VertexArray> vao);
-
+			Mesh(std::shared_ptr<VertexArray> vao);
+			void setMaterial(std::shared_ptr<Material> material);
 			void setName(const std::string& name);
 			std::string getName();
 

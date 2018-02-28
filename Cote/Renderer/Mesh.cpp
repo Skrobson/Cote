@@ -5,6 +5,15 @@ cote::graphic::Mesh::Mesh(std::shared_ptr<Material> material, std::shared_ptr<Ve
 {
 }
 
+cote::graphic::Mesh::Mesh(std::shared_ptr<VertexArray> vao) : vao(vao)
+{
+}
+
+void cote::graphic::Mesh::setMaterial(std::shared_ptr<Material> material)
+{
+	this->material = material;
+}
+
 void cote::graphic::Mesh::setName(const std::string & name)
 {
 	meshName = name;

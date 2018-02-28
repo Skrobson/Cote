@@ -18,6 +18,7 @@
 #include <Material.h>
 #include <Renderer.h>
 #include <Transform.h>
+#include <Model.h>
 
 using namespace cote::graphic;
 
@@ -45,11 +46,13 @@ private:
 
 	Renderer renderer;
 
-	std::shared_ptr<UniformT<glm::mat4>> model;
+	std::shared_ptr<UniformT<glm::mat4>> modelMat;
 	
 	cote::Transform transform;
 
 	glm::mat4 view;
 	glm::mat4 projection;
+
+	std::shared_ptr<Model> model;
 };
 
