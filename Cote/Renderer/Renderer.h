@@ -21,8 +21,8 @@ namespace cote
 			virtual ~Renderer();
 
 		protected:
-			std::queue<std::shared_ptr<RenderCommand>> renderQueue;
-
+			//std::queue<std::shared_ptr<RenderCommand>> renderQueue;
+			std::vector<std::shared_ptr<RenderCommand>> renderQueue;
 			std::shared_ptr<ShaderProgram> actualProgram = nullptr;
 
 			UniformT<glm::mat4> view;

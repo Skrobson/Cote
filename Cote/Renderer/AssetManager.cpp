@@ -3,7 +3,8 @@
 
 #include <iostream>
 
-
+#include <algorithm>
+#include <iterator>
 
 using namespace cote::graphic;
 using namespace cote;
@@ -20,8 +21,9 @@ AssetManager::~AssetManager()
 
 
 
-std::shared_ptr<Model> cote::AssetManager::loadModel(const std::string & filePath, std::shared_ptr<ShaderProgram>) //aiPostProcessSteps
+std::shared_ptr<Model> cote::AssetManager::loadModel(const std::string & filePath, std::shared_ptr<ShaderProgram> program) //aiPostProcessSteps
 {
+	this->program = program;
 	auto modelIterator = models.find(filePath);
 	if (modelIterator == models.end())
 	{
@@ -83,14 +85,22 @@ std::shared_ptr<Mesh> cote::AssetManager::processMesh(aiMesh * mesh, const aiSce
 			normals.push_back( vec);
 		}
 
-		if (mesh->mTextureCoords[0]) {
-			glm::vec2 vec;
-			vec.x = mesh->mTextureCoords[0][i].x;
-			vec.y = mesh->mTextureCoords[0][i].y;
-			uvs.push_back( vec);
-		}
+		
+			
+		//if (mesh->mTextureCoords[0])
+		//{
+		//	glm::vec2 vec;
+		//	vec.x = mesh->mTextureCoords[0][i].x;
+		//	vec.y = mesh->mTextureCoords[0][i].y;
+		//	uvs.push_back( vec);
+		//}
+		
 		//bitangens etc
 	}
+
+	std::vector<aiVector3D> aiVec;
+
+	std::copy(mesh->mTextureCoords[0], mesh->mTextureCoords[0] + mesh->mNumVertices, std::back_inserter(aiVec));
 
 	for (GLuint i = 0; i<mesh->mNumFaces; i++)
 	{
@@ -123,9 +133,9 @@ std::shared_ptr<Mesh> cote::AssetManager::processMesh(aiMesh * mesh, const aiSce
 		auto tex = loadTexture(aiMat, aiTextureType_DIFFUSE, TEX_DIFFUSE);
 		if (tex) material->addTexture(tex);
 		
-		tex = loadTexture(aiMat, aiTextureType_SPECULAR, TEX_SPECULAR);
-		if(tex) material->addTexture(tex);
-
+		auto tex2 = loadTexture(aiMat, aiTextureType_SPECULAR, TEX_SPECULAR);
+		if(tex2) material->addTexture(tex2);
+		
 	}
 
 	return newMesh;

@@ -20,27 +20,42 @@ void cote::graphic::Renderer::setView(glm::mat4 view)
 
 void cote::graphic::Renderer::addCommandToQueue(std::shared_ptr<RenderCommand> material)
 {
-	renderQueue.push(material);
+	renderQueue.push_back(material);
 	view.searchForUniformLocation(material->getProgram());
 	projection.searchForUniformLocation(material->getProgram());
 }
 
 void cote::graphic::Renderer::render()
 {
-	while (renderQueue.empty() == false)
+	//while (renderQueue.empty() != false)
+	//{
+	//	auto command = renderQueue.front();
+	//	if (actualProgram != command->getProgram())
+	//	{
+	//		actualProgram->unbind();
+	//		actualProgram = command->getProgram();
+	//		actualProgram->bind();
+	//		view.updateValueForProgram(actualProgram);
+	//		projection.updateValueForProgram(actualProgram);
+	//	}
+	//	command->render();
+	//	
+	//}
+
+	for (auto command : renderQueue)
 	{
-		auto command = renderQueue.front();
 		if (actualProgram != command->getProgram())
-		{
-			actualProgram->unbind();
-			actualProgram = command->getProgram();
-			actualProgram->bind();
-			view.updateValueForProgram(actualProgram);
-			projection.updateValueForProgram(actualProgram);
-		}
-		command->render();
-		renderQueue.pop();
+				{
+					actualProgram->unbind();
+					actualProgram = command->getProgram();
+					actualProgram->bind();
+					view.updateValueForProgram(actualProgram);
+					projection.updateValueForProgram(actualProgram);
+				}
+				command->render();
 	}
+
+	renderQueue.clear();
 	//actualProgram->unbind();
 
 	//actualProgram = nullptr;
