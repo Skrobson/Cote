@@ -72,7 +72,7 @@ TextureTest::TextureTest()
 
 	cote::AssetManager manager;
 
-	model = manager.loadModel("../../Data/models/nanosuit.blend", program);
+	model = manager.loadModel("../../Data/models/nanosuit.obj", program);
 	
 	model->transform.setPos(glm::vec3(0.0, 0.0, -4.0));
 }
