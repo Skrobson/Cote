@@ -66,8 +66,8 @@ TextureTest::TextureTest()
 	modelMat->setUniformName("model");
 
 	transform.setPos(glm::vec3(0.0, 0.0, -4.0));
-	//glm::mat4 matModel  = glm::translate(glm::mat4(1.0f), glm::vec3(0.0, 0.0, 0.0));
-	//model->setValue( glm::rotate(matModel, glm::radians(-10.0f), glm::vec3(1.0f, 0.0f, 0.0f)));
+	glm::mat4 matModel  = glm::translate(glm::mat4(1.0f), glm::vec3(0.0, 0.0, 0.0));
+	modelMat->setValue( glm::rotate(matModel, glm::radians(-10.0f), glm::vec3(1.0f, 0.0f, 0.0f)));
 	box = createBox();
 
 	cote::AssetManager manager;
@@ -85,12 +85,16 @@ TextureTest::~TextureTest()
 
 void TextureTest::render()
 {
-	//glm::mat4 matPos = glm::translate(glm::mat4(1.0f), glm::vec3(0.0, 0.0, -4.0));
+	glm::mat4 matPos = glm::translate(glm::mat4(1.0f), glm::vec3(0.0, 0.0, -4.0));
+
 	model->transform.rotate(glm::vec3(0.0f, 0.0f, 1.0f), -1.0f);
-	//*modelMat = transform.rotate(glm::vec3(0.0f, 0.0f, 1.0f),  -1.0f);
-	//(glm::rotate(matPos,  glm::radians((float)glfwGetTime() *-35.0f), glm::vec3(1.0f, 0.0f, -1.0f)));//transform.getModel();
-	//RenderCommand command(material, box, modelMat);
+
+	*modelMat = transform.rotate(glm::vec3(0.0f, 0.0f, 1.0f),  -1.0f);
+	
+	RenderCommand command(material, box, modelMat);
 	//renderer.addCommandToQueue(std::make_shared<RenderCommand>(command));
+
+
 	model->render(renderer);
 
 	renderer.render();

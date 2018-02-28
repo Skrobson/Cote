@@ -21,7 +21,8 @@ void cote::graphic::Model::render(Renderer& renderer)
 	{
 		auto model = std::make_shared<UniformT<glm::mat4>>("model");
 		*model = transform.getModel();
-		RenderCommand command(mesh->getMaterial(), mesh->getVAO(), model);
+		//RenderCommand command(mesh->getMaterial(), mesh->getVAO(), model);
+		renderer.addCommandToQueue(std::make_shared<RenderCommand>(mesh->getMaterial(), mesh->getVAO(), model));
 	}
 	
 }

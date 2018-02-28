@@ -31,9 +31,7 @@ int main()
 	}
 
 
-	glEnable(GL_DEPTH_TEST);
-	//glEnable(GL_CULL_FACE);
-	//glCullFace(GL_FRONT_AND_BACK);
+;
 
 	//pobieranie rozmiaru okna
 	int frameX, frameY;
@@ -48,20 +46,11 @@ int main()
 	}
 
 
-
-
-
-
-	//przykladowy vertex
-	//Vertex vertices1[] = {
-	//	{ glm::vec3(0.5f, 0.5f, 0.0f),glm::vec2(1.0f, 1.0f) },
-	//	{ glm::vec3(0.5f, -0.5f, 0.0f),glm::vec2(1.0f, 0.0f) },
-	//	{ glm::vec3(-0.5f, -0.5f, 0.0f),glm::vec2(0.0f, 0.0f) },
-	//	{ glm::vec3(-0.5f,  0.5f, 0.0f),glm::vec2(0.0f, 1.0f) }
-
-	//};
-	//GLuint indecies1[] = { 0,1,3 ,1,2,3 };
-
+	glEnable(GL_DEPTH_TEST);
+	
+	glEnable(GL_CULL_FACE);
+	//glCullFace(GL_FRONT_AND_BACK);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	TextureTest test;
 	//glEnable(GL_ALPHA);
 	while (glfwWindowShouldClose(*window) == false) {
