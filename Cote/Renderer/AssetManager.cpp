@@ -141,7 +141,7 @@ std::shared_ptr<Mesh> cote::AssetManager::processMesh(aiMesh * mesh, const aiSce
 		auto tex = loadTexture(aiMat, aiTextureType_DIFFUSE, "texture_diffuse1");
 		if (tex) material->addTexture(tex);
 		
-		auto tex2 = loadTexture(aiMat, aiTextureType_SPECULAR, TEX_SPECULAR);
+		auto tex2 = loadTexture(aiMat, aiTextureType_SPECULAR, "texture_specular1");
 		if(tex2) material->addTexture(tex2);
 		
 	}

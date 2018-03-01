@@ -28,7 +28,7 @@ public:
 	TextureTest();
 	~TextureTest();
 
-	void render();
+	void render(Camera& camera);
 private:
 	std::shared_ptr< cote::graphic::VertexArray> createBox();
 

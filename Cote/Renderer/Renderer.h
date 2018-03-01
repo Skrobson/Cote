@@ -1,7 +1,7 @@
 #pragma once
 #include <queue>
 #include "RenderCommand.h"
-
+#include "Camera.h"
 namespace cote
 {
 	namespace graphic
@@ -12,8 +12,11 @@ namespace cote
 		{
 		public:
 			Renderer();
+
+			void setCamera(Camera& camera);
 			void setView(glm::mat4 view);
 			
+
 			//prototype
 			void addCommandToQueue(std::shared_ptr<RenderCommand> command);
 			virtual void render();

@@ -39,6 +39,8 @@ void FreeCamera::update()
 	if (mInput->keyEvent(GLFW_KEY_E))
 		move(cameraSpeed, CameraMove::DOWN);
 	//mouse
+	
+
 	//issue pierwsze uzycie dziwnie przeskakuje, pozniej juz jest ok
 
 	if (mInput->mouseButtonEvent(GLFW_MOUSE_BUTTON_LEFT))

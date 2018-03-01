@@ -84,7 +84,7 @@ TextureTest::~TextureTest()
 
 }
 
-void TextureTest::render()
+void TextureTest::render(Camera& camera)
 {
 	glm::mat4 matPos = glm::translate(glm::mat4(1.0f), glm::vec3(0.0, -0.0, -1.0));
 
@@ -95,7 +95,7 @@ void TextureTest::render()
 	//RenderCommand command(material, box, modelMat);
 	//renderer.addCommandToQueue(std::make_shared<RenderCommand>(command));
 
-
+	renderer.setCamera(camera);
 	testModel->render(renderer);
 
 	renderer.render();
