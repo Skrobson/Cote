@@ -10,6 +10,7 @@ public:
 	virtual void update();
 
 	std::shared_ptr<Model> createBox();
-	std::shared_ptr<Model> box;
+	std::shared_ptr<Model> box1;
+	std::shared_ptr<Model> box2;
 };
 

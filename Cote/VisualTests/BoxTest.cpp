@@ -4,13 +4,22 @@
 
 BoxTest::BoxTest()
 {
-	box = createBox();
-	models.push_back(box);
+	box1 = createBox();
+	box2 = std::make_shared<Model>(*box1);
+	box2->transform.setPos(glm::vec3(5.0f, 5.0f, -5.0f));
+	//box1->transform.setScale(glm::vec3(1000.0f, 1000.0f, 1000.0f));
+	models.push_back(box1);
+	models.push_back(box2);
+	
+	glEnable(GL_CULL_FACE);
+	//glCullFace(GL_BACK);
+	//glCullFace(GL_FRONT_AND_BACK);
 }
 
 void BoxTest::update()
 {
-	box->transform.rotate(glm::vec3(1.0f, 1.0f, 0.0f), 2);
+	box2->transform.rotate(glm::vec3(1.0f, 1.0f, 0.0f), 22);
+	box1->transform.rotate(glm::vec3(1.0f, 1.0f, 0.0f), 2);
 }
 
 std::shared_ptr<Model> BoxTest::createBox()
@@ -101,9 +110,9 @@ std::shared_ptr<Model> BoxTest::createBox()
 	modelMat->setValue(glm::rotate(matModel, glm::radians(-10.0f), glm::vec3(1.0f, 0.0f, 0.0f)));
 
 	Mesh mesh(material, boxVao);
-	box = std::make_shared<Model>();
-	box->addMesh(std::make_shared<Mesh>(mesh));
-	return box;
+	box1 = std::make_shared<Model>();
+	box1->addMesh(std::make_shared<Mesh>(mesh));
+	return box1;
 }
 
 

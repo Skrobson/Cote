@@ -4,7 +4,6 @@
 
 
 #include "Window.h"
-#include "TextureTest.h"
 #include <GL\glew.h>
 #include <GLFW\glfw3.h>
 #include <FreeCamera.h>
@@ -15,10 +14,12 @@ int main()
 {
 
 	
-	//BoxTest test;
-	ModelTest test;
 	
+	ModelTest test;
 	test.work();
+
+	BoxTest btest;
+	btest.work();
 
 	return 0;
 }
