@@ -72,9 +72,10 @@ TextureTest::TextureTest()
 
 	cote::AssetManager manager;
 
-	model = manager.loadModel("../../Data/models/nanosuit.obj", program);
+	testModel = manager.loadModel("../../Data/models/nanosuit.obj", program);
 	
-	model->transform.setPos(glm::vec3(0.0, 0.0, -4.0));
+	testModel->transform.setPos(glm::vec3(0.0, -5.0, -8.0));
+	testModel->transform.setScale(glm::vec3(0.4, 0.4, 0.4));
 }
 
 
@@ -85,17 +86,17 @@ TextureTest::~TextureTest()
 
 void TextureTest::render()
 {
-	glm::mat4 matPos = glm::translate(glm::mat4(1.0f), glm::vec3(0.0, 0.0, -4.0));
+	glm::mat4 matPos = glm::translate(glm::mat4(1.0f), glm::vec3(0.0, -0.0, -1.0));
 
-	model->transform.rotate(glm::vec3(0.0f, 0.0f, 1.0f), -1.0f);
+	testModel->transform.rotate(glm::vec3(0.0f, 1.0f, 0.0f), -1.0f);
 
 	*modelMat = transform.rotate(glm::vec3(0.0f, 0.0f, 1.0f),  -1.0f);
 	
-	RenderCommand command(material, box, modelMat);
+	//RenderCommand command(material, box, modelMat);
 	//renderer.addCommandToQueue(std::make_shared<RenderCommand>(command));
 
 
-	model->render(renderer);
+	testModel->render(renderer);
 
 	renderer.render();
 }

@@ -39,6 +39,8 @@ std::shared_ptr<Model> cote::AssetManager::loadModel(const std::string & filePat
 
 		directory = filePath.substr(0, filePath.find_last_of('/') + 1);
 		auto meshes = processNode(aiScene->mRootNode, aiScene);
+		
+		std::cout << " End of loading, meshes: " << meshes.size() << std::endl;
 
 		auto model = std::make_shared<Model>(meshes);
 		models.insert(std::make_pair( filePath, model));
@@ -53,14 +55,23 @@ std::shared_ptr<Model> cote::AssetManager::loadModel(const std::string & filePat
 std::vector<std::shared_ptr<Mesh>> cote::AssetManager::processNode(aiNode * node, const aiScene * scene)
 {
 	std::vector<std::shared_ptr<Mesh>> meshes;
-	for (size_t i = 0; i < node->mNumMeshes; ++i) {
+
+	std::cout << " meshes " << node->mNumMeshes << std::endl;
+	for (size_t i = 0; i < node->mNumMeshes; ++i) 
+	{
+
+		std::cout << "nr mesh " << i << std::endl;
+
 		size_t index = node->mMeshes[i];
 		aiMesh* mesh = scene->mMeshes[index];
 		meshes.push_back(processMesh(mesh, scene));
 	}
+	std::cout << " nodes " << node->mNumChildren << std::endl;
 	for (size_t i = 0; i < node->mNumChildren; ++i) {
+		std::cout << "nr node " << i << std::endl;
+
 		auto vec = processNode(node->mChildren[i], scene);
-		meshes.assign(vec.begin(), vec.end());
+		meshes.insert(meshes.end(), vec.begin(), vec.end());
 	}
 	return meshes;
 }
@@ -85,22 +96,19 @@ std::shared_ptr<Mesh> cote::AssetManager::processMesh(aiMesh * mesh, const aiSce
 			normals.push_back( vec);
 		}
 
-		
-			
-		//if (mesh->mTextureCoords[0])
-		//{
-		//	glm::vec2 vec;
-		//	vec.x = mesh->mTextureCoords[0][i].x;
-		//	vec.y = mesh->mTextureCoords[0][i].y;
-		//	uvs.push_back( vec);
-		//}
-		
 		//bitangens etc
 	}
 
 	std::vector<aiVector3D> aiVec;
 
 	std::copy(mesh->mTextureCoords[0], mesh->mTextureCoords[0] + mesh->mNumVertices, std::back_inserter(aiVec));
+	for (auto uv : aiVec) 
+	{
+		glm::vec2 tc;
+		tc.x = uv.x;
+		tc.y = uv.y;
+		uvs.push_back(tc);
+	}
 
 	for (GLuint i = 0; i<mesh->mNumFaces; i++)
 	{
@@ -130,7 +138,7 @@ std::shared_ptr<Mesh> cote::AssetManager::processMesh(aiMesh * mesh, const aiSce
 	
 	if (mesh->mMaterialIndex >= 0) {
 		aiMaterial* aiMat = scene->mMaterials[mesh->mMaterialIndex];
-		auto tex = loadTexture(aiMat, aiTextureType_DIFFUSE, TEX_DIFFUSE);
+		auto tex = loadTexture(aiMat, aiTextureType_DIFFUSE, "texture_diffuse1");
 		if (tex) material->addTexture(tex);
 		
 		auto tex2 = loadTexture(aiMat, aiTextureType_SPECULAR, TEX_SPECULAR);
@@ -156,7 +164,7 @@ std::shared_ptr<Texture> cote::AssetManager::loadTexture( aiMaterial * material,
 		{
 			Bitmap bitmap = cote::graphic::Bitmap(tmp);
 			std::shared_ptr<Texture> texture = std::make_shared<Texture2d>(bitmap);
-
+			texture->setSamplerName(typeName);
 			textures.insert(std::make_pair(tmp, texture));
 			return texture;
 		}

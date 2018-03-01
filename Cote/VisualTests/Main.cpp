@@ -49,14 +49,17 @@ int main()
 	glEnable(GL_DEPTH_TEST);
 	
 	glEnable(GL_CULL_FACE);
+	glCullFace(GL_BACK);
 	//glCullFace(GL_FRONT_AND_BACK);
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	TextureTest test;
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	//glEnable(GL_ALPHA);
+	TextureTest test;
+	
 	while (glfwWindowShouldClose(*window) == false) {
 		glfwPollEvents();
 
-		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		//glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
 		//glActiveTexture(GL_TEXTURE0);

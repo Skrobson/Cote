@@ -1,5 +1,5 @@
 #include "Model.h"
-
+#include <iostream>
 using namespace cote::graphic;
 
 Model::Model()
@@ -24,5 +24,5 @@ void cote::graphic::Model::render(Renderer& renderer)
 		//RenderCommand command(mesh->getMaterial(), mesh->getVAO(), model);
 		renderer.addCommandToQueue(std::make_shared<RenderCommand>(mesh->getMaterial(), mesh->getVAO(), model));
 	}
-	
+
 }

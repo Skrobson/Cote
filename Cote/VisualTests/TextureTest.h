@@ -53,6 +53,6 @@ private:
 	glm::mat4 view;
 	glm::mat4 projection;
 
-	std::shared_ptr<Model> model;
+	std::shared_ptr<Model> testModel;
 };
 
