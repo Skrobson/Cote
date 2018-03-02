@@ -122,11 +122,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ATest.cpp" />
+    <ClCompile Include="BoxTest.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="TextureTest.cpp" />
+    <ClCompile Include="ModelTest.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="TextureTest.h" />
+    <ClInclude Include="ATest.h" />
+    <ClInclude Include="BoxTest.h" />
+    <ClInclude Include="ModelTest.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

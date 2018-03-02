@@ -136,17 +136,23 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ABuffer.cpp" />
+    <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="FreeCamera.cpp" />
     <ClCompile Include="GLerror.cpp" />
     <ClCompile Include="GlException.cpp" />
     <ClCompile Include="Bitmap.cpp" />
     <ClCompile Include="Input.cpp" />
-    <ClCompile Include="Log.cpp" />
+    <ClCompile Include="Material.cpp" />
+    <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="Model.cpp" />
+    <ClCompile Include="RenderCommand.cpp" />
+    <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="RenderState.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureFactory.cpp" />
-    <ClCompile Include="Textureold.cpp" />
+    <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Uniform.cpp" />
     <ClCompile Include="VertexAttribute.cpp" />
     <ClCompile Include="VertexAttributeLayout.cpp" />
@@ -158,15 +164,21 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ABuffer.h" />
+    <ClInclude Include="AssetManager.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="FreeCamera.h" />
     <ClInclude Include="GlException.h" />
     <ClInclude Include="Bitmap.h" />
     <ClInclude Include="Input.h" />
-    <ClInclude Include="Log.h" />
+    <ClInclude Include="Material.h" />
+    <ClInclude Include="Mesh.h" />
+    <ClInclude Include="Model.h" />
+    <ClInclude Include="RenderCommand.h" />
+    <ClInclude Include="Renderer.h" />
+    <ClInclude Include="RenderState.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureFactory.h" />
-    <ClInclude Include="Textureold.h" />
+    <ClInclude Include="Transform.h" />
     <ClInclude Include="Uniform.h" />
     <ClInclude Include="VertexAttribute.h" />
     <ClInclude Include="VertexAttributeLayout.h" />

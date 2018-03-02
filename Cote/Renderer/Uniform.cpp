@@ -2,7 +2,11 @@
 
 using namespace cote::graphic;
 
-void Uniform::searchForUniformLocation(std::shared_ptr<const ShaderProgram> program, const std::string & uniformName)
+cote::graphic::Uniform::Uniform(std::string name): uniformName(name)
+{
+}
+
+void Uniform::searchForUniformLocation(std::shared_ptr<const ShaderProgram> program) 
 {
 	auto location = glGetUniformLocation(program->getProgramID(), uniformName.c_str());
 	uniformLocations.insert_or_assign(program, location);

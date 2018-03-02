@@ -19,6 +19,16 @@ unsigned Texture::getTextureID()
 	return *handler;
 }
 
+void cote::graphic::Texture::setSamplerName(const std::string & type)
+{
+	this->samplerName = type;
+}
+
+std::string cote::graphic::Texture::getSamplerName() const
+{
+	return samplerName;
+}
+
 void Texture::bind(unsigned slot)
 {
 	glActiveTexture(GL_TEXTURE0 + slot);
