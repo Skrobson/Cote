@@ -1,6 +1,7 @@
 #include "FreeCamera.h"
 #include <cmath>
 
+using namespace cote;
 
 FreeCamera::FreeCamera(const glm::vec3& cameraPos, const glm::vec3& cameraDirection, std::shared_ptr< Window> window) :Camera(cameraPos,cameraDirection,window->getFrameX(),window->getFrameY(),PERSPECTIVE),
 	mInput(new InputHandler(window)),mSpeed(20.0f)

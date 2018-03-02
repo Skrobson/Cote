@@ -19,12 +19,6 @@
     <Filter Include="Header Files\Graphic">
       <UniqueIdentifier>{86860963-d465-4abb-9af9-73732b5e7d71}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Old">
-      <UniqueIdentifier>{5f5879b5-abec-4fc6-829c-0e532c3cd67a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Old">
-      <UniqueIdentifier>{dcd2ad50-9368-42ce-91cc-2d4c6252b70b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Graphic\API">
       <UniqueIdentifier>{804c3315-d245-4583-a43c-1931e37ad374}</UniqueIdentifier>
     </Filter>
@@ -63,18 +57,6 @@
     <ClCompile Include="Bitmap.cpp">
       <Filter>Source Files\Graphic</Filter>
     </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>Source Files\Old</Filter>
-    </ClCompile>
-    <ClCompile Include="FreeCamera.cpp">
-      <Filter>Source Files\Old</Filter>
-    </ClCompile>
-    <ClCompile Include="Input.cpp">
-      <Filter>Source Files\Old</Filter>
-    </ClCompile>
-    <ClCompile Include="Window.cpp">
-      <Filter>Source Files\Old</Filter>
-    </ClCompile>
     <ClCompile Include="VertexAttribute.cpp">
       <Filter>Source Files\Graphic\API</Filter>
     </ClCompile>
@@ -111,6 +93,18 @@
     <ClCompile Include="GlError.cpp">
       <Filter>Source Files\Graphic\API</Filter>
     </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FreeCamera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VertexBuffer.h">
@@ -142,18 +136,6 @@
     </ClInclude>
     <ClInclude Include="Bitmap.h">
       <Filter>Header Files\Graphic</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Header Files\Old</Filter>
-    </ClInclude>
-    <ClInclude Include="FreeCamera.h">
-      <Filter>Header Files\Old</Filter>
-    </ClInclude>
-    <ClInclude Include="Input.h">
-      <Filter>Header Files\Old</Filter>
-    </ClInclude>
-    <ClInclude Include="Window.h">
-      <Filter>Header Files\Old</Filter>
     </ClInclude>
     <ClInclude Include="VertexAttribute.h">
       <Filter>Header Files\Graphic\API</Filter>
@@ -190,6 +172,18 @@
     </ClInclude>
     <ClInclude Include="GlError.h">
       <Filter>Header Files\Graphic\API</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FreeCamera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

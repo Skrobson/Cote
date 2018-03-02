@@ -1,7 +1,7 @@
 #include "Window.h"
 
 
-
+using namespace cote;
 
 Window::Window(int width, int height, const std::string & title):mWidth(width),mHeight(height),mTitle(title), window(nullptr)
 {

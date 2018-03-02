@@ -2,7 +2,7 @@
 
 
 
-
+using namespace cote;
 
 Camera::Camera(const glm::vec3& cameraPos, const glm::vec3& cameraDirection, int frameX, int frameY, Projection projection) :mCameraPos(cameraPos),mCameraDirection(cameraDirection),mWorldUp(0.0f,1.0f,0.0f)
 {
