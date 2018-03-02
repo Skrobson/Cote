@@ -102,15 +102,6 @@ std::shared_ptr<Mesh> cote::AssetManager::processMesh(aiMesh * mesh, const aiSce
 		std::copy(face.mIndices, face.mIndices + face.mNumIndices, std::back_inserter(indicies));
 	});
 
-	for (GLuint i = 0; i<mesh->mNumFaces; i++)
-	{
-		aiFace face = mesh->mFaces[i];
-		for (size_t j = 0; j<face.mNumIndices; j++)
-		{
-			indicies.push_back(face.mIndices[j]);
-		}
-	}
-
 	auto pos = std::make_shared<cote::graphic::VertexAttribute3f>(cote::graphic::VertexAttributeIndex::POSITION, positions);
 	auto uv = std::make_shared<cote::graphic::VertexAttribute2f>(cote::graphic::VertexAttributeIndex::UV_0, uvs);
 	auto norm = std::make_shared<cote::graphic::VertexAttribute3f>(cote::graphic::VertexAttributeIndex::NORMAL, normals);
@@ -174,7 +165,6 @@ std::shared_ptr<Texture> cote::AssetManager::loadTexture( aiMaterial * material,
 			}
 			else
 				return texIt->second;
-
 		}
 	}	
 }
