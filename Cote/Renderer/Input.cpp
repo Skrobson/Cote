@@ -1,6 +1,8 @@
 #include "Input.h"
 #include  <stdexcept>
 
+using namespace cote;
+
 std::array<bool, InputHandler::KEY_RANGE>  InputHandler::mKeys = { false };
 std::array<bool, InputHandler::KEY_MODIFIER_RANGE> InputHandler::mKeyModifiers = { false };
 std::array<bool, InputHandler::MOUSE_BUTTONS_RANGE> InputHandler::mMouseButtons = { false };
@@ -10,7 +12,7 @@ double InputHandler::mYpos = 0;
 double InputHandler::mXscroll=0;
 double InputHandler::mYscroll=0;
 
-InputHandler::InputHandler(Window * window):mWindow(window)
+InputHandler::InputHandler(std::shared_ptr< Window> window) : mWindow(window)
 {
 	glfwSetKeyCallback(*mWindow, key_callback);
 	glfwSetCursorPosCallback(*mWindow, cursor_position_callback);

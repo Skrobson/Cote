@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -25,7 +25,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
@@ -33,20 +33,20 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -71,8 +71,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)\bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\bin\Intermiediates\$(Platform)\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)\..\3rdParty\Simple OpenGL Image Library\src;$(SolutionDir)\..\3rdParty\glm\glm;$(SolutionDir)\..\3rdParty\glfw-3.2.1.bin.WIN32\include;$(SolutionDir)\..\3rdParty\FreeImage\Dist\x32;$(SolutionDir)\..\3rdParty\glew-2.0.0\include;$(SolutionDir)\..\3rdParty\assimp\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)\..\3rdParty\Simple OpenGL Image Library\lib;$(SolutionDir)\..\3rdParty\assimp\lib32;$(SolutionDir)\..\3rdParty\FreeImage\Dist\x32;$(SolutionDir)\..\3rdParty\glfw-3.2.1.bin.WIN32\lib-vc2015;$(SolutionDir)\..\3rdParty\glew-2.0.0\lib\Release\Win32;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)\..\3rdParty\Simple OpenGL Image Library\src;$(SolutionDir)\..\3rdParty\glm\glm;$(SolutionDir)\..\3rdParty\glfw-3.2.1.bin.WIN32\include;$(SolutionDir)\..\3rdParty\FreeImage\Dist\x32;$(SolutionDir)\..\3rdParty\glew-2.0.0\include;$(SolutionDir)\..\3rdParty\Skrobson_Logger\include;$(SolutionDir)\..\3rdParty\assimp\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\..\3rdParty\Skrobson_Logger\dist_x86\debug;$(SolutionDir)\..\3rdParty\Simple OpenGL Image Library\lib;$(SolutionDir)\..\3rdParty\assimp\lib32;$(SolutionDir)\..\3rdParty\FreeImage\Dist\x32;$(SolutionDir)\..\3rdParty\glfw-3.2.1.bin.WIN32\lib-vc2015;$(SolutionDir)\..\3rdParty\glew-2.0.0\lib\Release\Win32;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)\bin\$(Platform)\$(Configuration)\</OutDir>
@@ -136,20 +136,27 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ABuffer.cpp" />
+    <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="FreeCamera.cpp" />
-    <ClCompile Include="GLerror.cpp" />
+    <ClCompile Include="GlError.cpp" />
     <ClCompile Include="GlException.cpp" />
+    <ClCompile Include="Bitmap.cpp" />
     <ClCompile Include="Input.cpp" />
-    <ClCompile Include="Log.cpp" />
+    <ClCompile Include="Material.cpp" />
+    <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="Model.cpp" />
+    <ClCompile Include="RenderCommand.cpp" />
+    <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="RenderState.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
-    <ClCompile Include="Test.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureFactory.cpp" />
-    <ClCompile Include="Textureold.cpp" />
+    <ClCompile Include="Transform.cpp" />
+    <ClCompile Include="Uniform.cpp" />
+    <ClCompile Include="VertexAttribute.cpp" />
     <ClCompile Include="VertexAttributeLayout.cpp" />
     <ClCompile Include="ElementBuffer.cpp" />
-    <ClCompile Include="main.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="VertexBuffer.cpp" />
     <ClCompile Include="VertexArray.cpp" />
@@ -157,18 +164,26 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ABuffer.h" />
+    <ClInclude Include="AssetManager.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="FreeCamera.h" />
     <ClInclude Include="GlException.h" />
+    <ClInclude Include="Bitmap.h" />
     <ClInclude Include="Input.h" />
-    <ClInclude Include="Log.h" />
-    <ClInclude Include="Test.h" />
+    <ClInclude Include="Material.h" />
+    <ClInclude Include="Mesh.h" />
+    <ClInclude Include="Model.h" />
+    <ClInclude Include="RenderCommand.h" />
+    <ClInclude Include="Renderer.h" />
+    <ClInclude Include="RenderState.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureFactory.h" />
-    <ClInclude Include="Textureold.h" />
+    <ClInclude Include="Transform.h" />
+    <ClInclude Include="Uniform.h" />
+    <ClInclude Include="VertexAttribute.h" />
     <ClInclude Include="VertexAttributeLayout.h" />
     <ClInclude Include="Shader.h" />
-    <ClInclude Include="GLerror.h" />
+    <ClInclude Include="GlError.h" />
     <ClInclude Include="ShaderProgram.h" />
     <ClInclude Include="VertexBuffer.h" />
     <ClInclude Include="ElementBuffer.h" />

@@ -1,10 +1,9 @@
 #include "FreeCamera.h"
-//#include "DebugLog.h"
 #include <cmath>
 
+using namespace cote;
 
-FreeCamera::FreeCamera(glm::vec3 cameraPos, glm::vec3 cameraDirection,Window* window)
-	:Camera(cameraPos,cameraDirection,window->getFrameX(),window->getFrameY(),PERSPECTIVE),
+FreeCamera::FreeCamera(const glm::vec3& cameraPos, const glm::vec3& cameraDirection, std::shared_ptr< Window> window) :Camera(cameraPos,cameraDirection,window->getFrameX(),window->getFrameY(),PERSPECTIVE),
 	mInput(new InputHandler(window)),mSpeed(20.0f)
 {	
 	mPitch = 0;// asin(cameraDirection.y);
@@ -39,7 +38,9 @@ void FreeCamera::update()
 	if (mInput->keyEvent(GLFW_KEY_E))
 		move(cameraSpeed, CameraMove::DOWN);
 	//mouse
-	//issue pierwsze uzycie dziwnie przeskakuje, pozniej juz jest ok
+	
+
+	//issue pierwsze u¿ycie dziwnie przeskakuje, pozniej juz jest ok
 
 	if (mInput->mouseButtonEvent(GLFW_MOUSE_BUTTON_LEFT))
 	{

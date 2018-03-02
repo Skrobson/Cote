@@ -3,29 +3,35 @@
 #include <GLFW\glfw3.h>
 
 #include <iostream>
-class Window
+#include <memory>
+
+namespace cote
 {
-public:
-	Window(int mWidth, int height, const std::string& title);
-
-	inline const int& getFrameX() const {
-		return mWidth;
-	}
-
-	inline const int& getFrameY() const {
-		return mHeight;
-	}
-	inline GLFWwindow* getWindow() {
-		return mWindow;
-	}
-	inline operator GLFWwindow*() {
-		return mWindow;
-	}
-	~Window();
-private:
-	bool init();
-	GLFWwindow* mWindow;
-	int mWidth, mHeight;
-	std::string mTitle;
-};
+	class Window
+	{
+	public:
+		Window(int mWidth, int height, const std::string& title);
+	
+		inline const int& getFrameX() const {
+			return mWidth;
+		}
+	
+		inline const int& getFrameY() const {
+			return mHeight;
+		}
+	
+		inline const GLFWwindow* getWindow()const {
+			return &(*window);
+		}
+		inline operator GLFWwindow*() {
+			return &(*window);
+		}
+	
+	private: 
+		bool init();
+		std::shared_ptr<GLFWwindow> window;
+		int mWidth, mHeight; 
+		std::string mTitle;
+	};
+}
 

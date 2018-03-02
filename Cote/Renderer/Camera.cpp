@@ -2,10 +2,9 @@
 
 
 
+using namespace cote;
 
-
-Camera::Camera(glm::vec3 cameraPos, glm::vec3 cameraDirection, const int& frameX, const int& frameY, Projection projection)
-	:mCameraPos(cameraPos),mCameraDirection(cameraDirection),mWorldUp(0.0f,1.0f,0.0f)
+Camera::Camera(const glm::vec3& cameraPos, const glm::vec3& cameraDirection, int frameX, int frameY, Projection projection) :mCameraPos(cameraPos),mCameraDirection(cameraDirection),mWorldUp(0.0f,1.0f,0.0f)
 {
 	//mCameraDirection= glm::normalize(mCameraPos - mCameraDirection);
 	mCameraRight = glm::normalize(glm::cross(mWorldUp, mCameraDirection));

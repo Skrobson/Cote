@@ -13,12 +13,16 @@ Shader::Shader()
 	makeHandler();
 }
 
+
 Shader::Shader(const std::string & filename, ShaderType type)
 {
 	makeHandler();
 	loadFromFile(filename, type);
 }
 
+/**
+* @throws GlException
+*/
 Shader::Shader(ShaderType type, const std::string & source)
 {
 	makeHandler();
@@ -33,7 +37,10 @@ std::shared_ptr<Shader> cote::graphic::Shader::createVertexShader(const std::str
 
 
 
-
+/**
+ * @throws std::exception
+ * @throws GlException
+ */
 void Shader::loadFromFile(const char * filename, ShaderType shaderType)
 {
 	std::fstream file;
@@ -43,8 +50,7 @@ void Shader::loadFromFile(const char * filename, ShaderType shaderType)
 	{
 		std::string error("Failed to open shader file");
 		error += filename;
-		throw(std::runtime_error(error.c_str()));
-		return;
+		throw(std::exception(error.c_str()));
 	}
 
 	std::stringstream sstream;
@@ -57,6 +63,10 @@ void Shader::loadFromFile(const char * filename, ShaderType shaderType)
 	createFromSource(source, shaderType);
 }
 
+/**
+* @throws GlException
+* @throws std::exception
+*/
 void Shader::loadFromFile(const std::string & filename, ShaderType type)
 {
 	loadFromFile(filename.c_str(), type);
@@ -64,7 +74,7 @@ void Shader::loadFromFile(const std::string & filename, ShaderType type)
 
 void cote::graphic::Shader::makeHandler()
 {
-	mShaderID = std::shared_ptr<unsigned>(new unsigned(), [](unsigned * handler) {
+	shaderID = std::shared_ptr<unsigned>(new unsigned(), [](unsigned * handler) {
 		glDeleteShader(*handler);
 		delete handler;
 	});
@@ -75,25 +85,27 @@ std::shared_ptr<Shader> cote::graphic::Shader::createFragmentShader(const std::s
 	return std::make_shared<Shader>(ShaderType::FRAGMENT_SHADER,source);
 }
 
+/**
+ * @throws GlException
+ */
 void Shader::createFromSource(const std::string & text, ShaderType type)
 {
 	GLint success;
 	GLchar errBuffer[512];
 
 	const GLchar * shaderText = text.c_str();
-	*mShaderID= glCreateShader(type);
+	*shaderID= glCreateShader(type);
 	
-	glShaderSource(*mShaderID, 1, &shaderText, NULL);
-	glCompileShader(*mShaderID);
-	glGetShaderiv(*mShaderID, GL_COMPILE_STATUS, &success);
+	glShaderSource(*shaderID, 1, &shaderText, NULL);
+	glCompileShader(*shaderID);
+	glGetShaderiv(*shaderID, GL_COMPILE_STATUS, &success);
 
-		if (!success)
+	if (!success)
 	{
-		glGetShaderInfoLog(*mShaderID, sizeof(errBuffer), NULL, errBuffer);
+		glGetShaderInfoLog(*shaderID, sizeof(errBuffer), NULL, errBuffer);
 		std::string error("Failed to compile shader from source: ");
 		error += errBuffer;
-		//throw(GLerror(error));
-		return ;
+		throw(GlException(error));
 	}
-	mbCompiled = true;
+	compiled = true;
 }

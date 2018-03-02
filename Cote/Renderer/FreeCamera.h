@@ -3,40 +3,44 @@
 #include "Window.h"
 #include "Input.h"
 
-enum CameraMove {
-	UP,
-	DOWN,
-	RIGHT,
-	LEFT,
-	FORWARD,
-	BACKWARD
-
-};
-
-/**Prototype class for tests */
-class FreeCamera :
-	public Camera
+namespace cote
 {
-public:
-	FreeCamera(glm::vec3 cameraPos, glm::vec3 cameraDirection,Window* window);
+	enum CameraMove {
+		UP,
+		DOWN,
+		RIGHT,
+		LEFT,
+		FORWARD,
+		BACKWARD
 
-	virtual void update() override;
-	glm::mat4 move(GLfloat delta, CameraMove direction);
+	};
 
-	inline void setSpeed(GLfloat speed) {
-		mSpeed = speed;
-	}
-	~FreeCamera();
-private:
-	GLfloat mSpeed;
-	InputHandler* mInput;
+	/**Prototype class for tests */
+	class FreeCamera :
+		public Camera
+	{
+	public:
+		FreeCamera(const glm::vec3& cameraPos, const glm::vec3& cameraDirection, std::shared_ptr< Window> window);
 
-	GLfloat deltaTime = 0.0f;	// Time between current frame and last frame
-	GLfloat lastFrame = 0.0f;
+		virtual void update() override;
+		glm::mat4 move(GLfloat delta, CameraMove direction);
 
-	GLfloat mLastX , mLastY;
-	GLfloat mYaw = 0, mPitch = 0;
-	bool mFirstMouseUse = true;
+		inline void setSpeed(GLfloat speed) {
+			mSpeed = speed;
+		}
+		~FreeCamera();
+	private:
+		GLfloat mSpeed;
+		InputHandler* mInput;
 
-};
+		GLfloat deltaTime = 0.0f;	// Time between current frame and last frame
+		GLfloat lastFrame = 0.0f;
+
+		GLfloat mLastX, mLastY;
+		GLfloat mYaw = 0, mPitch = 0;
+		bool mFirstMouseUse = true;
+
+	};
+
+}
 
