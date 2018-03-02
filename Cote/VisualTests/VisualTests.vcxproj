@@ -70,8 +70,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)\Renderer;$(SolutionDir)\..\3rdParty\glm\glm;$(SolutionDir)\..\3rdParty\glfw-3.2.1.bin.WIN32\include;$(SolutionDir)\..\3rdParty\glew-2.0.0\include;$(SolutionDir)\..\3rdParty\FreeImage\Dist\x32;$(SolutionDir)\..\3rdParty\assimp\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)\bin\Win32\Debug;$(SolutionDir)\..\3rdParty\glfw-3.2.1.bin.WIN32\lib-vc2015;$(SolutionDir)\..\3rdParty\glew-2.0.0\lib\Release\Win32;$(SolutionDir)\..\3rdParty\FreeImage\Dist\x32;$(SolutionDir)\..\3rdParty\assimp\lib32;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)\Renderer;$(SolutionDir)\..\3rdParty\glm\glm;$(SolutionDir)\..\3rdParty\Skrobson_Logger\include;$(SolutionDir)\..\3rdParty\glfw-3.2.1.bin.WIN32\include;$(SolutionDir)\..\3rdParty\glew-2.0.0\include;$(SolutionDir)\..\3rdParty\FreeImage\Dist\x32;$(SolutionDir)\..\3rdParty\assimp\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\bin\Win32\Debug;$(SolutionDir)\..\3rdParty\Skrobson_Logger\dist_x86\debug;$(SolutionDir)\..\3rdParty\glfw-3.2.1.bin.WIN32\lib-vc2015;$(SolutionDir)\..\3rdParty\glew-2.0.0\lib\Release\Win32;$(SolutionDir)\..\3rdParty\FreeImage\Dist\x32;$(SolutionDir)\..\3rdParty\assimp\lib32;$(LibraryPath)</LibraryPath>
     <SourcePath>$(SourcePath)</SourcePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -82,7 +82,7 @@
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>glew32.lib;glfw3dll.lib;opengl32.lib;freeimage.lib;assimp.lib;zlibstatic.lib;Renderer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Logger.lib;glew32.lib;glfw3dll.lib;opengl32.lib;freeimage.lib;assimp.lib;zlibstatic.lib;Renderer.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

@@ -2,10 +2,9 @@
 
 
 #include <iostream>
-
+#include <GlobalLogger.h>
 #include <algorithm>
 #include <iterator>
-
 using namespace cote::graphic;
 using namespace cote;
 
@@ -40,10 +39,11 @@ std::shared_ptr<Model> cote::AssetManager::loadModel(const std::string & filePat
 		directory = filePath.substr(0, filePath.find_last_of('/') + 1);
 		auto meshes = processNode(aiScene->mRootNode, aiScene);
 		
-		std::cout << " End of loading, meshes: " << meshes.size() << std::endl;
-
 		auto model = std::make_shared<Model>(meshes);
 		models.insert(std::make_pair( filePath, model));
+
+		DEBUG_LOG("model", filePath, "loaded");
+
 		return model;
 	}
 	else
@@ -56,19 +56,15 @@ std::vector<std::shared_ptr<Mesh>> cote::AssetManager::processNode(aiNode * node
 {
 	std::vector<std::shared_ptr<Mesh>> meshes;
 
-	std::cout << " meshes " << node->mNumMeshes << std::endl;
 	for (size_t i = 0; i < node->mNumMeshes; ++i) 
 	{
 
-		std::cout << "nr mesh " << i << std::endl;
 
 		size_t index = node->mMeshes[i];
 		aiMesh* mesh = scene->mMeshes[index];
 		meshes.push_back(processMesh(mesh, scene));
 	}
-	std::cout << " nodes " << node->mNumChildren << std::endl;
 	for (size_t i = 0; i < node->mNumChildren; ++i) {
-		std::cout << "nr node " << i << std::endl;
 
 		auto vec = processNode(node->mChildren[i], scene);
 		meshes.insert(meshes.end(), vec.begin(), vec.end());
@@ -128,8 +124,16 @@ std::shared_ptr<Mesh> cote::AssetManager::processMesh(aiMesh * mesh, const aiSce
 	vLayout.pushVertexAttribute(norm);
 	vLayout.pushVertexAttribute(uv);
 
-
-	auto vertexArray = std::make_shared<cote::graphic::VertexArray>(indicies, vLayout);
+	std::shared_ptr<VertexArray> vertexArray;
+	try
+	{
+		vertexArray = std::make_shared<cote::graphic::VertexArray>(indicies, vLayout);
+	}
+	catch (GlException & ex)
+	{
+		FATAL_ERROR_LOG(ex.what());
+		return nullptr;
+	}
 
 	auto material = std::make_shared<Material>(program);
 

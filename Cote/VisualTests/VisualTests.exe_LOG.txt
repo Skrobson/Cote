@@ -1,0 +1,12 @@
+[DEBUG]Fri Mar  2 11:22:24 2018 (main.cpp) test loga 
+
+[DEBUG]Fri Mar  2 11:47:33 2018 (main.cpp) test loga 
+
+[DEBUG]Fri Mar  2 11:50:16 2018 (main.cpp) test loga 
+
+[DEBUG]Fri Mar  2 11:51:46 2018 (main.cpp) test loga 
+
+[DEBUG]Fri Mar  2 11:52:28 2018 (main.cpp) test loga 
+
+[DEBUG]Fri Mar  2 11:52:31 2018 (assetmanager.cpp) model ../../Data/models/nanosuit.obj loaded 
+
