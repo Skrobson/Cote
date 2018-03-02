@@ -44,8 +44,7 @@ namespace cote
 		protected:
 
 			std::shared_ptr<unsigned> programID;
-			/**Na ta chwile mapa shaderow bedzie sie znajdowala w shader program, pozniej zostanie przeniesiona
-			do fabryki programow*/
+
 			std::vector<unsigned> attachedShaders;
 
 			bool linked = false;

@@ -36,9 +36,6 @@
     <ClCompile Include="ElementBuffer.cpp">
       <Filter>Source Files\Graphic\API</Filter>
     </ClCompile>
-    <ClCompile Include="GLerror.cpp">
-      <Filter>Source Files\Graphic\API</Filter>
-    </ClCompile>
     <ClCompile Include="Shader.cpp">
       <Filter>Source Files\Graphic\API</Filter>
     </ClCompile>
@@ -111,15 +108,15 @@
     <ClCompile Include="AssetManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GlError.cpp">
+      <Filter>Source Files\Graphic\API</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VertexBuffer.h">
       <Filter>Header Files\Graphic\API</Filter>
     </ClInclude>
     <ClInclude Include="ElementBuffer.h">
-      <Filter>Header Files\Graphic\API</Filter>
-    </ClInclude>
-    <ClInclude Include="GLerror.h">
       <Filter>Header Files\Graphic\API</Filter>
     </ClInclude>
     <ClInclude Include="Shader.h">
@@ -190,6 +187,9 @@
     </ClInclude>
     <ClInclude Include="AssetManager.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GlError.h">
+      <Filter>Header Files\Graphic\API</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,9 +1,9 @@
 #pragma once
 #include <gl\glew.h>
 #include <string>
-#include <exception>
-#include "GLerror.h"
 #include <memory>
+#include "GlError.h"
+#include "GlException.h"
 
 namespace cote
 {

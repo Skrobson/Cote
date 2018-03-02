@@ -1,6 +1,6 @@
 #include "Texture.h"
-#include <iostream>
-
+#include "GlError.h"
+#include "GlException.h"
 using namespace cote::graphic;
 
 
@@ -61,6 +61,7 @@ Texture::~Texture()
 cote::graphic::Texture2d::Texture2d(size_t width, size_t height, const unsigned char * data):Texture(width,height)
 {
 	glBindTexture(GL_TEXTURE_2D, *handler);
+	GlError error;
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	// Set texture wrapping to GL_REPEAT
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -68,8 +69,14 @@ cote::graphic::Texture2d::Texture2d(size_t width, size_t height, const unsigned 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 
+	if (error.check())
+		throw GlException(error.getError());
+
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_BGRA, GL_UNSIGNED_BYTE, (GLvoid*)data);
 	glGenerateMipmap(GL_TEXTURE_2D);
+
+	if (error.check())
+		throw GlException(error.getError());
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 }

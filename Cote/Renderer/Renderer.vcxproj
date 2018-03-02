@@ -139,7 +139,7 @@
     <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="FreeCamera.cpp" />
-    <ClCompile Include="GLerror.cpp" />
+    <ClCompile Include="GlError.cpp" />
     <ClCompile Include="GlException.cpp" />
     <ClCompile Include="Bitmap.cpp" />
     <ClCompile Include="Input.cpp" />
@@ -183,7 +183,7 @@
     <ClInclude Include="VertexAttribute.h" />
     <ClInclude Include="VertexAttributeLayout.h" />
     <ClInclude Include="Shader.h" />
-    <ClInclude Include="GLerror.h" />
+    <ClInclude Include="GlError.h" />
     <ClInclude Include="ShaderProgram.h" />
     <ClInclude Include="VertexBuffer.h" />
     <ClInclude Include="ElementBuffer.h" />

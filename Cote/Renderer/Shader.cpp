@@ -44,7 +44,6 @@ void Shader::loadFromFile(const char * filename, ShaderType shaderType)
 		std::string error("Failed to open shader file");
 		error += filename;
 		throw(std::exception(error.c_str()));
-		return;
 	}
 
 	std::stringstream sstream;
@@ -87,13 +86,12 @@ void Shader::createFromSource(const std::string & text, ShaderType type)
 	glCompileShader(*shaderID);
 	glGetShaderiv(*shaderID, GL_COMPILE_STATUS, &success);
 
-		if (!success)
+	if (!success)
 	{
 		glGetShaderInfoLog(*shaderID, sizeof(errBuffer), NULL, errBuffer);
 		std::string error("Failed to compile shader from source: ");
 		error += errBuffer;
-		//throw(GLerror(error));
-		return ;
+		throw(GlException(error));
 	}
 	compiled = true;
 }
