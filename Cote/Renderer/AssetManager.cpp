@@ -56,19 +56,17 @@ std::vector<std::shared_ptr<Mesh>> cote::AssetManager::processNode(aiNode * node
 {
 	std::vector<std::shared_ptr<Mesh>> meshes;
 
-	for (size_t i = 0; i < node->mNumMeshes; ++i) 
+	std::for_each(node->mMeshes, node->mMeshes + node->mNumMeshes, [&](size_t index)
 	{
-
-
-		size_t index = node->mMeshes[i];
-		aiMesh* mesh = scene->mMeshes[index];
-		meshes.push_back(processMesh(mesh, scene));
-	}
-	for (size_t i = 0; i < node->mNumChildren; ++i) {
-
-		auto vec = processNode(node->mChildren[i], scene);
+		meshes.push_back(processMesh( scene->mMeshes[index], scene));
+	});
+	
+	std::for_each(node->mChildren, node->mChildren + node->mNumChildren, [&](aiNode * node)
+	{
+		auto vec = processNode(node, scene);
 		meshes.insert(meshes.end(), vec.begin(), vec.end());
-	}
+	});
+
 	return meshes;
 }
 
@@ -79,32 +77,30 @@ std::shared_ptr<Mesh> cote::AssetManager::processMesh(aiMesh * mesh, const aiSce
 	std::vector<glm::vec2> uvs;
 	std::vector<unsigned> indicies;
 
-	for (GLuint i = 0; i < mesh->mNumVertices; ++i) 
+	auto numVertices = mesh->mNumVertices;
+
+	auto vector3dConversion = [](const aiVector3D & aiVec)->glm::vec3
 	{
-		aiVector3D currentAiVec = mesh->mVertices[i];
-		glm::vec3 vec(currentAiVec.x, currentAiVec.y, currentAiVec.z);
-		positions.push_back( vec);
+		return glm::vec3(aiVec.x, aiVec.y, aiVec.z);
+	};
 
-		if (mesh->mNormals) {
-
-			currentAiVec = mesh->mNormals[i];
-			vec = glm::vec3(currentAiVec.x, currentAiVec.y, currentAiVec.z);
-			normals.push_back( vec);
-		}
+	std::transform(mesh->mVertices, mesh->mVertices + numVertices, std::back_inserter(positions),vector3dConversion);
+	std::transform(mesh->mNormals, mesh->mNormals + numVertices, std::back_inserter(normals), vector3dConversion);
 
 		//bitangens etc
-	}
-
-	std::vector<aiVector3D> aiVec;
-
-	std::copy(mesh->mTextureCoords[0], mesh->mTextureCoords[0] + mesh->mNumVertices, std::back_inserter(aiVec));
-	for (auto uv : aiVec) 
+	
+	std::transform(mesh->mTextureCoords[0], mesh->mTextureCoords[0] + mesh->mNumVertices, std::back_inserter(uvs), [](const aiVector3D & aiUv)->glm::vec2
 	{
-		glm::vec2 tc;
-		tc.x = uv.x;
-		tc.y = uv.y;
-		uvs.push_back(tc);
-	}
+		glm::vec2 uv;
+		uv.x = aiUv.x;
+		uv.y = aiUv.y;
+		return uv;
+	});
+
+	std::for_each(mesh->mFaces, mesh->mFaces + mesh->mNumFaces, [& indicies](const aiFace& face)
+	{
+		std::copy(face.mIndices, face.mIndices + face.mNumIndices, std::back_inserter(indicies));
+	});
 
 	for (GLuint i = 0; i<mesh->mNumFaces; i++)
 	{
@@ -140,6 +136,7 @@ std::shared_ptr<Mesh> cote::AssetManager::processMesh(aiMesh * mesh, const aiSce
 	auto newMesh = std::make_shared<Mesh>(material, vertexArray);
 	newMesh->setName(mesh->mName.C_Str());
 	
+	//refactor
 	if (mesh->mMaterialIndex >= 0) {
 		aiMaterial* aiMat = scene->mMaterials[mesh->mMaterialIndex];
 		auto tex = loadTexture(aiMat, aiTextureType_DIFFUSE, "texture_diffuse1");
