@@ -51,6 +51,7 @@ ATest::~ATest()
 {
 	delete window;
 	delete camera;
+	glfwTerminate();
 }
 
 void ATest::render()
