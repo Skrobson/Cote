@@ -243,3 +243,4 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+/Cote/VisualTests/VisualTests.exe_LOG.txt
