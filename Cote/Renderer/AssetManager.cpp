@@ -152,25 +152,28 @@ std::shared_ptr<Mesh> cote::AssetManager::processMesh(aiMesh * mesh, const aiSce
 std::shared_ptr<Texture> cote::AssetManager::loadTexture( aiMaterial * material, aiTextureType type, std::string typeName)
 {
 	size_t size = material->GetTextureCount(type);
-	for (size_t i = 0; i < size; ++i)
+	if (size <= 0) return nullptr;
+	else
 	{
-		aiString name;
-		material->GetTexture(type, i, &name);
-		std::string tmp = directory;
-		tmp += name.C_Str();
-
-		auto texIt = textures.find(tmp);
-		if (texIt == textures.end())
+		for (size_t i = 0; i < size; ++i)
 		{
-			Bitmap bitmap = cote::graphic::Bitmap(tmp);
-			std::shared_ptr<Texture> texture = std::make_shared<Texture2d>(bitmap);
-			texture->setSamplerName(typeName);
-			textures.insert(std::make_pair(tmp, texture));
-			return texture;
+			aiString name;
+			material->GetTexture(type, i, &name);
+			std::string tmp = directory;
+			tmp += name.C_Str();
+
+			auto texIt = textures.find(tmp);
+			if (texIt == textures.end())
+			{
+				Bitmap bitmap = cote::graphic::Bitmap(tmp);
+				std::shared_ptr<Texture> texture = std::make_shared<Texture2d>(bitmap);
+				texture->setSamplerName(typeName);
+				textures.insert(std::make_pair(tmp, texture));
+				return texture;
+			}
+			else
+				return texIt->second;
+
 		}
-		else
-			return texIt->second;
-
-	}
-
+	}	
 }

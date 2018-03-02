@@ -37,9 +37,9 @@ public:
 	virtual void work();
 protected:
 	Renderer renderer;
-	Window* window;
+	std::shared_ptr< Window> window;
 
-	FreeCamera*  camera;
+	std::shared_ptr< FreeCamera>  camera;
 	cote::AssetManager manager;
 
 	std::vector<std::shared_ptr<Model>> models;

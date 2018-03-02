@@ -3,6 +3,7 @@
 #include <GLFW\glfw3.h>
 
 #include <iostream>
+#include <memory>
 class Window
 {
 public:
@@ -15,17 +16,18 @@ public:
 	inline const int& getFrameY() const {
 		return mHeight;
 	}
-	inline GLFWwindow* getWindow() {
-		return mWindow;
+
+	inline const GLFWwindow* getWindow()const {
+		return &(*window);
 	}
 	inline operator GLFWwindow*() {
-		return mWindow;
+		return &(*window);
 	}
-	~Window();
-private:
+
+private: 
 	bool init();
-	GLFWwindow* mWindow;
-	int mWidth, mHeight;
+	std::shared_ptr<GLFWwindow> window;
+	int mWidth, mHeight; 
 	std::string mTitle;
 };
 

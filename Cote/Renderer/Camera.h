@@ -15,7 +15,7 @@ public:
 		PERSPECTIVE,
 		ORTHOGRAPHIC
 	};
-	Camera(glm::vec3 cameraPos, glm::vec3 cameraDirection,const int& frameX,const int& frameY, Projection projection);
+	Camera(const glm::vec3& cameraPos, const glm::vec3& cameraDirection,int frameX,int frameY, Projection projection);
 	glm::mat4 translate(glm::vec3 translation);
 	//zostanie przeniesione na wyzszy poziom
 	

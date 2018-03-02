@@ -5,6 +5,7 @@
 #include <array>
 
 #include "Window.h"
+#include <memory>
 
 //narazie odpowiedzialny za mysz i klawiature
 //z powodu glfwCallback funkcje i tablice musza byc statyczne
@@ -13,7 +14,7 @@
 class InputHandler
 {
 public:
-	InputHandler(Window* window);
+	InputHandler(std::shared_ptr< Window> window);
 	bool operator()(int key);
 	bool keyEvent(int key);
 	bool mouseButtonEvent(int button);
@@ -21,7 +22,7 @@ public:
 	glm::vec2 mouseScroll();
 	~InputHandler();
 private:
-	Window* mWindow;
+	std::shared_ptr< Window> mWindow;
 	//keyboard
 	static const uint16_t KEY_RANGE = 349;//form glfw documentation
 	static const uint8_t KEY_MODIFIER_RANGE = 9;

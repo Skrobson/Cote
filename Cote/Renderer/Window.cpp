@@ -3,15 +3,9 @@
 
 
 
-Window::Window(int width, int height, const std::string & title):mWidth(width),mHeight(height),mTitle(title),mWindow(nullptr)
+Window::Window(int width, int height, const std::string & title):mWidth(width),mHeight(height),mTitle(title), window(nullptr)
 {
 	init();
-}
-
-Window::~Window()
-{
-	glfwDestroyWindow(mWindow);
-
 }
 
 bool Window::init()
@@ -24,13 +18,12 @@ bool Window::init()
 	glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
 	//TODO: dorobic wykrywaie ekranu, monitora
-	mWindow = glfwCreateWindow(mWidth, mHeight, mTitle.c_str(), nullptr, nullptr);
-	if (!mWindow) {
+	window = std::shared_ptr<GLFWwindow>(glfwCreateWindow(mWidth, mHeight, mTitle.c_str(), nullptr, nullptr), glfwDestroyWindow);
+	if (!window) {
 		std::cerr << "/nFAILED TO CREATE WINDOW";//debugLog
-		glfwTerminate();
 		
 		return false;
 	}
-	glfwMakeContextCurrent(mWindow);
+	glfwMakeContextCurrent(&(*window));
 	return true;
 }

@@ -5,8 +5,8 @@
 ATest::ATest()
 {
 	glfwInit();
-	window = new Window(1280, 700, "renderer");//w klasie window znajduje sie glfwWindowhint ktory musi zostac wywo³any przed glewInit
-	camera = new FreeCamera(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, -1.0f), window);
+	window = std::make_shared<Window>(1280, 700, "renderer");//w klasie window znajduje sie glfwWindowhint ktory musi zostac wywo³any przed glewInit
+	camera = std::make_shared<FreeCamera>(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, -1.0f), window);
 
 	glewExperimental = GL_TRUE;
 	if (glewInit() != GLEW_OK) {
@@ -49,8 +49,6 @@ ATest::ATest()
 
 ATest::~ATest()
 {
-	delete window;
-	delete camera;
 	glfwTerminate();
 }
 

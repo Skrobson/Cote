@@ -18,7 +18,7 @@ class FreeCamera :
 	public Camera
 {
 public:
-	FreeCamera(glm::vec3 cameraPos, glm::vec3 cameraDirection,Window* window);
+	FreeCamera(const glm::vec3& cameraPos, const glm::vec3& cameraDirection, std::shared_ptr< Window> window);
 
 	virtual void update() override;
 	glm::mat4 move(GLfloat delta, CameraMove direction);
