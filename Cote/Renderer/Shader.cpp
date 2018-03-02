@@ -13,12 +13,16 @@ Shader::Shader()
 	makeHandler();
 }
 
+
 Shader::Shader(const std::string & filename, ShaderType type)
 {
 	makeHandler();
 	loadFromFile(filename, type);
 }
 
+/**
+* @throws GlException
+*/
 Shader::Shader(ShaderType type, const std::string & source)
 {
 	makeHandler();
@@ -33,7 +37,10 @@ std::shared_ptr<Shader> cote::graphic::Shader::createVertexShader(const std::str
 
 
 
-
+/**
+ * @throws std::exception
+ * @throws GlException
+ */
 void Shader::loadFromFile(const char * filename, ShaderType shaderType)
 {
 	std::fstream file;
@@ -56,6 +63,10 @@ void Shader::loadFromFile(const char * filename, ShaderType shaderType)
 	createFromSource(source, shaderType);
 }
 
+/**
+* @throws GlException
+* @throws std::exception
+*/
 void Shader::loadFromFile(const std::string & filename, ShaderType type)
 {
 	loadFromFile(filename.c_str(), type);
@@ -74,6 +85,9 @@ std::shared_ptr<Shader> cote::graphic::Shader::createFragmentShader(const std::s
 	return std::make_shared<Shader>(ShaderType::FRAGMENT_SHADER,source);
 }
 
+/**
+ * @throws GlException
+ */
 void Shader::createFromSource(const std::string & text, ShaderType type)
 {
 	GLint success;

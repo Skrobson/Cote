@@ -9,6 +9,9 @@ namespace cote
 		class VertexBuffer:public ABuffer
 		{
 		public:
+			/**
+			* @throws GlException
+			*/
 			VertexBuffer(const VertexAttributeLayout& layout);
 			VertexBuffer() = delete;
 			void bind()const noexcept override;
@@ -16,6 +19,9 @@ namespace cote
 
 
 		private:
+			/**
+			 * @throws GlException
+			 */
 			void setVertexAttributeLayout(const VertexAttributeLayout& layout);
 		};
 	}

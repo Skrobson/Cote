@@ -23,24 +23,44 @@ namespace cote
 		{
 		public:
 			Shader();
-			/**Loading from file*/
+
+			/**Loading from file
+			* @throws GlException
+			* @throws std::exception
+			*/
 			Shader(const std::string& filename, ShaderType);
 
-			/**Create shader from source*/
+			/**Create shader from source
+			* @throws GlException
+			*/
 			static std::shared_ptr<Shader> createVertexShader(const std::string& source);
 
-			/**Create shader from source*/
+			/**Create shader from source
+			* @throws GlException
+			*/
 			static std::shared_ptr<Shader> createFragmentShader(const std::string& source);
 
-			/**Create from source*/
+			/**Create from source
+			* @throws GlException
+			*/
 			Shader(ShaderType ,const std::string& source);
-	
+			
+			/**Create from source
+			* @throws GlException
+			*/
 			void createFromSource(const std::string & text, ShaderType type);
 			
 
-			//Wczytywanie z pliku mo¿nazrobiæ osobno
+			/**Loading from file
+			* @throws GlException
+			* @throws std::exception
+			*/
 			void loadFromFile(const char* filename, ShaderType type);
 
+			/**Loading from file
+			* @throws GlException
+			* @throws std::exception
+			*/
 			void loadFromFile(const std::string & filename, ShaderType type);
 
 

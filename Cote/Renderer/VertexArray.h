@@ -15,6 +15,9 @@ namespace cote
 		public:
 			VertexArray() = delete;
 
+			/**
+			* @throws GlException
+			*/
 			VertexArray(const std::vector<unsigned>& indecies, const VertexAttributeLayout & layout);
 
 			void bind()const noexcept override;

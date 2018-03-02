@@ -4,7 +4,7 @@
 using namespace cote::graphic;
 
 /**
-Can throw GlException
+@throw GlException
 */
 cote::graphic::VertexArray::VertexArray(const std::vector<unsigned>& indecies, const VertexAttributeLayout & layout)
 {
