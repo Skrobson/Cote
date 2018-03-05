@@ -142,6 +142,7 @@
     <ClCompile Include="GlError.cpp" />
     <ClCompile Include="GlException.cpp" />
     <ClCompile Include="Bitmap.cpp" />
+    <ClCompile Include="HeightmapLoader.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="Mesh.cpp" />
@@ -169,6 +170,7 @@
     <ClInclude Include="FreeCamera.h" />
     <ClInclude Include="GlException.h" />
     <ClInclude Include="Bitmap.h" />
+    <ClInclude Include="HeightmapLoader.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="Mesh.h" />

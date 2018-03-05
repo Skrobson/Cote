@@ -3,6 +3,7 @@
 #include <FreeImage.h>
 #include <memory>
 #include <functional>
+#include <glm.hpp>
 
 namespace cote
 {
@@ -11,9 +12,14 @@ namespace cote
 		class Bitmap
 		{
 		public:
-			Bitmap(std::string filePath);
+			Bitmap(const std::string& filePath);
+			Bitmap();
+
+			void load(const std::string& filePath);
 
 			const unsigned char* getRawData()const;
+
+			std::vector<std::vector<glm::vec3>> getColors()const ;
 
 			const size_t getHeight()const noexcept 
 			{
