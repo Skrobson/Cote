@@ -1,6 +1,6 @@
 #include "MapTest.h"
 #include <HeightmapLoader.h>
-#include <GlobalLogger.h>
+//#include <GlobalLogger.h>
 
 
 
@@ -33,7 +33,8 @@ MapTest::MapTest()
 	}
 	catch (GlException & ex)
 	{
-		FATAL_ERROR_LOG(ex.what());
+		std::cerr << ex.what();
+		//FATAL_ERROR_LOG(ex.what());
 	}
 
 	auto material = std::make_shared<Material>(program);

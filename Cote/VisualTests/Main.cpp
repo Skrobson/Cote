@@ -7,7 +7,7 @@
 #include <GL\glew.h>
 #include <GLFW\glfw3.h>
 #include <FreeCamera.h>
-#include <GlobalLogger.h>
+//#include <GlobalLogger.h>
 #include "ATest.h"
 #include "ModelTest.h"
 #include "BoxTest.h"
@@ -15,7 +15,7 @@
 int main()
 {
 
-	DEBUG_LOG("test loga");
+	//DEBUG_LOG("test loga");
 	
 
 	//ModelTest test;

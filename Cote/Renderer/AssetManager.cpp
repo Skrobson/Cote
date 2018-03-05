@@ -2,7 +2,7 @@
 
 
 #include <iostream>
-#include <GlobalLogger.h>
+//#include <GlobalLogger.h>
 #include <algorithm>
 #include <iterator>
 using namespace cote::graphic;
@@ -42,7 +42,7 @@ std::shared_ptr<Model> cote::AssetManager::loadModel(const std::string & filePat
 		auto model = std::make_shared<Model>(meshes);
 		models.insert(std::make_pair( filePath, model));
 
-		DEBUG_LOG("model", filePath, "loaded");
+		//DEBUG_LOG("model", filePath, "loaded");
 
 		return model;
 	}
@@ -118,7 +118,7 @@ std::shared_ptr<Mesh> cote::AssetManager::processMesh(aiMesh * mesh, const aiSce
 	}
 	catch (GlException & ex)
 	{
-		FATAL_ERROR_LOG(ex.what());
+		//FATAL_ERROR_LOG(ex.what());
 		return nullptr;
 	}
 

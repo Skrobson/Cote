@@ -1,7 +1,7 @@
 #include "HeightmapLoader.h"
 #include <algorithm>
 #include <iterator>
-#include <GlobalLogger.h>
+//#include <GlobalLogger.h>
 
 using namespace cote;
 
@@ -25,9 +25,9 @@ void cote::HeightmapLoader::convert(const Bitmap & bitmap)
 
 	std::vector<glm::vec3> vertices;
 
-	for (size_t x = 0; x < width; ++x)
+	for (size_t z = 0; z < height; ++z)
 	{
-		for (size_t z = 0; z < height; ++z)
+		for (size_t x = 0; x < width; ++x)
 		{
 			float px = static_cast<float>(x);
 			float py = 0.0f;//static_cast<float>(bits[x + z]);
@@ -44,23 +44,34 @@ void cote::HeightmapLoader::convert(const Bitmap & bitmap)
 
 	std::vector<unsigned> indicies;
 
-	for (size_t x = 0; x <(width - 1); ++x)
+	for (size_t z = 0; z <height -1; ++z)
 	{
-		if (x % 2 == 0)
+		if (z % 2 == 0)
 		{
-			for (size_t z = 0; (z + 1) < height; ++z)
+			size_t x;
+			for ( x= 0; x < width; ++x)
 			{
-				indicies.push_back(z + x * height);
-				indicies.push_back((z + x * height) + height);
+				indicies.push_back(x +( z * width));
+				indicies.push_back((x + (z * width)) + width);
+				
+			}
+			if (z != height - 2)
+			{
+				indicies.push_back(--x + (z* width));
 			}
 		}
 		else
 		{
-			for (size_t z =height -1 ; z  >height; --z)
+			size_t x;
+			for ( x= width -1 ; x  >width; --x)
 			{
-				indicies.push_back(z + x * height);
-				indicies.push_back((z + x * height) - height);
+				indicies.push_back(x + z * width);
+				indicies.push_back((x + z * width) - width);
 
+			}
+			if (z != height - 2)
+			{
+				indicies.push_back(++x + (z* width));
 			}
 		}
 		
