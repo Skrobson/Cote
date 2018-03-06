@@ -13,11 +13,19 @@ MapTest::MapTest()
 	program->attachShader(fS);
 	program->linkProgram();
 
-	Bitmap bitmap("../../Data/textures/Heightmap.png");
+	Bitmap bitmap("../../Data/textures/heightmap-no-erosion.jpg");//terrain-heightmap-01.png
 	HeightmapLoader mapLoader;
 	mapLoader.convert(bitmap);
 
-	std::vector<glm::vec2> uvs( mapLoader.vertices.size() );
+	std::vector<glm::vec2> uvs;
+	for (auto y = 0; y < bitmap.getHeight(); ++y)
+	{
+		for (auto x = 0; x < bitmap.getWidth(); ++x)
+		{
+			uvs.push_back(glm::vec2(static_cast<float>(x) / (static_cast<float>( bitmap.getWidth())), static_cast<float>(y) / (static_cast<float>(bitmap.getHeight()))));
+		}
+	}
+
 
 	auto pos = std::make_shared<cote::graphic::VertexAttribute3f>(cote::graphic::VertexAttributeIndex::POSITION,mapLoader.vertices);
 	auto uv = std::make_shared<cote::graphic::VertexAttribute2f>(cote::graphic::VertexAttributeIndex::UV_0, uvs);
@@ -36,17 +44,17 @@ MapTest::MapTest()
 		std::cerr << ex.what();
 		//FATAL_ERROR_LOG(ex.what());
 	}
-
+	Bitmap bitmap2("../../Data/textures/RocksSculptedTexture.png");
 	auto material = std::make_shared<Material>(program);
-	auto tex = std::make_shared<cote::graphic::Texture2d>(bitmap);
+	auto tex = std::make_shared<cote::graphic::Texture2d>(bitmap2);
 	tex->setSamplerName("texture_diffuse1");
 	material->addTexture(tex);
 
 	Mesh mapMesh = { material , vertexArray };
 	Model mapModel ;
+	mapModel.transform.setPos(glm::vec3(-45.0f, -150.0f, 15.0f));
 	mapModel.addMesh(std::make_shared<Mesh>(mapMesh));
 	models.push_back(std::make_shared<Model>(mapModel));
 
-	mapModel.transform.setPos(glm::vec3(0.0f, 0.0f, 0.0f));
 }
 

@@ -19,7 +19,7 @@ namespace cote
 
 			const unsigned char* getRawData()const;
 
-			std::vector<std::vector<glm::vec3>> getColors()const ;
+			std::vector<glm::vec3> getColors()const ;
 
 			const size_t getHeight()const noexcept 
 			{

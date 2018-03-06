@@ -18,7 +18,7 @@ namespace cote
 		std::vector<glm::vec3> vertices;
 		std::vector<unsigned> indicies;
 	private:
-
+		float grayscale(const glm::vec3 & colo);
 	
 	};
 }

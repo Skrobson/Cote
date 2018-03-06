@@ -24,6 +24,7 @@ void cote::graphic::Bitmap::load(const std::string & filePath)
 	width = FreeImage_GetWidth(bitmap.get());
 	height = FreeImage_GetHeight(bitmap.get());
 	unloadBitmap(data);
+	
 }
 
 
@@ -32,21 +33,18 @@ const unsigned char* cote::graphic::Bitmap::getRawData() const
 	return FreeImage_GetBits(bitmap.get());
 }
 
-std::vector<std::vector<glm::vec3>> cote::graphic::Bitmap::getColors() const
+std::vector<glm::vec3> cote::graphic::Bitmap::getColors() const
 {
-
-	std::vector<std::vector<glm::vec3>> colorMap(height);
 	RGBQUAD color;
-	for (size_t x = 0; x < height; ++x)
+	std::vector<glm::vec3> colors;
+	for (size_t y= 0; y < height; ++y)
 	{
-		std::vector<glm::vec3> widthVec(width);
-		for (size_t y = 0; y < width; ++y)
+		for (size_t x = 0; x < width; ++x)
 		{
 			FreeImage_GetPixelColor(bitmap.get(), x, y, &color);
 			glm::vec3 colorVec = { color.rgbRed,color.rgbGreen, color.rgbBlue };
-			widthVec.push_back(std::move(colorVec));
+			colors.push_back(std::move(colorVec));
 		}
-		colorMap.push_back(std::move(widthVec));
 	}
-	return colorMap;
+	return colors;
 }
