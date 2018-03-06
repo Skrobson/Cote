@@ -24,9 +24,9 @@ namespace cote
 
 			void addTexture(std::shared_ptr<Texture> texture);
 
-			void updateUniforms();
+			void updateUniforms(std::shared_ptr<ShaderProgram> shader);
 
-			void bindTextures();
+			void bindTextures(std::shared_ptr<ShaderProgram> shader);
 			void unbindTextures();
 
 			std::shared_ptr<ShaderProgram> getProgram();

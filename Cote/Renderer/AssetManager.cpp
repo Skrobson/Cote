@@ -108,8 +108,8 @@ std::shared_ptr<Mesh> cote::AssetManager::processMesh(aiMesh * mesh, const aiSce
 
 	cote::graphic::VertexAttributeLayout vLayout;
 	vLayout.pushVertexAttribute(pos);
-	vLayout.pushVertexAttribute(norm);
 	vLayout.pushVertexAttribute(uv);
+	vLayout.pushVertexAttribute(norm);
 
 	std::shared_ptr<VertexArray> vertexArray;
 	try

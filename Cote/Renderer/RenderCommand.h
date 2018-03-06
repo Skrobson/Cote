@@ -20,7 +20,7 @@ namespace cote
 			
 			std::shared_ptr<ShaderProgram> getProgram();
 
-			void render();
+			void render(std::shared_ptr<ShaderProgram>  program);
 
 		protected:
 			std::shared_ptr<ShaderProgram>  program ;

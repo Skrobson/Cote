@@ -1,5 +1,6 @@
 #pragma once
 #include "ATest.h"
+#include <Light.h>
 class ModelTest: public ATest
 {
 public:
@@ -16,5 +17,6 @@ protected:
 	std::shared_ptr<cote::graphic::ShaderProgram> program;
 	
 	std::shared_ptr<Model> testModel;
+	std::shared_ptr<Light> dirLight;
 };
 
