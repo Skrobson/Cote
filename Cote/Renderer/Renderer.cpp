@@ -44,7 +44,7 @@ void cote::graphic::Renderer::render()
 	{
 		if (actualProgram != command->getProgram())
 				{
-					actualProgram->unbind();
+					//actualProgram->unbind();
 					actualProgram = command->getProgram();
 					actualProgram->bind();
 					view.updateValueForProgram(actualProgram);

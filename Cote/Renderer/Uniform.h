@@ -25,6 +25,7 @@ namespace cote
 			void setUniformName(const std::string& name) { uniformName = name; }
 			virtual void updateValueForProgram(std::shared_ptr<ShaderProgram>  program)=0;
 			
+			std::string getName()const { return uniformName; }
 
 			virtual void searchForUniformLocation(std::shared_ptr<const ShaderProgram> program);
 		protected:
@@ -58,7 +59,6 @@ namespace cote
 		protected:
 			T value;
 
-			std::string name;
 			
 		};
 		template<typename T>

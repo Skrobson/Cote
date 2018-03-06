@@ -87,9 +87,9 @@ void cote::HeightmapLoader::convert(const Bitmap & bitmap)
 
 float cote::HeightmapLoader::grayscale(const glm::vec3 & color)
 {
-	float rGamma = 0.1f;
-	float gGamma = 0.2f;
-	float bGamma = 0.3f;
+	//float rGamma = 0.1f;
+	//float gGamma = 0.2f;
+	//float bGamma = 0.3f;
 
 	auto gray = (color.r + color.g + color.b) / 3;
 

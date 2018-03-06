@@ -54,6 +54,7 @@ namespace cote
 			void setUniform(int location, glm::mat3 value);
 			void setUniform(int location, glm::mat4 value);
 
+			virtual void searchForUniformLocation(std::string uniformName);
 		protected:
 
 			std::map<std::string, int > uniformLocations;
@@ -65,7 +66,7 @@ namespace cote
 			bool linked = false;
 
 			void setUpUniformLocations();
-			virtual void searchForUniformLocation(std::string uniformName);
+			
 
 		private:
 			void createProgram();
@@ -76,8 +77,8 @@ namespace cote
 			auto location = uniformLocations.find(name);
 			if (location != uniformLocations.end())
 				setUniform(location->second, value);
-		//	else
-			//	searchForUniformLocation(name);
+			else
+				searchForUniformLocation(name);
 		}
 	}
 }

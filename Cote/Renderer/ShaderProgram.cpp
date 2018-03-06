@@ -124,6 +124,7 @@ void cote::graphic::ShaderProgram::setUniform(int location, glm::mat4 value)
 
 void cote::graphic::ShaderProgram::setUpUniformLocations()
 {
+	bind();
 	GLint numActiveUniforms = 0;
 	glGetProgramiv(*programID, GL_ACTIVE_UNIFORMS, &numActiveUniforms);
 
@@ -141,6 +142,7 @@ void cote::graphic::ShaderProgram::setUpUniformLocations()
 		
 		uniformLocations.insert(std::make_pair(name, attrib));
 	}
+	unbind();
 }
 
 void cote::graphic::ShaderProgram::searchForUniformLocation(std::string uniformName)

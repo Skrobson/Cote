@@ -17,7 +17,7 @@ void cote::graphic::Material::addUniform(std::shared_ptr<Uniform> uniform)
 void cote::graphic::Material::addTexture(std::shared_ptr<Texture> texture)
 {
 	UniformT<int> texSampler(texture->getSamplerName());
-	texSampler.searchForUniformLocation(shader);
+	//texSampler.searchForUniformLocation(shader);
 	textures.push_back(std::make_pair(texture,texSampler));
 }
 

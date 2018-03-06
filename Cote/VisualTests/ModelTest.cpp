@@ -19,12 +19,20 @@ ModelTest::ModelTest()
 
 	models.push_back(testModel);
 
-	dirLight = std::make_shared<Light>();
-	dirLight->ambient = glm::vec3(0.4f, 0.4f, 0.2f);
-	dirLight->diffuse = glm::vec3(0.5f, 0.5f, 0.5f);
-	dirLight->specular = glm::vec3(1.0f, 1.0f, 1.0f);
-	dirLight->direction = glm::vec3(0.0f, 1.0f, 1.0f);
+	/////
+	program->bind();
+	std::cout << glGetUniformLocation(program->getProgramID(), "viewPos");
+	std::cout << glGetUniformLocation(program->getProgramID(), "light.direction");
 
+	dirLight = std::make_shared<Light>();
+	dirLight->ambient = glm::vec3(0.2f, 0.2f, 0.2f);
+	dirLight->diffuse = glm::vec3(0.3f, 0.3f, 0.3f);
+	dirLight->specular = glm::vec3(1.0f, 1.0f, 1.0f);
+	dirLight->direction = glm::vec3(0.0f, 7.0f, 7.0f);
+	//program->searchForUniformLocation(dirLight->ambient.getName());
+	//program->searchForUniformLocation(dirLight->diffuse.getName());
+	//program->searchForUniformLocation(dirLight->specular.getName());
+	//program->searchForUniformLocation(dirLight->direction.getName());
 	ATest::renderer.setDirectionalLight(dirLight);
 	
 }
