@@ -19,13 +19,6 @@ void cote::HeightmapLoader::convert(const Bitmap & bitmap)
 	auto bits = bitmap.getColors(); 
 	auto height = bitmap.getHeight();
 	auto width = bitmap.getWidth();
-	//size_t height = 5;
-	//size_t width = 5;
-
-	//std::vector<float> attidutes;
-	//std::copy(bits, bits + (height * width), std::back_inserter(attidutes));
-
-	std::vector<glm::vec3> vertices;
 
 	for (size_t z = 0; z < height; ++z)
 	{
@@ -41,11 +34,8 @@ void cote::HeightmapLoader::convert(const Bitmap & bitmap)
 			glm::vec3 pos = { px ,py, pz  };
 			vertices.push_back(std::move(pos));
 		}
-
+		
 	}
-	this->vertices = std::move(vertices);
-
-	std::vector<unsigned> indicies;
 
 	for (size_t z = 0; z <height -1; ++z)
 	{
@@ -82,15 +72,36 @@ void cote::HeightmapLoader::convert(const Bitmap & bitmap)
 		//}
 		
 	}
-	this->indicies = std::move(indicies);
+
+	auto indexCount = this->indicies.size();
+	normals.reserve((this->vertices.size()));
+	normals.resize(this->vertices.size());
+	
+
+	for (int i = 0; i < indexCount , i+3< indexCount; i += 3)
+	{
+		// get the three vertices that make the faces
+		glm::vec3 p0 = this->vertices[indicies[i + 0]];
+		glm::vec3 p1 = this->vertices[indicies[i + 1]];
+		glm::vec3 p2 = this->vertices[indicies[i + 2]];
+
+		glm::vec3 e1 = p1 - p0;
+		glm::vec3 e2 = p2 - p0;
+		glm::vec3 normal = glm::cross(e1, e2);
+		normal = glm::normalize(normal);
+
+		normals[indicies[i + 0]] += normal;
+		normals[indicies[i + 1]] += normal;
+		normals[indicies[i + 2]] += normal;
+	}
+	for (auto & norm : normals)
+	{
+		norm = glm::normalize(norm);
+	}
 }
 
 float cote::HeightmapLoader::grayscale(const glm::vec3 & color)
 {
-	//float rGamma = 0.1f;
-	//float gGamma = 0.2f;
-	//float bGamma = 0.3f;
-
 	auto gray = (color.r + color.g + color.b) / 3;
 
 	return gray;

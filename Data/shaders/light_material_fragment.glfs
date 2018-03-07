@@ -5,6 +5,12 @@ in vec3 normal;
 in vec3 fragPos;
 out vec4 color;
 
+struct Material {
+    vec3 ambient;
+    vec3 diffuse;
+    vec3 specular;    
+    float shininess;
+}; 
 
 struct DirectionalLight {
     vec3 direction;

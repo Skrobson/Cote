@@ -27,11 +27,13 @@ MapTest::MapTest()
 	}
 
 
-	auto pos = std::make_shared<cote::graphic::VertexAttribute3f>(cote::graphic::VertexAttributeIndex::POSITION,mapLoader.vertices);
-	auto uv = std::make_shared<cote::graphic::VertexAttribute2f>(cote::graphic::VertexAttributeIndex::UV_0, uvs);
+	auto pos = std::make_shared<VertexAttribute3f>(VertexAttributeIndex::POSITION,mapLoader.vertices);
+	auto uv = std::make_shared<VertexAttribute2f>(VertexAttributeIndex::UV_0, uvs);
+	auto norm = std::make_shared<VertexAttribute3f>(VertexAttributeIndex::NORMAL, mapLoader.normals);
 	cote::graphic::VertexAttributeLayout vLayout;
 	vLayout.pushVertexAttribute(pos);
 	vLayout.pushVertexAttribute(uv);
+	vLayout.pushVertexAttribute(norm);
 
 	std::shared_ptr<VertexArray> vertexArray;
 	try

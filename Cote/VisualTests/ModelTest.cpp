@@ -24,7 +24,7 @@ ModelTest::ModelTest()
 	dirLight->ambient = glm::vec3(0.3f, 0.3f, 0.3f);
 	dirLight->diffuse = glm::vec3(0.5f, 0.5f, 0.5f);
 	dirLight->specular = glm::vec3(1.0f, 1.0f, 1.0f);
-	dirLight->direction = glm::vec3(-2.0f, 1.0f, 2.0f);
+	dirLight->direction = glm::vec3(5.0f, 1.0f, 2.0f);
 	//program->searchForUniformLocation(dirLight->ambient.getName());
 	//program->searchForUniformLocation(dirLight->diffuse.getName());
 	//program->searchForUniformLocation(dirLight->specular.getName());
