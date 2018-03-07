@@ -16,6 +16,12 @@ namespace cote {
 		class Texture
 		{
 		public:
+			enum Repeat : GLint
+			{
+				NORMAL = GL_REPEAT,
+				MIRROR = GL_MIRRORED_REPEAT
+			};
+
 			Texture(size_t width , size_t height);
 			Texture(Texture&&) = default;
 			Texture(const Texture&) = default;
@@ -42,7 +48,9 @@ namespace cote {
 		class Texture2d :public Texture
 		{
 		public:
-			Texture2d(size_t width, size_t height, const unsigned char* data);
+			Texture2d(size_t width, size_t height, const unsigned char* data, Repeat repeat );
+
+			Texture2d(Bitmap& image, Repeat repeat);
 
 			Texture2d(Bitmap& image);
 

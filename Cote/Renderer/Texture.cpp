@@ -58,13 +58,13 @@ Texture::~Texture()
 //GL_CLAMP_TO_EDGE : Clamps the coordinates between 0 and 1. The result is that higher coordinates become clamped to the edge, resulting in a stretched edge pattern.
 //GL_CLAMP_TO_BORDER : Coordinates outside the range are now given a user - specified border color.
 
-cote::graphic::Texture2d::Texture2d(size_t width, size_t height, const unsigned char * data):Texture(width,height)
+cote::graphic::Texture2d::Texture2d(size_t width, size_t height, const unsigned char * data , Texture::Repeat repeat): Texture(width,height )
 {
 	glBindTexture(GL_TEXTURE_2D, *handler);
 	GlError error;
 
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	// Set texture wrapping to GL_REPEAT
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, repeat);	// Set texture wrapping to GL_REPEAT
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, repeat);
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
@@ -81,7 +81,11 @@ cote::graphic::Texture2d::Texture2d(size_t width, size_t height, const unsigned 
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-cote::graphic::Texture2d::Texture2d(Bitmap & image):Texture2d(image.getWidth(),image.getHeight(), image.getRawData())
+cote::graphic::Texture2d::Texture2d(Bitmap & image, Texture::Repeat repeat) :Texture2d(image.getWidth(),image.getHeight(), image.getRawData(), repeat)
+{
+}
+
+cote::graphic::Texture2d::Texture2d(Bitmap & image) : Texture2d(image.getWidth(), image.getHeight(), image.getRawData(), Texture::Repeat::NORMAL)
 {
 }
 

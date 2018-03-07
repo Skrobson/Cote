@@ -22,7 +22,8 @@ MapTest::MapTest()
 	{
 		for (auto x = 0; x < bitmap.getWidth(); ++x)
 		{
-			uvs.push_back(glm::vec2(static_cast<float>(x) / (static_cast<float>( bitmap.getWidth())), static_cast<float>(y) / (static_cast<float>(bitmap.getHeight()))));
+			uvs.push_back(glm::vec2(static_cast<float>(x)/10, static_cast<float>(y)/10));
+			//uvs.push_back(glm::vec2(static_cast<float>(x) / (static_cast<float>(bitmap.getWidth())), static_cast<float>(y) / (static_cast<float>(bitmap.getHeight()))));
 		}
 	}
 
@@ -46,11 +47,11 @@ MapTest::MapTest()
 		std::cerr << ex.what();
 		//FATAL_ERROR_LOG(ex.what());
 	}
-	Bitmap bitmap2("../../Data/textures/RocksSculptedTexture.png");
+	Bitmap bitmap2("../../Data/textures/rock_blue.jpg");
 	Bitmap bitmap3("../../Data/textures/ground_ao.png");
 	auto material = std::make_shared<Material>(program);
-	auto tex = std::make_shared<cote::graphic::Texture2d>(bitmap2);
-	auto tex2 = std::make_shared<cote::graphic::Texture2d>(bitmap3);
+	auto tex = std::make_shared<cote::graphic::Texture2d>(bitmap2, Texture::Repeat::MIRROR);
+	auto tex2 = std::make_shared<cote::graphic::Texture2d>(bitmap3, Texture::Repeat::MIRROR);
 	tex->setSamplerName("texture_diffuse1");
 	tex2->setSamplerName("texture_specular1");
 	material->addTexture(tex);
@@ -58,7 +59,7 @@ MapTest::MapTest()
 
 	Mesh mapMesh = { material , vertexArray };
 	Model mapModel ;
-	mapModel.transform.setPos(glm::vec3(-45.0f, -150.0f, 15.0f));
+	mapModel.transform.setPos(glm::vec3(-450.0f, -150.0f, -25.0f));
 	mapModel.addMesh(std::make_shared<Mesh>(mapMesh));
 	models.push_back(std::make_shared<Model>(mapModel));
 
