@@ -19,16 +19,12 @@ ModelTest::ModelTest()
 
 	models.push_back(testModel);
 
-	/////
-	program->bind();
-	std::cout << glGetUniformLocation(program->getProgramID(), "viewPos");
-	std::cout << glGetUniformLocation(program->getProgramID(), "light.direction");
-
 	dirLight = std::make_shared<Light>();
-	dirLight->ambient = glm::vec3(0.2f, 0.2f, 0.2f);
-	dirLight->diffuse = glm::vec3(0.3f, 0.3f, 0.3f);
+	//dirLight->ambient = glm::vec3(0.35f, 0.35f, 0.35f);
+	dirLight->ambient = glm::vec3(1.0f, 1.0f, 1.0f);
+	dirLight->diffuse = glm::vec3(0.5f, 0.5f, 0.5f);
 	dirLight->specular = glm::vec3(1.0f, 1.0f, 1.0f);
-	dirLight->direction = glm::vec3(0.0f, 7.0f, 7.0f);
+	dirLight->direction = glm::vec3(-2.0f, 5.0f, 2.0f);
 	//program->searchForUniformLocation(dirLight->ambient.getName());
 	//program->searchForUniformLocation(dirLight->diffuse.getName());
 	//program->searchForUniformLocation(dirLight->specular.getName());

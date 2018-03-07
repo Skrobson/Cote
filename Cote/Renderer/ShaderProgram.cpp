@@ -104,7 +104,7 @@ void cote::graphic::ShaderProgram::setUniform(int location, glm::vec2 value)
 
 void cote::graphic::ShaderProgram::setUniform(int location, glm::vec3 value)
 {
-	glUniform2fv(location, 1, glm::value_ptr(value));
+	glUniform3fv(location, 1, glm::value_ptr(value));
 }
 
 void cote::graphic::ShaderProgram::setUniform(int location, glm::vec4 value)
