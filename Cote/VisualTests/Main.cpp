@@ -18,14 +18,14 @@ int main()
 	//DEBUG_LOG("test loga");
 	
 
-	ModelTest test;
-	test.work();
+	//ModelTest test;
+	//test.work();
 
 	//BoxTest btest;
 	//btest.work();
 
-	//MapTest mTest;
-	//mTest.work();
+	MapTest mTest;
+	mTest.work();
 
 
 	return 0;

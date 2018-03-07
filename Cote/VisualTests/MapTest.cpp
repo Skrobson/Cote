@@ -6,8 +6,8 @@
 
 MapTest::MapTest()
 {
-	vS.loadFromFile("../../Data/shaders/simple_model_vertex.glvs", cote::graphic::ShaderType::VERTEX_SHADER);
-	fS.loadFromFile("../../Data/shaders/simple_model_fragment.glfs", cote::graphic::ShaderType::FRAGMENT_SHADER);
+	vS.loadFromFile("../../Data/shaders/light_map_model_vertex.glvs", cote::graphic::ShaderType::VERTEX_SHADER);
+	fS.loadFromFile("../../Data/shaders/light_map_model_fragment.glfs", cote::graphic::ShaderType::FRAGMENT_SHADER);
 	program = std::make_shared<cote::graphic::ShaderProgram>();
 	program->attachShader(vS);
 	program->attachShader(fS);
@@ -45,10 +45,14 @@ MapTest::MapTest()
 		//FATAL_ERROR_LOG(ex.what());
 	}
 	Bitmap bitmap2("../../Data/textures/RocksSculptedTexture.png");
+	Bitmap bitmap3("../../Data/textures/ground_ao.png");
 	auto material = std::make_shared<Material>(program);
 	auto tex = std::make_shared<cote::graphic::Texture2d>(bitmap2);
+	auto tex2 = std::make_shared<cote::graphic::Texture2d>(bitmap3);
 	tex->setSamplerName("texture_diffuse1");
+	tex2->setSamplerName("texture_specular1");
 	material->addTexture(tex);
+	material->addTexture(tex2);
 
 	Mesh mapMesh = { material , vertexArray };
 	Model mapModel ;

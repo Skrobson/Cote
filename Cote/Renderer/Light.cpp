@@ -5,10 +5,10 @@ using namespace cote::graphic;
 using namespace cote;
 Light::Light()
 {
-	ambient.setUniformName("light.ambient");
-	diffuse.setUniformName("light.diffuse");
-	direction.setUniformName("light.direction");
-	specular.setUniformName("light.specular");
+	ambient.setUniformName("directionalLight.ambient");
+	diffuse.setUniformName("directionalLight.diffuse");
+	direction.setUniformName("directionalLight.direction");
+	specular.setUniformName("directionalLight.specular");
 
 }
 
