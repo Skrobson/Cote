@@ -6,6 +6,7 @@
 #include <memory>
 #include <initializer_list>
 #include <map>
+#include <string.>
 
 #include  <glm.hpp>
 #include "GLerror.h"
@@ -32,6 +33,18 @@ namespace cote
 
 			inline bool isLinked()const { return linked; }
 
+			template<typename  T>
+			void setUniform(const std::string& name, T value);
+
+			//void setUniform(const std::string& name, int value);
+			//void setUniform(const std::string& name, unsigned value);
+			//void setUniform(const std::string& name, float value);
+			//void setUniform(const std::string& name, glm::vec2 value);
+			//void setUniform(const std::string& name, glm::vec3 value);
+			//void setUniform(const std::string& name, glm::vec4 value);
+			//void setUniform(const std::string& name, glm::mat3 value);
+			//void setUniform(const std::string& name, glm::mat4 value);
+
 			void setUniform(int location, int value);
 			void setUniform(int location, unsigned value);
 			void setUniform(int location, float value);
@@ -41,7 +54,10 @@ namespace cote
 			void setUniform(int location, glm::mat3 value);
 			void setUniform(int location, glm::mat4 value);
 
+			virtual void searchForUniformLocation(std::string uniformName);
 		protected:
+
+			std::map<std::string, int > uniformLocations;
 
 			std::shared_ptr<unsigned> programID;
 
@@ -49,9 +65,21 @@ namespace cote
 
 			bool linked = false;
 
+			void setUpUniformLocations();
+			
+
 		private:
 			void createProgram();
 		};
+		template<typename T>
+		inline void ShaderProgram::setUniform(const std::string & name, T value)
+		{
+			auto location = uniformLocations.find(name);
+			if (location != uniformLocations.end())
+				setUniform(location->second, value);
+			else
+				searchForUniformLocation(name);
+		}
 	}
 }
 

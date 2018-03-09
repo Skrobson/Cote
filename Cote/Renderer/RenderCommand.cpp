@@ -11,7 +11,7 @@ cote::graphic::RenderCommand::RenderCommand(std::shared_ptr<Material> material, 
 	this->vao = vao;
 	modelTransform = transform;
 	modelTransform->setUniformName("model");
-	modelTransform->searchForUniformLocation(program);
+	//modelTransform->searchForUniformLocation(program);
 }
 
 
@@ -21,11 +21,11 @@ std::shared_ptr<ShaderProgram> cote::graphic::RenderCommand::getProgram()
 	return material->getProgram();
 }
 
-void cote::graphic::RenderCommand::render()
+void cote::graphic::RenderCommand::render(std::shared_ptr<ShaderProgram> shader)
 {
-	modelTransform->updateValueForProgram(program);
-	material->updateUniforms();
-	material->bindTextures();
+	modelTransform->updateValueForProgram(shader);
+	material->updateUniforms(shader);
+	material->bindTextures(shader);
 
 	
 	vao->bind();

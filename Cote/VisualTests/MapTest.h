@@ -1,22 +1,18 @@
 #pragma once
 #include "ATest.h"
-#include <Light.h>
-class ModelTest: public ATest
+#include "ModelTest.h"
+class MapTest : public ModelTest
 {
 public:
-	ModelTest();
+	MapTest();
 
-	virtual void update();
+	//virtual void update() override;
 
-	~ModelTest();
-
-protected:
-
+private:
 	cote::graphic::Shader vS;
 	cote::graphic::Shader fS;
 	std::shared_ptr<cote::graphic::ShaderProgram> program;
-	
+
 	std::shared_ptr<Model> testModel;
-	std::shared_ptr<Light> dirLight;
 };
 

@@ -2,7 +2,7 @@
 
 
 #include <iostream>
-#include <GlobalLogger.h>
+//#include <GlobalLogger.h>
 #include <algorithm>
 #include <iterator>
 using namespace cote::graphic;
@@ -42,7 +42,7 @@ std::shared_ptr<Model> cote::AssetManager::loadModel(const std::string & filePat
 		auto model = std::make_shared<Model>(meshes);
 		models.insert(std::make_pair( filePath, model));
 
-		DEBUG_LOG("model", filePath, "loaded");
+		//DEBUG_LOG("model", filePath, "loaded");
 
 		return model;
 	}
@@ -102,23 +102,14 @@ std::shared_ptr<Mesh> cote::AssetManager::processMesh(aiMesh * mesh, const aiSce
 		std::copy(face.mIndices, face.mIndices + face.mNumIndices, std::back_inserter(indicies));
 	});
 
-	for (GLuint i = 0; i<mesh->mNumFaces; i++)
-	{
-		aiFace face = mesh->mFaces[i];
-		for (size_t j = 0; j<face.mNumIndices; j++)
-		{
-			indicies.push_back(face.mIndices[j]);
-		}
-	}
-
 	auto pos = std::make_shared<cote::graphic::VertexAttribute3f>(cote::graphic::VertexAttributeIndex::POSITION, positions);
 	auto uv = std::make_shared<cote::graphic::VertexAttribute2f>(cote::graphic::VertexAttributeIndex::UV_0, uvs);
 	auto norm = std::make_shared<cote::graphic::VertexAttribute3f>(cote::graphic::VertexAttributeIndex::NORMAL, normals);
 
 	cote::graphic::VertexAttributeLayout vLayout;
 	vLayout.pushVertexAttribute(pos);
-	vLayout.pushVertexAttribute(norm);
 	vLayout.pushVertexAttribute(uv);
+	vLayout.pushVertexAttribute(norm);
 
 	std::shared_ptr<VertexArray> vertexArray;
 	try
@@ -127,7 +118,7 @@ std::shared_ptr<Mesh> cote::AssetManager::processMesh(aiMesh * mesh, const aiSce
 	}
 	catch (GlException & ex)
 	{
-		FATAL_ERROR_LOG(ex.what());
+		//FATAL_ERROR_LOG(ex.what());
 		return nullptr;
 	}
 
@@ -174,7 +165,6 @@ std::shared_ptr<Texture> cote::AssetManager::loadTexture( aiMaterial * material,
 			}
 			else
 				return texIt->second;
-
 		}
 	}	
 }

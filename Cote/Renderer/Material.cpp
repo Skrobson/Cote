@@ -17,11 +17,11 @@ void cote::graphic::Material::addUniform(std::shared_ptr<Uniform> uniform)
 void cote::graphic::Material::addTexture(std::shared_ptr<Texture> texture)
 {
 	UniformT<int> texSampler(texture->getSamplerName());
-	texSampler.searchForUniformLocation(shader);
+	//texSampler.searchForUniformLocation(shader);
 	textures.push_back(std::make_pair(texture,texSampler));
 }
 
-void cote::graphic::Material::updateUniforms()
+void cote::graphic::Material::updateUniforms(std::shared_ptr<ShaderProgram> shader)
 {
 	for (auto uniform : uniforms)
 	{
@@ -29,7 +29,7 @@ void cote::graphic::Material::updateUniforms()
 	}
 }
 
-void cote::graphic::Material::bindTextures()
+void cote::graphic::Material::bindTextures(std::shared_ptr<ShaderProgram> shader)
 {
 	for (size_t i = 0; i < textures.size(); ++i)
 	{
